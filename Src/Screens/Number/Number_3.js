@@ -17,6 +17,7 @@ import Style from '../../Utils/Style';
 import Drawer_green from '../../../assets/Svg Image/Drawer_green';
 import Left_greenbtn from '../../../assets/Svg Image/Left_greenbtn';
 import Right_greenbtn from '../../../assets/Svg Image/Right_greenbtn';
+import Lucky3 from '../../../assets/Svg Image/Lucky3';
 
 const Number_3 = ({navigation}) => {
   return (
@@ -29,7 +30,7 @@ const Number_3 = ({navigation}) => {
         </View>
       </View>
       <View style={Style.middle}>
-        <Image source={Images.No_3} style={Style.Number_Image} />
+        <Lucky3 />
         <Text style={Style.Number_txt}>
           Good And Creative Brain/ Tend To Imagine Everything.
         </Text>

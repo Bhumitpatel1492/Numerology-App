@@ -75,6 +75,12 @@ const Style = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
+  text4: {
+    fontSize: moderateScale(30),
+    color: '#FFFFFF',
+    fontFamily: fonts.ATR,
+    marginHorizontal: 20,
+  },
 });
 
 export default Style;

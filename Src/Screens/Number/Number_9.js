@@ -35,7 +35,7 @@ const Number_9 = ({navigation}) => {
         <TouchableOpacity onPress={() => navigation.navigate('Number_8')}>
           <Left_greenbtn />
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('Number_8')}>
+        <TouchableOpacity onPress={() => navigation.navigate('Profession')}>
           <Right_greenbtn />
         </TouchableOpacity>
       </View>
