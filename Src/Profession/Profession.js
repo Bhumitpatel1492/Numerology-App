@@ -26,7 +26,7 @@ const Profession = ({navigation}) => {
             <Text style={styles.text2}>TEJASH SHAH</Text>
           </View>
         </View>
-        <ScrollView>
+        <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.back}>
             <Text style={styles.text3}>Profession</Text>
           </View>
@@ -87,7 +87,7 @@ const Profession = ({navigation}) => {
           <TouchableOpacity onPress={() => navigation.navigate('Number_9')}>
             <Backbtn_Purple />
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('Wallpaper')}>
             <Nextbtn_Purple />
           </TouchableOpacity>
         </View>

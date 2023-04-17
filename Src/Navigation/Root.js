@@ -25,6 +25,7 @@ import Number_8 from '../Screens/Number/Number_8';
 import Number_9 from '../Screens/Number/Number_9';
 import Mulyank from '../Screens/Driver1Screen/Mulyank';
 import Profession from '../Profession/Profession';
+import Wallpaper from '../Screens/Wallpaper on mobile/Wallpaper';
 
 const Stack = createNativeStackNavigator();
 const Root = () => {
@@ -58,6 +59,7 @@ const Root = () => {
         <Stack.Screen name="Number_8" component={Number_8} />
         <Stack.Screen name="Number_9" component={Number_9} />
         <Stack.Screen name="Profession" component={Profession} />
+        <Stack.Screen name="Wallpaper" component={Wallpaper} />
       </Stack.Navigator>
     </NavigationContainer>
   );
