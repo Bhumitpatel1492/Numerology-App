@@ -145,5 +145,6 @@ const styles = StyleSheet.create({
   footer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    bottom: 14,
   },
 });
