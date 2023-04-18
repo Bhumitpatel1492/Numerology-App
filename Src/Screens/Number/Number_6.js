@@ -12,8 +12,6 @@ import {moderateScale} from '../../Utils/scalling';
 import Lucky6 from '../../../assets/Svg Image/Lucky6';
 import Style from '../../Utils/Style';
 import Drawer from '../../../assets/Svg Image/Drawer_red';
-import Left_greenbtn from '../../../assets/Svg Image/Left_greenbtn';
-import Right_greenbtn from '../../../assets/Svg Image/Right_greenbtn';
 import Backbtn from '../../../assets/Svg Image/Left_redbtn';
 import Nextbtn from '../../../assets/Svg Image/Right_redbtn';
 
