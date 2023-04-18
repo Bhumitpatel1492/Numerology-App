@@ -1,0 +1,52 @@
+[
+    {
+        "Name": "app",
+        "version": 0,
+        "link": "https://tejash.me/numerojinni/app/app.json"
+    },
+    {
+        "Name": "spalsh_screen",
+        "version": 0,
+        "link": "https://tejash.me/numerojinni/app/spalsh_screen.jpg"
+    },
+    {
+        "Name": "navbar",
+        "version": 0,
+        "link": "https://tejash.me/numerojinni/app/navbar.json"
+    },
+    {
+        "Name": "number-details",
+        "version": 0,
+        "link": "https://tejash.me/numerojinni/app/number-details.json"
+    },
+    {
+        "Name": "mulyank-bhaagyank-combination",
+        "version": 0,
+        "link": "https://tejash.me/numerojinni/app/mulyank-bhaagyank-combination.json"
+    },
+    {
+        "Name": "missing-no-says",
+        "version": 0,
+        "link": "https://tejash.me/numerojinni/app/missing-no-says.json"
+    },
+    {
+        "Name": "loshu-grid-no-says",
+        "version": 0,
+        "link": "https://tejash.me/numerojinni/app/loshu-grid-no-says.json"
+    },
+    {
+        "Name": "wallpaper-should-keep",
+        "version": 0,
+        "link": "https://tejash.me/numerojinni/app/wallpaper-should-keep.json"
+    },
+    {
+        "Name": "yogs",
+        "version": 0,
+        "link": "https://tejash.me/numerojinni/app/yogs.json"
+    },
+    {
+        "Name": "yogs-details",
+        "version": 0,
+        "link": "https://tejash.me/numerojinni/app/yogs-details.json"
+    }
+]
