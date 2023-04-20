@@ -15,30 +15,118 @@ import Checkbox from '../../Components/Chechbox';
 import {moderateScale} from '../../Utils/scalling';
 import CustomTextInput from '../../Components/Textinput';
 import DateCollect from '../../Components/Datecollect';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import Datevalue from '../../Components/Datevalue';
+import Monthvalue from '../../Components/Monthvalue';
+import Yearvalue from '../../Components/Yearvalue';
 
 const Register = ({navigation}) => {
-  const [FirstName, setFirstName] = useState();
-  console.log('first', FirstName);
-  const [LastName, setLastName] = useState();
-  console.log('last', LastName);
-  const [Email, setEmail] = useState();
-  console.log('email', Email);
-  const [Mobile, setMobile] = useState();
-  console.log('mobile', Mobile);
+  const [alldata, setAllData] = useState({
+    FirstName: '',
+    LastName: '',
+    Email: '',
+    Mobile: '',
+    date: '',
+    month: '',
+    year: '',
+  });
+  console.log('all', alldata.date);
+  const [selectedValue, setSelectedValue] = useState();
+
+  const handleSelection = value => {
+    setSelectedValue(value);
+  };
+
+  const [day, setDay] = useState('');
+  console.log('day', day);
+
+  const [error, setError] = useState('');
+
+  // const handleNameChange = value => {
+  //   setAllData({...alldata, FirstName: value});
+  // };
+
+  // const handleLastNameChange = value => {
+  //   setAllData({...alldata, LastName: value});
+  // };
+
+  // const handleEmailChange = value => {
+  //   setAllData({...alldata, Email: value});
+  // };
+
+  // const handleMobileChange = value => {
+  //   setAllData({...alldata, Mobile: value});
+  // };
+
+  // const handledateChange = value => {
+  //   setAllData({...alldata, date: value});
+  // };
+
+  // const handlemonthChange = value => {
+  //   setAllData({...alldata, month: value});
+  // };
+
+  // const handleyearChange = value => {
+  //   setAllData({...alldata, year: value});
+  // };
+
+  const Mobile = /^[6-9]\d{9}$/;
+  const email = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  // const Date = /(0?[1-9]|[12]\d|3[01])/;
 
   const checkTextInput = () => {
-    if (FirstName === '') {
+    if (alldata.FirstName === '') {
       Alert.alert('Please Enter FirstName');
       return;
-    } else if (LastName === '') {
+    } else if (alldata.LastName === '') {
       Alert.alert('Please Enter LastName');
-    } else if (Email === '') {
+    } else if (alldata.Email === '') {
       Alert.alert('Please Enter Email');
-    } else if (Mobile === '') {
+    } else if (!email.test(alldata.Email)) {
+      Alert.alert('enter Valid Email');
+    } else if (alldata.Mobile === '') {
       Alert.alert('Please Enter Mobile Number');
+    } else if (!Mobile.test(alldata.Mobile)) {
+      Alert.alert('Invalid Number');
+    } else if (selectedValue === null) {
+      Alert.alert('select Your Gender');
+    } else if (alldata.date === '') {
+      Alert.alert('Please Enter Birth Date');
+    } else if (alldata.month === '') {
+      Alert.alert('Please Enter month');
+    } else if (alldata.year === '') {
+      Alert.alert('Please Enter year');
     } else {
-      Alert.alert('successful');
-      // props.navigation.navigate('ReportDriver ');
+      Alert.alert('success');
+    }
+  };
+
+  const handleDayChange = text => {
+    // Check that the input is a number
+    if (/^\d+$/.test(text)) {
+      const dayNum = parseInt(text, 10);
+      // Check that the day is within the valid range
+      if (dayNum >= 1 && dayNum <= 31) {
+        setDay(text);
+        setError(''); // Clear any previous error message
+      } else {
+        setError('Please enter a valid day between 1 and 31');
+      }
+    } else {
+      setError('Please enter a valid number');
+    }
+  };
+
+  const handleInputChange = (key, value) => {
+    setAllData({...alldata, [key]: value});
+  };
+
+  const handleFormSubmit = async () => {
+    try {
+      await AsyncStorage.setItem('alldata', JSON.stringify(alldata));
+      console.log('Form data saved successfully!', alldata);
+    } catch (e) {
+      console.error(e);
     }
   };
 
@@ -60,50 +148,111 @@ const Register = ({navigation}) => {
             <View>
               <CustomTextInput
                 label="FirstName"
-                value={FirstName}
-                onChangeText={text => setFirstName(text)}
+                value={alldata.FirstName}
+                onChangeText={text => handleInputChange('FirstName', text)}
               />
 
               <CustomTextInput
                 label="LastName"
-                value={LastName}
-                onChangeText={text => setLastName(text)}
+                value={alldata.LastName}
+                onChangeText={text => handleInputChange('LastName', text)}
               />
 
               <CustomTextInput
                 label="Email"
-                value={Email}
-                onChangeText={text => setEmail(text)}
+                value={alldata.Email}
+                onChangeText={text => handleInputChange('Email', text)}
               />
 
               <CustomTextInput
                 label="Mobile"
-                value={Mobile}
-                onChangeText={text => setMobile(text)}
+                value={alldata.Mobile}
+                onChangeText={text => handleInputChange('Mobile', text)}
+                keyboardType="numeric"
+                maxLength={10}
               />
             </View>
 
-            <Checkbox />
+            <View
+              style={{
+                backgroundColor: '#FFFFFF',
+                flexDirection: 'row',
+                alignItems: 'center',
+                marginHorizontal: 24,
+                marginVertical: moderateScale(10),
+              }}>
+              <Text style={Style.txt}>Gender : </Text>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  // alignItems: 'center',
+                  top: 2,
+                }}>
+                <Checkbox
+                  selected={selectedValue === 'option1'}
+                  onPress={() => handleSelection('option1')}
+                />
+                <Text style={Style.txt}>Male</Text>
+              </View>
+
+              <View
+                style={{
+                  flexDirection: 'row',
+                  // alignItems: 'center',
+                  top: 4,
+                  marginLeft: 5,
+                }}>
+                <Checkbox
+                  selected={selectedValue === 'option2'}
+                  onPress={() => handleSelection('option2')}
+                />
+                <Text style={Style.txt}>Female</Text>
+              </View>
+            </View>
 
             <View style={{flexDirection: 'row', marginHorizontal: 18}}>
+              {/* <View style={{flex: 1}}>
+                <Datevalue />
+              </View>
+              <View style={{flex: 1}}>
+                <Monthvalue />
+              </View>
+              <View style={{flex: 1}}>
+                <Yearvalue />
+              </View> */}
+
               <DateCollect
                 label="Date"
                 style={styles.input}
                 keyboardType="numeric"
                 maxLength={2}
+                value={alldata.date}
+                onChangeText={text => handleInputChange('date', text)}
               />
-              <DateCollect label="Month" style={styles.input} maxLength={8} />
+              <DateCollect
+                label="Month"
+                style={styles.input}
+                maxLength={2}
+                keyboardType="numeric"
+                value={alldata.month}
+                onChangeText={text => handleInputChange('month', text)}
+              />
               <DateCollect
                 label="Year"
                 style={[styles.input, {width: moderateScale(160)}]}
                 keyboardType="numeric"
                 maxLength={4}
+                value={alldata.year}
+                onChangeText={text => handleInputChange('year', text)}
               />
             </View>
 
             <TouchableOpacity
               style={styles.btn}
-              onPress={() => navigation.navigate('ReportDriver')}>
+              onPress={() => {
+                checkTextInput();
+                handleFormSubmit();
+              }}>
               <Text
                 style={{
                   fontSize: moderateScale(22),

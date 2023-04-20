@@ -1,51 +1,46 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, SafeAreaView} from 'react-native';
-import Style from '../Utils/Style';
-import {RadioButton} from 'react-native-paper';
-import {moderateScale} from '../Utils/scalling';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 
-const Checkbox = () => {
-  const [checked, setChecked] = React.useState('');
-
+const Checkbox = ({lable, status, onPress, selected}) => {
   return (
-    <View
-      style={{
-        backgroundColor: '#FFFFFF',
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginHorizontal: 24,
-        marginVertical: moderateScale(10),
-      }}>
-      <Text style={[Style.txt]}>Gender :</Text>
+    <TouchableOpacity style={styles.radioButtonContainer} onPress={onPress}>
       <View
-        style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          top: 2,
-        }}>
-        <RadioButton
-          value="first"
-          status={checked === 'first' ? 'checked' : 'unchecked'}
-          onPress={() => setChecked('first')}
-        />
-
-        <Text style={Style.txt}>Male</Text>
+        style={[styles.radioButton, selected && styles.radioButtonSelected]}>
+        {selected && <View style={styles.radioButtonInner} />}
       </View>
-      <View
-        style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          top: 4,
-        }}>
-        <RadioButton
-          value="second"
-          status={checked === 'second' ? 'checked' : 'unchecked'}
-          onPress={() => setChecked('second')}
-        />
-        <Text style={Style.txt}>Female</Text>
-      </View>
-    </View>
+      <Text style={styles.radioButtonLabel}>{lable}</Text>
+    </TouchableOpacity>
   );
 };
 
 export default Checkbox;
+
+const styles = StyleSheet.create({
+  radioButtonContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  radioButton: {
+    width: 20,
+    height: 20,
+    borderRadius: 10,
+    borderWidth: 2,
+    borderColor: '#9D8081',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  radioButtonSelected: {
+    borderColor: '#9D8081',
+  },
+  radioButtonInner: {
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    backgroundColor: '#9D8081',
+  },
+  radioButtonLabel: {
+    marginLeft: 10,
+    fontSize: 16,
+  },
+});

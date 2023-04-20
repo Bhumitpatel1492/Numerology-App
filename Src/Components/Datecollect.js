@@ -26,6 +26,7 @@ const DateCollect = ({
         style={style}
         keyboardType={keyboardType}
         maxLength={maxLength}
+        // dataDetectorTypes={'phoneNumber'}
       />
     </View>
   );
