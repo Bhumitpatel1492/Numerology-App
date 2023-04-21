@@ -1,6 +1,7 @@
-import React, {Component} from 'react';
+import React, {Component, useEffect, useState} from 'react';
 import {
   View,
+  FlatList,
   Text,
   StyleSheet,
   SafeAreaView,
@@ -12,13 +13,33 @@ import Onbording from '../../../assets/Svg Image/onbording';
 import Backbtn from '../../../assets/Svg Image/Left_redbtn';
 import Nextbtn from '../../../assets/Svg Image/Right_redbtn';
 import fonts from '../../Utils/Fonts';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   moderateScale,
   verticalScale,
   horizontalScale,
 } from '../../Utils/scalling';
 
-const ReportDriver = ({navigation}) => {
+const data = require('../../../Jsonfile/number-details.json');
+const ReportDriver = ({navigation, route}) => {
+  const [jsonData, setJsonData] = useState(data);
+  const [FirstName, setFirstName] = useState();
+  const [LastName, setLastName] = useState();
+  const [Email, setEmail] = useState();
+  const [MobileNo, setMobileNo] = useState();
+  const [date, setdate] = useState();
+  const [month, setmonth] = useState();
+  const [year, setyear] = useState();
+  // const {paramName} = route.params;
+  // const {paramName1} = route.params;
+  // const {paramName2} = route.params;
+  // const {paramName3} = route.params;
+  // console.log('paramName...' + paramName2);
+
+  // useEffect(() => {
+  //   setJsonData(data);
+  // });
+
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#A02056'}}>
       <View style={styles.container}>
@@ -61,8 +82,6 @@ const ReportDriver = ({navigation}) => {
     </SafeAreaView>
   );
 };
-
-// define your styles
 
 export default ReportDriver;
 

@@ -27,6 +27,7 @@ import Mulyank from '../Screens/Driver1Screen/Mulyank';
 import Profession from '../Profession/Profession';
 import Wallpaper from '../Screens/Wallpaper on mobile/Wallpaper';
 import occultree from '../Screens/closer/occultree';
+import ExtraScreen from '../Screens/extra';
 
 const Stack = createNativeStackNavigator();
 const Root = () => {
@@ -62,6 +63,7 @@ const Root = () => {
         <Stack.Screen name="Profession" component={Profession} />
         <Stack.Screen name="Wallpaper" component={Wallpaper} />
         <Stack.Screen name="occultree" component={occultree} />
+        <Stack.Screen name="ExtraScreen" component={ExtraScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

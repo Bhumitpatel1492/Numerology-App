@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -15,119 +15,131 @@ import Checkbox from '../../Components/Chechbox';
 import {moderateScale} from '../../Utils/scalling';
 import CustomTextInput from '../../Components/Textinput';
 import DateCollect from '../../Components/Datecollect';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import Datevalue from '../../Components/Datevalue';
-import Monthvalue from '../../Components/Monthvalue';
-import Yearvalue from '../../Components/Yearvalue';
 
 const Register = ({navigation}) => {
-  const [alldata, setAllData] = useState({
-    FirstName: '',
-    LastName: '',
-    Email: '',
-    Mobile: '',
-    date: '',
-    month: '',
-    year: '',
-  });
-  console.log('all', alldata.date);
+  const [FirstName, setFirstName] = useState();
+  console.log('fristname', FirstName);
+  const [LastName, setLastName] = useState();
+  const [Email, setEmail] = useState();
+  const [MobileNo, setMobileNo] = useState();
+  const [date, setdate] = useState();
+  const [month, setmonth] = useState();
+  const [year, setyear] = useState();
   const [selectedValue, setSelectedValue] = useState();
+  const [Driver_no, setDriver_no] = useState();
+  const [Final1, setFinal1] = useState();
+  const [Final2, setFinal2] = useState();
+  const [conductor_no, setconductor_no] = useState();
+  console.log('final..>' + conductor_no);
+
+  useEffect(() => {
+    setFirstName('');
+    setLastName('');
+    setEmail('');
+    setMobileNo('');
+    setdate('');
+    setmonth('');
+    setyear('');
+  }, []);
+
+  useEffect(() => {
+    handledatesum();
+    handleyearsum();
+    handlemonthsum();
+    Data();
+  });
 
   const handleSelection = value => {
     setSelectedValue(value);
   };
 
-  const [day, setDay] = useState('');
-  console.log('day', day);
-
-  const [error, setError] = useState('');
-
-  // const handleNameChange = value => {
-  //   setAllData({...alldata, FirstName: value});
-  // };
-
-  // const handleLastNameChange = value => {
-  //   setAllData({...alldata, LastName: value});
-  // };
-
-  // const handleEmailChange = value => {
-  //   setAllData({...alldata, Email: value});
-  // };
-
-  // const handleMobileChange = value => {
-  //   setAllData({...alldata, Mobile: value});
-  // };
-
-  // const handledateChange = value => {
-  //   setAllData({...alldata, date: value});
-  // };
-
-  // const handlemonthChange = value => {
-  //   setAllData({...alldata, month: value});
-  // };
-
-  // const handleyearChange = value => {
-  //   setAllData({...alldata, year: value});
-  // };
-
-  const Mobile = /^[6-9]\d{9}$/;
-  const email = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  // const Date = /(0?[1-9]|[12]\d|3[01])/;
-
-  const checkTextInput = () => {
-    if (alldata.FirstName === '') {
-      Alert.alert('Please Enter FirstName');
-      return;
-    } else if (alldata.LastName === '') {
-      Alert.alert('Please Enter LastName');
-    } else if (alldata.Email === '') {
-      Alert.alert('Please Enter Email');
-    } else if (!email.test(alldata.Email)) {
-      Alert.alert('enter Valid Email');
-    } else if (alldata.Mobile === '') {
-      Alert.alert('Please Enter Mobile Number');
-    } else if (!Mobile.test(alldata.Mobile)) {
-      Alert.alert('Invalid Number');
-    } else if (selectedValue === null) {
-      Alert.alert('select Your Gender');
-    } else if (alldata.date === '') {
-      Alert.alert('Please Enter Birth Date');
-    } else if (alldata.month === '') {
-      Alert.alert('Please Enter month');
-    } else if (alldata.year === '') {
-      Alert.alert('Please Enter year');
+  const handledatesum = async value => {
+    const user = date;
+    let item = user.split('');
+    var value = item[0];
+    var value0 = item[1];
+    let ans = parseInt(value) + parseInt(value0);
+    if (ans > 9) {
+      let B = ans.toString();
+      let C = B.split('');
+      let ans2 = C;
+      let X = ans2[0];
+      let Y = ans2[1];
+      let final = parseInt(X) + parseInt(Y);
+      setDriver_no(final);
     } else {
-      Alert.alert('success');
+      setDriver_no(ans);
     }
   };
+  const handleyearsum = async value => {
+    const user = year;
+    let item = user.split('');
+    var value = item[0];
+    var value0 = item[1];
+    var value1 = item[2];
+    var value2 = item[3];
+    let ans =
+      parseInt(value) + parseInt(value0) + parseInt(value1) + parseInt(value2);
+    // console.log('ans', ans);
+    if (ans > 9) {
+      let B = ans.toString();
+      let C = B.split('');
+      let ans2 = C;
+      let X = ans2[0];
+      let Y = ans2[1];
+      let final = parseInt(X) + parseInt(Y);
+      // console.log('okok', final);
 
-  const handleDayChange = text => {
-    // Check that the input is a number
-    if (/^\d+$/.test(text)) {
-      const dayNum = parseInt(text, 10);
-      // Check that the day is within the valid range
-      if (dayNum >= 1 && dayNum <= 31) {
-        setDay(text);
-        setError(''); // Clear any previous error message
-      } else {
-        setError('Please enter a valid day between 1 and 31');
+      if (final > 9) {
+        let B = final.toString();
+        let C = B.split('');
+        let ans3 = C;
+        let X = ans3[0];
+        let Y = ans3[1];
+        let last = parseInt(X) + parseInt(Y);
+        console.log('less10', last);
+        setFinal1(last);
       }
     } else {
-      setError('Please enter a valid number');
+      setFinal1(ans);
+    }
+  };
+  const handlemonthsum = async value => {
+    const user = month;
+    let item = user.split('');
+    var value = item[0];
+    var value0 = item[1];
+    let ans = parseInt(value) + parseInt(value0);
+    console.log('okok', ans);
+    if (ans > 9) {
+      let B = ans.toString();
+      let C = B.split('');
+      let ans2 = C;
+      let X = ans2[0];
+      let Y = ans2[1];
+      let final = parseInt(X) + parseInt(Y);
+      console.log('final', final);
+      setFinal2(final);
+    } else {
+      setFinal2(ans);
     }
   };
 
-  const handleInputChange = (key, value) => {
-    setAllData({...alldata, [key]: value});
-  };
-
-  const handleFormSubmit = async () => {
-    try {
-      await AsyncStorage.setItem('alldata', JSON.stringify(alldata));
-      console.log('Form data saved successfully!', alldata);
-    } catch (e) {
-      console.error(e);
+  const Data = () => {
+    let a = Driver_no + Final1 + Final2;
+    if (a > 9) {
+      let B = a.toString();
+      let C = B.split('');
+      let ans2 = C;
+      let X = ans2[0];
+      let Y = ans2[1];
+      let final = parseInt(X) + parseInt(Y);
+      setconductor_no(final);
+    } else {
+      setconductor_no(a);
     }
+    // setconductor_no(a)
+    console.log('valueee===>...' + a);
   };
 
   return (
@@ -148,26 +160,26 @@ const Register = ({navigation}) => {
             <View>
               <CustomTextInput
                 label="FirstName"
-                value={alldata.FirstName}
-                onChangeText={text => handleInputChange('FirstName', text)}
+                value={FirstName}
+                onChangeText={value => setFirstName(value)}
               />
 
               <CustomTextInput
                 label="LastName"
-                value={alldata.LastName}
-                onChangeText={text => handleInputChange('LastName', text)}
+                value={LastName}
+                onChangeText={value => setLastName(value)}
               />
 
               <CustomTextInput
                 label="Email"
-                value={alldata.Email}
-                onChangeText={text => handleInputChange('Email', text)}
+                value={Email}
+                onChangeText={value => setEmail(value)}
               />
 
               <CustomTextInput
                 label="Mobile"
-                value={alldata.Mobile}
-                onChangeText={text => handleInputChange('Mobile', text)}
+                value={MobileNo}
+                onChangeText={value => setMobileNo(value)}
                 keyboardType="numeric"
                 maxLength={10}
               />
@@ -211,47 +223,41 @@ const Register = ({navigation}) => {
             </View>
 
             <View style={{flexDirection: 'row', marginHorizontal: 18}}>
-              {/* <View style={{flex: 1}}>
-                <Datevalue />
-              </View>
-              <View style={{flex: 1}}>
-                <Monthvalue />
-              </View>
-              <View style={{flex: 1}}>
-                <Yearvalue />
-              </View> */}
-
               <DateCollect
                 label="Date"
                 style={styles.input}
                 keyboardType="numeric"
                 maxLength={2}
-                value={alldata.date}
-                onChangeText={text => handleInputChange('date', text)}
+                value={date}
+                onChangeText={value => setdate(value)}
               />
               <DateCollect
                 label="Month"
                 style={styles.input}
                 maxLength={2}
                 keyboardType="numeric"
-                value={alldata.month}
-                onChangeText={text => handleInputChange('month', text)}
+                value={month}
+                onChangeText={value => setmonth(value)}
               />
               <DateCollect
                 label="Year"
                 style={[styles.input, {width: moderateScale(160)}]}
                 keyboardType="numeric"
                 maxLength={4}
-                value={alldata.year}
-                onChangeText={text => handleInputChange('year', text)}
+                value={year}
+                onChangeText={value => setyear(value)}
               />
             </View>
 
             <TouchableOpacity
               style={styles.btn}
               onPress={() => {
-                checkTextInput();
-                handleFormSubmit();
+                navigation.navigate('ReportDriver', {
+                  paramName: Driver_no,
+                  paramName1: Final1,
+                  paramName2: Final2,
+                  paramName3: conductor_no,
+                });
               }}>
               <Text
                 style={{
