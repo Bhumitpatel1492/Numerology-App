@@ -19,7 +19,12 @@ import {
   horizontalScale,
 } from '../../Utils/scalling';
 
-const ReportDriver1 = ({navigation}) => {
+const ReportDriver1 = ({navigation, route}) => {
+  // const {f_name} = route.params; // first_name
+  // const {l_name} = route.params; // last_name
+  // const {paramName6} = route.params;
+  // console.log('oojkk', paramName6);
+
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#0096A5'}}>
       <View style={styles.container}>
@@ -28,7 +33,7 @@ const ReportDriver1 = ({navigation}) => {
             <Drawer2 />
             <View>
               <Text style={styles.title}>Numerology Report of</Text>
-              <Text style={styles.name}>TEJASH SHAH</Text>
+              <Text style={styles.name}>Tejash Shash</Text>
             </View>
           </View>
           <View style={styles.image}>

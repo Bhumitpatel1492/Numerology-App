@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -15,8 +15,40 @@ import Nextbtn from '../../../assets/Svg Image/Right_redbtn';
 import fonts from '../../Utils/Fonts';
 import {moderateScale} from '../../Utils/scalling';
 import Drawer from '../../../assets/Svg Image/Drawer_red';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const ReportDriverDetails = ({navigation}) => {
+const ReportDriverDetails = ({navigation, route}) => {
+  const [data, setData] = useState([]);
+  const [data1, setData1] = useState([]);
+  const [data2, setData2] = useState();
+
+  const getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('firstname');
+      // console.log('fname', value);
+      const value1 = await AsyncStorage.getItem('lastname');
+      // console.log('lname', value1);
+      const value2 = await AsyncStorage.getItem('driver_no');
+      console.log('dno', value2);
+      if (value !== null) {
+        setData(value);
+      }
+      if (value1 !== null) {
+        setData1(value1);
+      }
+      if (value2 !== null) {
+        setData2(value2);
+      }
+    } catch (e) {}
+  };
+
+  useEffect(() => {
+    // setJsonData(data);
+    {
+      getData();
+    }
+  }, []);
+
   const windowWidth = Dimensions.get('window').width;
 
   return (
@@ -27,9 +59,11 @@ const ReportDriverDetails = ({navigation}) => {
             <Drawer />
             <View>
               <Text style={styles.title}>Numerology Report of</Text>
-              <Text Text style={styles.name}>
-                TEJASH SHAH
-              </Text>
+              <View
+                style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>
+                <Text style={styles.name}>Tejash</Text>
+                <Text style={styles.name}>Shash</Text>
+              </View>
             </View>
           </View>
 

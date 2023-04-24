@@ -16,7 +16,10 @@ import {moderateScale} from '../../Utils/scalling';
 import Backbtn from '../../../assets/Svg Image/Left_redbtn';
 import Nextbtn from '../../../assets/Svg Image/Right_redbtn';
 
-const Mulyank = ({navigation}) => {
+const Mulyank = ({navigation, route}) => {
+  // const {fname} = route.params; // first_name
+  // const {lname} = route.params; // last_name
+
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#FFF2F7'}}>
       <View style={styles.container}>
@@ -25,7 +28,7 @@ const Mulyank = ({navigation}) => {
           <View>
             <Text style={styles.title}>Numerology Report of</Text>
             <Text Text style={styles.name}>
-              TEJASH SHAH
+              Tejash Shash
             </Text>
           </View>
         </View>

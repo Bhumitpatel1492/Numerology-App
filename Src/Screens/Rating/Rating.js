@@ -17,7 +17,9 @@ import {moderateScale} from '../../Utils/scalling';
 import Leftbtn from '../../../assets/Svg Image/Leftbtn';
 import Rightbtn from '../../../assets/Svg Image/Rightbtn';
 
-const Rating = ({navigation}) => {
+const Rating = ({navigation, route}) => {
+  // const {firstName} = route.params; // first_name
+  // const {lastName} = route.params; // last_name
   return (
     <SafeAreaView style={Style.maincontainer}>
       <View style={styles.container}>
@@ -25,7 +27,7 @@ const Rating = ({navigation}) => {
           <Drawer2 />
           <View>
             <Text style={styles.title}>Numerology Report of</Text>
-            <Text style={styles.name}>TEJASH SHAH</Text>
+            <Text style={styles.name}>Tejash Shash</Text>
           </View>
         </View>
         <ScrollView showsVerticalScrollIndicator={false}>

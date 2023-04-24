@@ -23,22 +23,44 @@ import {
 const data = require('../../../Jsonfile/number-details.json');
 const ReportDriver = ({navigation, route}) => {
   const [jsonData, setJsonData] = useState(data);
-  const [FirstName, setFirstName] = useState();
-  const [LastName, setLastName] = useState();
-  const [Email, setEmail] = useState();
-  const [MobileNo, setMobileNo] = useState();
-  const [date, setdate] = useState();
-  const [month, setmonth] = useState();
-  const [year, setyear] = useState();
-  // const {paramName} = route.params;
-  // const {paramName1} = route.params;
-  // const {paramName2} = route.params;
-  // const {paramName3} = route.params;
-  // console.log('paramName...' + paramName2);
+  // const {paramName1} = route.params; // first_name
+  // const {paramName2} = route.params; // last_name
+  // const {paramName3} = route.params;   // Driver_no
+  // const {paramName4} = route.params;   // Month
+  // const {paramName5} = route.params;  // year
+  // const {paramName6} = route.params;  // conductor_no
 
-  // useEffect(() => {
-  //   setJsonData(data);
-  // });
+  const [data, setData] = useState([]);
+  const [data1, setData1] = useState([]);
+  const [data2, setData2] = useState();
+  // console.log('driver', data2);
+
+  const getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('firstname');
+      // console.log('fname', value);
+      const value1 = await AsyncStorage.getItem('lastname');
+      // console.log('lname', value1);
+      const value2 = await AsyncStorage.getItem('driver_no');
+      console.log('dno', value2);
+      if (value !== null) {
+        setData(value);
+      }
+      if (value1 !== null) {
+        setData1(value1);
+      }
+      if (value2 !== null) {
+        setData2(value2);
+      }
+    } catch (e) {}
+  };
+
+  useEffect(() => {
+    setJsonData(data);
+    {
+      getData();
+    }
+  }, []);
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#A02056'}}>
@@ -51,7 +73,11 @@ const ReportDriver = ({navigation, route}) => {
 
             <View>
               <Text style={styles.title}>Numerology Report of</Text>
-              <Text style={styles.name}>TEJASH SHAH</Text>
+              <View
+                style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>
+                <Text style={styles.name}>Tejash</Text>
+                <Text style={styles.name}>Shash</Text>
+              </View>
             </View>
           </View>
           <View style={styles.image}>
@@ -59,6 +85,14 @@ const ReportDriver = ({navigation, route}) => {
           </View>
           <View>
             <Text style={styles.middlename}>Driver (Mulyank)</Text>
+            {/* <Text
+              style={{
+                color: '#FFFFFF',
+                fontSize: 15,
+                backgroundColor: 'green',
+              }}>
+              {data2}
+            </Text> */}
             <View style={{alignItems: 'center', marginHorizontal: 10}}>
               <Text style={styles.line}>
                 The driver no. Shows what drives native in his life i.e. his

@@ -14,7 +14,9 @@ import Number5 from '../../../assets/Svg Image/Number_5';
 import {moderateScale} from '../../Utils/scalling';
 import fonts from '../../Utils/Fonts';
 
-const Bhagyank = ({navigation}) => {
+const Bhagyank = ({navigation, route}) => {
+  // const {f_name} = route.params; // first_name
+  // const {l_name} = route.params; // last_name
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#E8FDFF'}}>
       <View style={styles.container}>
@@ -22,7 +24,7 @@ const Bhagyank = ({navigation}) => {
           <Drawer2 />
           <View>
             <Text style={styles.title}>Numerology Report of</Text>
-            <Text style={styles.name}>TEJASH SHAH</Text>
+            <Text style={styles.name}>Tejash Shash</Text>
           </View>
         </View>
         <View style={styles.view1}>
@@ -51,6 +53,7 @@ const Bhagyank = ({navigation}) => {
         <TouchableOpacity onPress={() => navigation.navigate('Rating')}>
           <Leftbtn />
         </TouchableOpacity>
+
         <TouchableOpacity onPress={() => navigation.navigate('Loshu_Grid')}>
           <Rightbtn />
         </TouchableOpacity>

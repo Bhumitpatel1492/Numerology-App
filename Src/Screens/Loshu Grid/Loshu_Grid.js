@@ -13,14 +13,16 @@ import Drawer_Blue from '../../../assets/Svg Image/Drawer_Blue';
 import Left_bluebtn from '../../../assets/Svg Image/Left_bluebtn';
 import Right_bluebtn from '../../../assets/Svg Image/Right_bluebtn';
 
-const Loshu_Grid = ({navigation}) => {
+const Loshu_Grid = ({navigation, route}) => {
+  // const {firstName} = route.params; // first_name
+  // const {lastname} = route.params; // last_name
   return (
     <View style={styles.container}>
       <View style={styles.subcontainer}>
         <Drawer_Blue />
         <View>
           <Text style={styles.title}>Numerology Report of</Text>
-          <Text style={styles.name}>TEJASH SHAH</Text>
+          <Text style={styles.name}>Tejash Shash</Text>
         </View>
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>

@@ -15,11 +15,12 @@ import Checkbox from '../../Components/Chechbox';
 import {moderateScale} from '../../Utils/scalling';
 import CustomTextInput from '../../Components/Textinput';
 import DateCollect from '../../Components/Datecollect';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Register = ({navigation}) => {
   const [FirstName, setFirstName] = useState();
-  console.log('fristname', FirstName);
-  const [LastName, setLastName] = useState();
+
+  const [LastName, setLastName] = useState('');
   const [Email, setEmail] = useState();
   const [MobileNo, setMobileNo] = useState();
   const [date, setdate] = useState();
@@ -30,7 +31,18 @@ const Register = ({navigation}) => {
   const [Final1, setFinal1] = useState();
   const [Final2, setFinal2] = useState();
   const [conductor_no, setconductor_no] = useState();
-  console.log('final..>' + conductor_no);
+  console.log(
+    'final..>' + FirstName,
+    LastName,
+    Email,
+    MobileNo,
+    date,
+    month,
+    year,
+    selectedValue,
+    Driver_no,
+    conductor_no,
+  );
 
   useEffect(() => {
     setFirstName('');
@@ -47,6 +59,7 @@ const Register = ({navigation}) => {
     handleyearsum();
     handlemonthsum();
     Data();
+    // FirstName;
   });
 
   const handleSelection = value => {
@@ -71,6 +84,7 @@ const Register = ({navigation}) => {
       setDriver_no(ans);
     }
   };
+
   const handleyearsum = async value => {
     const user = year;
     let item = user.split('');
@@ -98,12 +112,13 @@ const Register = ({navigation}) => {
         let Y = ans3[1];
         let last = parseInt(X) + parseInt(Y);
         console.log('less10', last);
-        setFinal1(last);
+        setFinal2(last);
       }
     } else {
-      setFinal1(ans);
+      setFinal2(ans);
     }
   };
+
   const handlemonthsum = async value => {
     const user = month;
     let item = user.split('');
@@ -119,11 +134,63 @@ const Register = ({navigation}) => {
       let Y = ans2[1];
       let final = parseInt(X) + parseInt(Y);
       console.log('final', final);
-      setFinal2(final);
+      setFinal1(final);
     } else {
-      setFinal2(ans);
+      setFinal1(ans);
     }
   };
+
+  const number = /^[6-9]\d{9}$/;
+  const email = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  // const checkTextInput = () => {
+  //   if (FirstName === '') {
+  //     Alert.alert('Please Enter FirstName');
+  //     return;
+  //   } else if (LastName === '') {
+  //     Alert.alert('Please Enter LastName');
+  //   } else if (Email === '') {
+  //     Alert.alert('Please Enter Email');
+  //   } else if (!email.test(Email)) {
+  //     Alert.alert('enter Valid Email');
+  //   } else if (MobileNo === '') {
+  //     Alert.alert('Please Enter Mobile Number');
+  //   } else if (!number.test(MobileNo)) {
+  //     Alert.alert('Invalid Number');
+  //   } else if (selectedValue === null) {
+  //     Alert.alert('select Your Gender');
+  //   } else if (date === '') {
+  //     Alert.alert('Please Enter Birth Date');
+  //   } else if (month === '') {
+  //     Alert.alert('Please Enter month');
+  //   } else if (year === '') {
+  //     Alert.alert('Please Enter year');
+  //   } else {
+  //     Alert.alert('success');
+  //     // storeData();
+  //     props.navigation.navigate('ReportDriver');
+  //   }
+  // };
+
+  const storeData = async Final => {
+    try {
+      await AsyncStorage.setItem('firstname', FirstName);
+      await AsyncStorage.setItem('lastname', LastName);
+      await AsyncStorage.setItem('email', Email);
+      await AsyncStorage.setItem('mobile', MobileNo);
+      await AsyncStorage.setItem('gender', selectedValue);
+      await AsyncStorage.setItem('date', date);
+      await AsyncStorage.setItem('month', month);
+      await AsyncStorage.setItem('year', year);
+      await AsyncStorage.setItem('driver_no', JSON.stringify(Driver_no));
+      console.log('oooo', Driver_no);
+      await AsyncStorage.setItem('conductor_no', JSON.stringify(conductor_no));
+    } catch (e) {
+      console.log('error');
+    }
+  };
+
+  // const driver = Driver_no.stringify(dri);
 
   const Data = () => {
     let a = Driver_no + Final1 + Final2;
@@ -201,8 +268,8 @@ const Register = ({navigation}) => {
                   top: 2,
                 }}>
                 <Checkbox
-                  selected={selectedValue === 'option1'}
-                  onPress={() => handleSelection('option1')}
+                  selected={selectedValue === 'male'}
+                  onPress={() => handleSelection('male')}
                 />
                 <Text style={Style.txt}>Male</Text>
               </View>
@@ -215,8 +282,8 @@ const Register = ({navigation}) => {
                   marginLeft: 5,
                 }}>
                 <Checkbox
-                  selected={selectedValue === 'option2'}
-                  onPress={() => handleSelection('option2')}
+                  selected={selectedValue === 'female'}
+                  onPress={() => handleSelection('female')}
                 />
                 <Text style={Style.txt}>Female</Text>
               </View>
@@ -251,14 +318,7 @@ const Register = ({navigation}) => {
 
             <TouchableOpacity
               style={styles.btn}
-              onPress={() => {
-                navigation.navigate('ReportDriver', {
-                  paramName: Driver_no,
-                  paramName1: Final1,
-                  paramName2: Final2,
-                  paramName3: conductor_no,
-                });
-              }}>
+              onPress={() => navigation.navigate('ReportDriver')}>
               <Text
                 style={{
                   fontSize: moderateScale(22),
