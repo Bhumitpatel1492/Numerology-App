@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {Component, useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   ScrollView,
   Dimensions,
+  FlatList,
 } from 'react-native';
 import Onbording2 from '../../../assets/Svg Image/Onbording2';
 import Style from '../../Utils/Style';
@@ -17,39 +18,46 @@ import {moderateScale} from '../../Utils/scalling';
 import Drawer from '../../../assets/Svg Image/Drawer_red';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+const item = require('../../../Jsonfile/number-details.json'); // No,Plantes,
 const ReportDriverDetails = ({navigation, route}) => {
-  const [data, setData] = useState([]);
-  const [data1, setData1] = useState([]);
-  const [data2, setData2] = useState();
+  const windowWidth = Dimensions.get('window').width;
+  const [list, setlist] = useState(item);
+  const [FirstName, setFirstName] = useState();
+
+  const [LastName, setLastName] = useState();
+  const [Email, setEmail] = useState();
+  const [driver_no, setdriver_no] = useState();
+  // const { root } = route.params;
+  // const { name } = route.params;
+  // const value = JSON.stringify(name);
+
+  useEffect(() => {
+    setlist(list);
+    getData();
+  });
 
   const getData = async () => {
     try {
       const value = await AsyncStorage.getItem('firstname');
-      // console.log('fname', value);
       const value1 = await AsyncStorage.getItem('lastname');
-      // console.log('lname', value1);
       const value2 = await AsyncStorage.getItem('driver_no');
-      console.log('dno', value2);
+      // console.log("value==>" + value2)
+      const Email = await AsyncStorage.getItem('email');
+      console.log('value==>' + value);
       if (value !== null) {
-        setData(value);
+        setFirstName(value);
       }
       if (value1 !== null) {
-        setData1(value1);
+        setLastName(value1);
       }
       if (value2 !== null) {
-        setData2(value2);
+        setdriver_no(value2);
+      }
+      if (Email !== null) {
+        setEmail(Email);
       }
     } catch (e) {}
   };
-
-  useEffect(() => {
-    // setJsonData(data);
-    {
-      getData();
-    }
-  }, []);
-
-  const windowWidth = Dimensions.get('window').width;
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#FFF2F7'}}>
@@ -60,9 +68,9 @@ const ReportDriverDetails = ({navigation, route}) => {
             <View>
               <Text style={styles.title}>Numerology Report of</Text>
               <View
-                style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>
-                <Text style={styles.name}>Tejash</Text>
-                <Text style={styles.name}>Shash</Text>
+                style={{flexDirection: 'row', textDecorationLine: 'underline'}}>
+                <Text style={styles.name}>{FirstName}</Text>
+                <Text style={styles.name1}>{LastName}</Text>
               </View>
             </View>
           </View>
@@ -77,75 +85,109 @@ const ReportDriverDetails = ({navigation, route}) => {
               Driver (Mulyank)
             </Text>
           </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+            <Onbording2 />
 
-          <View style={styles.subcontainer1}>
-            <View style={{flex: 0.26, width: windowWidth}}>
-              <Onbording2 />
-            </View>
-            <View
+            <FlatList
               style={{
-                flex: 0.8,
+                marginStart: moderateScale(18),
+              }}
+              data={list}
+              keyExtractor={(item, index) => index.toString()}
+              renderItem={({item}) => (
+                <View>
+                  <View
+                    style={{
+                      width: windowWidth,
+                      alignItems: 'flex-end',
+                    }}>
+                    <View style={styles.profile}>
+                      {driver_no == item.No ? (
+                        <Text style={Style.types}>Plantes </Text>
+                      ) : null}
+                      {driver_no == item.No ? (
+                        <Text style={Style.details}> {item.Plantes}</Text>
+                      ) : null}
+                    </View>
+                    <View style={styles.profile}>
+                      {driver_no == item.No ? (
+                        <Text style={Style.types}>Relations</Text>
+                      ) : null}
+                      {driver_no == item.No ? (
+                        <Text style={Style.details}> {item.Relations}</Text>
+                      ) : null}
+                    </View>
 
-                borderTopColor: '#FFFFFF',
-                borderTopWidth: 1,
-                width: windowWidth,
-                left: 10,
-              }}>
-              <View style={styles.profile}>
-                <Text style={Style.types}>Plantes</Text>
-                <Text style={Style.details}>Mercury - Budh</Text>
-              </View>
-              <View style={styles.profile}>
-                <Text style={Style.types}>Relations</Text>
-                <Text style={Style.details}>Prince</Text>
-              </View>
-              <View style={styles.profile}>
-                <Text style={Style.types}>Qualities</Text>
-                <Text style={Style.details}>Emotional & Mental Balance</Text>
-              </View>
-            </View>
+                    <View style={styles.profile}>
+                      {driver_no == item.No ? (
+                        <Text style={Style.types}>Qualities </Text>
+                      ) : null}
+                      {driver_no == item.No ? (
+                        <Text style={Style.details}> {item.Qualities}</Text>
+                      ) : null}
+                    </View>
+                  </View>
+                </View>
+              )}
+            />
           </View>
 
-          <View>
-            <Text style={Style.lines}>
-              • You accept the challenges as a challenge and fight them and win.
-            </Text>
-            <Text style={[Style.lines, {marginVertical: 10}]}>
-              • It is natural for individuals to be intelligent and at the same
-              time, people of this radix are courageous and actionable.
-            </Text>
-
-            <Text style={Style.lines}>
-              • You can earn profit by implementing new schemes. You are always
-              ready to take risks in business, and you are relatively more
-              successful in business.
-            </Text>
-
-            <Text style={[Style.lines, {marginVertical: 10}]}>
-              • You do not worry about any subject for a long time, nor are you
-              happy or sad for long. You adapt yourselves to the situation.
-            </Text>
-            <Text style={[Style.lines, {marginVertical: 10}]}>
-              • You also have the quality of hypnotizing others, you always
-              befriend others, and get your work done out of them.
-            </Text>
-            <Text style={[Style.lines, {marginVertical: 8}]}>
-              • You see the intent of any person.
-            </Text>
-
-            <Text style={[Style.lines, {marginVertical: 8}]}>
-              • You get excellent education. You are knowledgeable of many
-              languages, even if your learning is less due to some reason, even
-              then you are said to be clever and intelligent.
-            </Text>
-
-            <Text style={[Style.lines, {marginVertical: 10}]}>
-              • You also study religious texts and occult practices.
-            </Text>
-          </View>
+          <FlatList
+            data={list}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({item}) => (
+              <View style={{marginTop: moderateScale(10)}}>
+                <View style={{flexDirection: 'row'}}>
+                  {driver_no == item.No ? (
+                    <Text style={Style.lines}>•</Text>
+                  ) : null}
+                  {driver_no == item.No ? (
+                    <Text style={Style.lines}>{item.SymptomsLowEnergy}</Text>
+                  ) : null}
+                </View>
+                <View style={{flexDirection: 'row'}}>
+                  {driver_no == item.No ? (
+                    <Text style={Style.lines}>•</Text>
+                  ) : null}
+                  {driver_no == item.No ? (
+                    <Text style={Style.lines}>{item.Solutions}</Text>
+                  ) : null}
+                </View>
+                <View style={{flexDirection: 'row'}}>
+                  {driver_no == item.No ? (
+                    <Text style={Style.lines}>•</Text>
+                  ) : null}
+                  {driver_no == item.No ? (
+                    <Text style={Style.lines}>{item.EnhanceMulyank}</Text>
+                  ) : null}
+                </View>
+                <View style={{flexDirection: 'row'}}>
+                  {driver_no == item.No ? (
+                    <Text style={Style.lines}>•</Text>
+                  ) : null}
+                  {driver_no == item.No ? (
+                    <Text style={Style.lines}>{item.EnhanceBhagyank}</Text>
+                  ) : null}
+                </View>
+                <View style={{flexDirection: 'row'}}>
+                  {driver_no == item.No ? (
+                    <Text style={Style.lines}>•</Text>
+                  ) : null}
+                  {driver_no == item.No ? (
+                    <Text style={Style.lines}>{item.WallpaperSuggestion}</Text>
+                  ) : null}
+                </View>
+              </View>
+            )}
+          />
         </ScrollView>
         <View style={styles.arrow}>
-          <TouchableOpacity onPress={() => navigation.navigate('ReportDriver')}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
             <Backbtn />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate('Mulyank')}>
@@ -170,12 +212,27 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
+
+  name1: {
+    fontSize: moderateScale(42),
+    color: '#A02056',
+    opacity: 1,
+    textDecorationLine: 'underline',
+    fontFamily: fonts.ATR,
+    marginStart: moderateScale(20),
+    // textTransform: 'uppercase',
+  },
   subcontainer1: {
     flexDirection: 'row',
     flex: 1,
     alignItems: 'center',
     // justifyContent: 'space-between',
     // backgroundColor: 'red',
+  },
+  subcontainer2: {
+    flexDirection: 'row',
+    flex: 1,
+    alignItems: 'center',
   },
   arrow: {
     flexDirection: 'row',
@@ -212,7 +269,7 @@ const styles = StyleSheet.create({
   },
   profile: {
     flexDirection: 'row',
-    flex: 1,
+    // flex: 1,
     borderBottomColor: '#FFFFFF',
     borderBottomWidth: 1,
     // justifyContent: 'space-around',
@@ -225,5 +282,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginVertical: 20,
+  },
+
+  numberTextConatiner: {
+    // color: '#A02056',
+    color: 'white',
+    fontSize: moderateScale(50),
+    fontFamily: fonts.ATSBI,
+    // backgroundColor: "#E7C7D4",
+    // borderRadius: 50,
+    // height: 100, width: 100, alignSelf: "center"
   },
 });

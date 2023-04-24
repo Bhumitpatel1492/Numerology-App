@@ -143,34 +143,34 @@ const Register = ({navigation}) => {
   const number = /^[6-9]\d{9}$/;
   const email = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  // const checkTextInput = () => {
-  //   if (FirstName === '') {
-  //     Alert.alert('Please Enter FirstName');
-  //     return;
-  //   } else if (LastName === '') {
-  //     Alert.alert('Please Enter LastName');
-  //   } else if (Email === '') {
-  //     Alert.alert('Please Enter Email');
-  //   } else if (!email.test(Email)) {
-  //     Alert.alert('enter Valid Email');
-  //   } else if (MobileNo === '') {
-  //     Alert.alert('Please Enter Mobile Number');
-  //   } else if (!number.test(MobileNo)) {
-  //     Alert.alert('Invalid Number');
-  //   } else if (selectedValue === null) {
-  //     Alert.alert('select Your Gender');
-  //   } else if (date === '') {
-  //     Alert.alert('Please Enter Birth Date');
-  //   } else if (month === '') {
-  //     Alert.alert('Please Enter month');
-  //   } else if (year === '') {
-  //     Alert.alert('Please Enter year');
-  //   } else {
-  //     Alert.alert('success');
-  //     // storeData();
-  //     props.navigation.navigate('ReportDriver');
-  //   }
-  // };
+  const checkTextInput = () => {
+    if (FirstName === '') {
+      Alert.alert('Please Enter FirstName');
+      return;
+    } else if (LastName === '') {
+      Alert.alert('Please Enter LastName');
+    } else if (Email === '') {
+      Alert.alert('Please Enter Email');
+    } else if (!email.test(Email)) {
+      Alert.alert('enter Valid Email');
+    } else if (MobileNo === '') {
+      Alert.alert('Please Enter Mobile Number');
+    } else if (!number.test(MobileNo)) {
+      Alert.alert('Invalid Number');
+    } else if (selectedValue === null) {
+      Alert.alert('select Your Gender');
+    } else if (date === '') {
+      Alert.alert('Please Enter Birth Date');
+    } else if (month === '') {
+      Alert.alert('Please Enter month');
+    } else if (year === '') {
+      Alert.alert('Please Enter year');
+    } else {
+      Alert.alert('success');
+      storeData();
+      navigation.navigate('ReportDriver');
+    }
+  };
 
   const storeData = async Final => {
     try {
@@ -316,9 +316,7 @@ const Register = ({navigation}) => {
               />
             </View>
 
-            <TouchableOpacity
-              style={styles.btn}
-              onPress={() => navigation.navigate('ReportDriver')}>
+            <TouchableOpacity style={styles.btn} onPress={checkTextInput}>
               <Text
                 style={{
                   fontSize: moderateScale(22),

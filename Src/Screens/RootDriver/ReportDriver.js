@@ -7,6 +7,7 @@ import {
   SafeAreaView,
   TouchableOpacity,
   ScrollView,
+  Alert,
 } from 'react-native';
 import Drawer from '../../../assets/Svg Image/Drawer_red';
 import Onbording from '../../../assets/Svg Image/onbording';
@@ -20,47 +21,37 @@ import {
   horizontalScale,
 } from '../../Utils/scalling';
 
-const data = require('../../../Jsonfile/number-details.json');
+const item = require('../../../Jsonfile/number-details.json'); // No,Plantes,
+// console.log("hello,,..//>>" + item)
 const ReportDriver = ({navigation, route}) => {
-  const [jsonData, setJsonData] = useState(data);
-  // const {paramName1} = route.params; // first_name
-  // const {paramName2} = route.params; // last_name
-  // const {paramName3} = route.params;   // Driver_no
-  // const {paramName4} = route.params;   // Month
-  // const {paramName5} = route.params;  // year
-  // const {paramName6} = route.params;  // conductor_no
+  const [list, setlist] = useState(item);
+  const [FirstName, setFirstName] = useState();
+  const [LastName, setLastName] = useState();
+  const [driver_no, setdriver_no] = useState();
 
-  const [data, setData] = useState([]);
-  const [data1, setData1] = useState([]);
-  const [data2, setData2] = useState();
-  // console.log('driver', data2);
-
+  useEffect(() => {
+    setlist(list);
+  });
+  useEffect(() => {
+    getData();
+  });
   const getData = async () => {
     try {
       const value = await AsyncStorage.getItem('firstname');
-      // console.log('fname', value);
       const value1 = await AsyncStorage.getItem('lastname');
-      // console.log('lname', value1);
       const value2 = await AsyncStorage.getItem('driver_no');
-      console.log('dno', value2);
+      console.log('value==>' + value2);
       if (value !== null) {
-        setData(value);
+        setFirstName(value);
       }
       if (value1 !== null) {
-        setData1(value1);
+        setLastName(value1);
       }
       if (value2 !== null) {
-        setData2(value2);
+        setdriver_no(value2);
       }
     } catch (e) {}
   };
-
-  useEffect(() => {
-    setJsonData(data);
-    {
-      getData();
-    }
-  }, []);
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#A02056'}}>
@@ -74,40 +65,48 @@ const ReportDriver = ({navigation, route}) => {
             <View>
               <Text style={styles.title}>Numerology Report of</Text>
               <View
-                style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>
-                <Text style={styles.name}>Tejash</Text>
-                <Text style={styles.name}>Shash</Text>
+                style={{flexDirection: 'row', textDecorationLine: 'underline'}}>
+                <Text style={styles.name}>{FirstName}</Text>
+                <Text style={styles.name1}>{LastName}</Text>
               </View>
+              {/* {/ <Text style={{ color: "white", backgroundColor: "green" }}>{driver_no}</Text> /} */}
             </View>
           </View>
           <View style={styles.image}>
             <Onbording />
           </View>
-          <View>
-            <Text style={styles.middlename}>Driver (Mulyank)</Text>
-            {/* <Text
-              style={{
-                color: '#FFFFFF',
-                fontSize: 15,
-                backgroundColor: 'green',
-              }}>
-              {data2}
-            </Text> */}
-            <View style={{alignItems: 'center', marginHorizontal: 10}}>
-              <Text style={styles.line}>
-                The driver no. Shows what drives native in his life i.e. his
-                desires and ambitions. They are based on the planet who is the
-                lord of that number. This number works throughout his life and
-                it cannt be changed.
-              </Text>
-            </View>
-          </View>
+
+          <FlatList
+            style={{alignSelf: 'center'}}
+            data={list}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({item}) => (
+              <View>
+                <View style={{alignItems: 'center', justifyContent: 'center'}}>
+                  {driver_no == item.No ? (
+                    <Text style={styles.numberTextConatiner}>{item.No}</Text>
+                  ) : null}
+                </View>
+                {driver_no == item.No ? (
+                  <Text style={styles.HeaderTextConatiner}>{item.Plantes}</Text>
+                ) : null}
+                <View style={{paddingHorizontal: moderateScale(35)}}>
+                  {driver_no == item.No ? (
+                    <Text style={styles.DescriptionContainer}>
+                      {item.WallpaperSuggestion}
+                    </Text>
+                  ) : null}
+                </View>
+              </View>
+            )}
+          />
         </ScrollView>
         <View style={styles.arrow}>
           <TouchableOpacity onPress={() => navigation.navigate('Register')}>
             <Backbtn />
           </TouchableOpacity>
           <TouchableOpacity
+            // onPress={() => navigation.navigate('ReportDriverDetails', { root: paramName, name: item })}
             onPress={() => navigation.navigate('ReportDriverDetails')}>
             <Nextbtn />
           </TouchableOpacity>
@@ -116,6 +115,8 @@ const ReportDriver = ({navigation, route}) => {
     </SafeAreaView>
   );
 };
+
+// define your styles
 
 export default ReportDriver;
 
@@ -159,6 +160,15 @@ const styles = StyleSheet.create({
     fontFamily: fonts.ATSBI,
     // textTransform: 'uppercase',
   },
+  name1: {
+    fontSize: moderateScale(42),
+    color: '#FFFFFF',
+    opacity: 1,
+    textDecorationLine: 'underline',
+    fontFamily: fonts.ATSBI,
+    marginStart: moderateScale(20),
+    // textTransform: 'uppercase',
+  },
   middlename: {
     fontSize: 30,
     color: '#FFFFFF',
@@ -174,5 +184,27 @@ const styles = StyleSheet.create({
     marginHorizontal: 8,
     marginVertical: 10,
     lineHeight: 26,
+  },
+
+  numberTextConatiner: {
+    // color: '#A02056',
+    color: 'white',
+    fontSize: moderateScale(50),
+    fontFamily: fonts.ATSBI,
+    // backgroundColor: "#E7C7D4",
+    // borderRadius: 50,
+    // height: 100, width: 100, alignSelf: "center"
+  },
+  HeaderTextConatiner: {
+    color: '#FFFFFF',
+    fontSize: moderateScale(25),
+    fontFamily: fonts.ATSBI,
+    alignSelf: 'center',
+  },
+  DescriptionContainer: {
+    color: '#E7C7D4',
+    fontSize: moderateScale(22),
+    fontFamily: fonts.ATR,
+    marginTop: moderateScale(25),
   },
 });

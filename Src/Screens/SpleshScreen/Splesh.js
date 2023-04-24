@@ -7,10 +7,10 @@ import Logo1 from '../../../assets/Svg Image/Logo1';
 import fonts from '../../Utils/Fonts';
 import {moderateScale} from '../../Utils/scalling';
 
-const Splesh = props => {
+const Splesh = ({navigation}) => {
   useEffect(() => {
     setTimeout(() => {
-      props.navigation.navigate('Register');
+      navigation.navigate('Register');
     }, 3000);
   }, []);
 
