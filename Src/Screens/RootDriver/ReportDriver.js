@@ -22,9 +22,10 @@ import {
 } from '../../Utils/scalling';
 
 const item = require('../../../Jsonfile/number-details.json'); // No,Plantes,
-// console.log("hello,,..//>>" + item)
+
 const ReportDriver = ({navigation, route}) => {
   const [list, setlist] = useState(item);
+  // console.log('driver_no', list);
   const [FirstName, setFirstName] = useState();
   const [LastName, setLastName] = useState();
   const [driver_no, setdriver_no] = useState();
@@ -66,10 +67,11 @@ const ReportDriver = ({navigation, route}) => {
               <Text style={styles.title}>Numerology Report of</Text>
               <View
                 style={{flexDirection: 'row', textDecorationLine: 'underline'}}>
-                <Text style={styles.name}>{FirstName}</Text>
-                <Text style={styles.name1}>{LastName}</Text>
+                <Text style={styles.name}>
+                  {FirstName}
+                  {LastName}
+                </Text>
               </View>
-              {/* {/ <Text style={{ color: "white", backgroundColor: "green" }}>{driver_no}</Text> /} */}
             </View>
           </View>
           <View style={styles.image}>
@@ -106,7 +108,6 @@ const ReportDriver = ({navigation, route}) => {
             <Backbtn />
           </TouchableOpacity>
           <TouchableOpacity
-            // onPress={() => navigation.navigate('ReportDriverDetails', { root: paramName, name: item })}
             onPress={() => navigation.navigate('ReportDriverDetails')}>
             <Nextbtn />
           </TouchableOpacity>
@@ -115,8 +116,6 @@ const ReportDriver = ({navigation, route}) => {
     </SafeAreaView>
   );
 };
-
-// define your styles
 
 export default ReportDriver;
 
@@ -153,12 +152,11 @@ const styles = StyleSheet.create({
     fontFamily: fonts.ATR,
   },
   name: {
-    fontSize: moderateScale(42),
+    fontSize: moderateScale(38),
     color: '#FFFFFF',
     opacity: 1,
     textDecorationLine: 'underline',
     fontFamily: fonts.ATSBI,
-    // textTransform: 'uppercase',
   },
   name1: {
     fontSize: moderateScale(42),
@@ -167,7 +165,6 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline',
     fontFamily: fonts.ATSBI,
     marginStart: moderateScale(20),
-    // textTransform: 'uppercase',
   },
   middlename: {
     fontSize: 30,
@@ -187,13 +184,9 @@ const styles = StyleSheet.create({
   },
 
   numberTextConatiner: {
-    // color: '#A02056',
     color: 'white',
     fontSize: moderateScale(50),
     fontFamily: fonts.ATSBI,
-    // backgroundColor: "#E7C7D4",
-    // borderRadius: 50,
-    // height: 100, width: 100, alignSelf: "center"
   },
   HeaderTextConatiner: {
     color: '#FFFFFF',

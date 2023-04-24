@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -6,6 +6,7 @@ import {
   Image,
   TouchableOpacity,
   SafeAreaView,
+  FlatList,
 } from 'react-native';
 import Rightbtn from '../../../assets/Svg Image/Rightbtn';
 import Leftbtn from '../../../assets/Svg Image/Leftbtn';
@@ -13,10 +14,42 @@ import Drawer2 from '../../../assets/Svg Image/Drawer2';
 import Number5 from '../../../assets/Svg Image/Number_5';
 import {moderateScale} from '../../Utils/scalling';
 import fonts from '../../Utils/Fonts';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const item = require('../../../Jsonfile/number-details.json');
 
 const Bhagyank = ({navigation, route}) => {
-  // const {f_name} = route.params; // first_name
-  // const {l_name} = route.params; // last_name
+  const [FirstName, setFirstName] = useState();
+  const [LastName, setLastName] = useState();
+  const [list, setlist] = useState(item);
+  const [total, setTotal] = useState();
+  console.log('ttt', total);
+
+  useEffect(() => {
+    getData();
+  });
+  useEffect(() => {
+    setlist(list);
+  });
+
+  const getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('firstname');
+      const value1 = await AsyncStorage.getItem('lastname');
+      const value2 = await AsyncStorage.getItem('total');
+
+      if (value !== null) {
+        setFirstName(value);
+      }
+      if (value1 !== null) {
+        setLastName(value1);
+      }
+      if (value2 !== null) {
+        setTotal(value2);
+      }
+    } catch (e) {}
+  };
+
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#E8FDFF'}}>
       <View style={styles.container}>
@@ -24,7 +57,10 @@ const Bhagyank = ({navigation, route}) => {
           <Drawer2 />
           <View>
             <Text style={styles.title}>Numerology Report of</Text>
-            <Text style={styles.name}>Tejash Shash</Text>
+            <Text style={styles.name}>
+              {FirstName}
+              {LastName}
+            </Text>
           </View>
         </View>
         <View style={styles.view1}>
@@ -42,11 +78,17 @@ const Bhagyank = ({navigation, route}) => {
         </View>
         <View style={{marginHorizontal: 12, marginTop: 20}}>
           <Text style={styles.low}>Enhance Bhagyank</Text>
-          <Text style={styles.Mobile}>
-            Keep the Greenery (small plant at your table) near by Your Work
-            table and give water daily to it. Carry Green Ink pen in your
-            pocket, write name with green pen daily.
-          </Text>
+          <FlatList
+            data={list}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({item}) => (
+              <View>
+                {total == item.No ? (
+                  <Text style={styles.Mobile}>{item.EnhanceBhagyank}</Text>
+                ) : null}
+              </View>
+            )}
+          />
         </View>
       </View>
       <View style={styles.footer}>

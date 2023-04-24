@@ -46,7 +46,7 @@ const Loshu_GridNumber = ({navigation}) => {
         <View style={styles.background}>
           <Text
             style={{
-              fontSize: moderateScale(40),
+              fontSize: moderateScale(34),
               color: '#AAA0CE',
               fontFamily: fonts.ATSBI,
             }}>
@@ -55,7 +55,7 @@ const Loshu_GridNumber = ({navigation}) => {
         </View>
         <ImageBackground
           source={Images.Gridle}
-          style={{height: 300, width: 350}}>
+          style={{height: 300, width: 350, alignSelf: 'center'}}>
           <View style={styles.table}>
             <FlatList
               data={data}
@@ -69,13 +69,15 @@ const Loshu_GridNumber = ({navigation}) => {
             />
           </View>
         </ImageBackground>
-        <View style={{marginHorizontal: 20}}>
+        <View>
           <Text
             style={{
-              fontSize: 45,
+              fontSize: 35,
               textAlign: 'center',
               fontFamily: fonts.ATSBI,
               color: '#FFFFFF',
+              marginTop: 20,
+              marginBottom: 20,
             }}>
             What your Loshu Grid number says
           </Text>
@@ -107,13 +109,13 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   title: {
-    fontSize: 20,
+    fontSize: moderateScale(20),
     color: '#AAA0CE',
     opacity: 0.8,
     fontFamily: fonts.ATR,
   },
   name: {
-    fontSize: 30,
+    fontSize: moderateScale(30),
     color: '#FFFFFF',
     opacity: 1,
     textDecorationLine: 'underline',
@@ -127,7 +129,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     alignItems: 'center',
     justifyContent: 'center',
-    marginVertical: 20,
+    marginVertical: 15,
   },
   txt2: {
     fontSize: moderateScale(24),
@@ -140,8 +142,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     // marginVertical: 10,
     alignSelf: 'stretch',
-
-    bottom: 20,
+    bottom: 10,
   },
   table: {
     alignItems: 'center',
@@ -162,6 +163,7 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: moderateScale(35),
     textAlign: 'center',
+    textAlignVertical: 'center',
     fontFamily: fonts.ATR,
   },
 });

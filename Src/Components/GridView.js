@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     // flex: 1,
     alignItems: 'center',
     borderRadius: 40,
-    borderWidth: 1,
+    //borderWidth: 1,
     // marginVertical: 20,
     backgroundColor: '#45357C',
     marginHorizontal: 10,
@@ -58,7 +58,8 @@ const styles = StyleSheet.create({
     borderWidth: 1.2,
     color: '#FFFFFF',
     fontSize: moderateScale(35),
-    textAlign: 'center',
     fontFamily: fonts.ATR,
+    textAlignVertical: 'center',
+    textAlign: 'center',
   },
 });

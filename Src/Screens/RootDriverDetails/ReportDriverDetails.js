@@ -23,13 +23,9 @@ const ReportDriverDetails = ({navigation, route}) => {
   const windowWidth = Dimensions.get('window').width;
   const [list, setlist] = useState(item);
   const [FirstName, setFirstName] = useState();
-
   const [LastName, setLastName] = useState();
   const [Email, setEmail] = useState();
   const [driver_no, setdriver_no] = useState();
-  // const { root } = route.params;
-  // const { name } = route.params;
-  // const value = JSON.stringify(name);
 
   useEffect(() => {
     setlist(list);
@@ -41,7 +37,6 @@ const ReportDriverDetails = ({navigation, route}) => {
       const value = await AsyncStorage.getItem('firstname');
       const value1 = await AsyncStorage.getItem('lastname');
       const value2 = await AsyncStorage.getItem('driver_no');
-      // console.log("value==>" + value2)
       const Email = await AsyncStorage.getItem('email');
       console.log('value==>' + value);
       if (value !== null) {
@@ -69,8 +64,9 @@ const ReportDriverDetails = ({navigation, route}) => {
               <Text style={styles.title}>Numerology Report of</Text>
               <View
                 style={{flexDirection: 'row', textDecorationLine: 'underline'}}>
-                <Text style={styles.name}>{FirstName}</Text>
-                <Text style={styles.name1}>{LastName}</Text>
+                <Text style={styles.name}>
+                  {FirstName} {LastName}
+                </Text>
               </View>
             </View>
           </View>

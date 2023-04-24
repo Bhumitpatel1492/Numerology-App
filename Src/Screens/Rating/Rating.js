@@ -1,5 +1,4 @@
-//import liraries
-import React, {Component} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -8,6 +7,7 @@ import {
   ScrollView,
   SafeAreaView,
   TouchableOpacity,
+  FlatList,
 } from 'react-native';
 import Drawer2 from '../../../assets/Svg Image/Drawer2';
 import fonts from '../../Utils/Fonts';
@@ -16,10 +16,43 @@ import Style from '../../Utils/Style';
 import {moderateScale} from '../../Utils/scalling';
 import Leftbtn from '../../../assets/Svg Image/Leftbtn';
 import Rightbtn from '../../../assets/Svg Image/Rightbtn';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const item = require('../../../Jsonfile/mulyank-bhaagyank-combination.json');
 
 const Rating = ({navigation, route}) => {
-  // const {firstName} = route.params; // first_name
-  // const {lastName} = route.params; // last_name
+  const [FirstName, setFirstName] = useState();
+  const [LastName, setLastName] = useState();
+  const [list, setlist] = useState(item);
+  // console.log('ook', list);
+  const [total, setTotal] = useState();
+  console.log('ttt', total);
+
+  useEffect(() => {
+    getData();
+  });
+  useEffect(() => {
+    setlist(list);
+  });
+
+  const getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('firstname');
+      const value1 = await AsyncStorage.getItem('lastname');
+      const value2 = await AsyncStorage.getItem('total');
+
+      if (value !== null) {
+        setFirstName(value);
+      }
+      if (value1 !== null) {
+        setLastName(value1);
+      }
+      if (value2 !== null) {
+        setTotal(value2);
+      }
+    } catch (e) {}
+  };
+
   return (
     <SafeAreaView style={Style.maincontainer}>
       <View style={styles.container}>
@@ -27,7 +60,10 @@ const Rating = ({navigation, route}) => {
           <Drawer2 />
           <View>
             <Text style={styles.title}>Numerology Report of</Text>
-            <Text style={styles.name}>Tejash Shash</Text>
+            <Text style={styles.name}>
+              {FirstName}
+              {LastName}
+            </Text>
           </View>
         </View>
         <ScrollView showsVerticalScrollIndicator={false}>
@@ -40,21 +76,22 @@ const Rating = ({navigation, route}) => {
             <Image source={Images.number} style={styles.imgstyle} />
           </View>
 
-          <View style={styles.rating}>
-            <Text style={styles.txt3}>3 Stars</Text>
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'space-evenly',
-                marginHorizontal: 22,
-              }}>
-              <Image source={Images.Green_Star} style={styles.start_img} />
-              <Image source={Images.Green_Star} style={styles.start_img} />
-              <Image source={Images.Green_Star} style={styles.start_img} />
-              <Image source={Images.White_Star} style={styles.start_img} />
-              <Image source={Images.White_Star} style={styles.start_img} />
-            </View>
-          </View>
+          <FlatList
+            data={list}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({item}) => (
+              <View style={styles.rating}>
+                <View style={{justifyContent: 'center', alignItems: 'center'}}>
+                  {total == item.MB ? (
+                    <Text style={{fontSize: 22, color: 'black'}}>
+                      {item.Ranking}
+                    </Text>
+                  ) : null}
+                </View>
+              </View>
+            )}
+          />
+
           <View
             style={{
               marginHorizontal: 25,

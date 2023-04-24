@@ -31,34 +31,41 @@ const Register = ({navigation}) => {
   const [Final1, setFinal1] = useState();
   const [Final2, setFinal2] = useState();
   const [conductor_no, setconductor_no] = useState();
+  const [total, setTotal] = useState();
+
   console.log(
-    'final..>' + FirstName,
-    LastName,
-    Email,
-    MobileNo,
-    date,
-    month,
-    year,
+    'fname>' + FirstName,
+    'lname>' + LastName,
+    'email>' + Email,
+    'mn>' + MobileNo,
+    'date>' + date,
+    'month>' + month,
+    'year>' + year,
+
     selectedValue,
-    Driver_no,
-    conductor_no,
+    'dno>' + Driver_no,
+    'cno>' + conductor_no,
+    'total>' + total,
   );
 
   useEffect(() => {
-    setFirstName('');
-    setLastName('');
-    setEmail('');
-    setMobileNo('');
-    setdate('');
-    setmonth('');
-    setyear('');
+    setFirstName('Bhumit');
+    setLastName('Patel');
+    setEmail('abc123@gmail.com');
+    setMobileNo('9429856212');
+    setdate('14');
+    setmonth('09');
+    setyear('2002');
+    setTotal('');
   }, []);
 
   useEffect(() => {
     handledatesum();
     handleyearsum();
     handlemonthsum();
+    handletotalsum();
     Data();
+
     // FirstName;
   });
 
@@ -82,6 +89,27 @@ const Register = ({navigation}) => {
       setDriver_no(final);
     } else {
       setDriver_no(ans);
+    }
+  };
+
+  const handlemonthsum = async value => {
+    const user = month;
+    let item = user.split('');
+    var value = item[0];
+    var value0 = item[1];
+    let ans = parseInt(value) + parseInt(value0);
+    console.log('okok', ans);
+    if (ans > 9) {
+      let B = ans.toString();
+      let C = B.split('');
+      let ans2 = C;
+      let X = ans2[0];
+      let Y = ans2[1];
+      let final = parseInt(X) + parseInt(Y);
+      console.log('final', final);
+      setFinal1(final);
+    } else {
+      setFinal1(ans);
     }
   };
 
@@ -119,25 +147,27 @@ const Register = ({navigation}) => {
     }
   };
 
-  const handlemonthsum = async value => {
-    const user = month;
-    let item = user.split('');
-    var value = item[0];
-    var value0 = item[1];
-    let ans = parseInt(value) + parseInt(value0);
-    console.log('okok', ans);
-    if (ans > 9) {
-      let B = ans.toString();
+  const handletotalsum = () => {
+    let a = Driver_no + Final1 + Final2;
+    console.log('driver', Driver_no + 'final1', Final1 + 'final2', Final2);
+    setTotal(a);
+  };
+
+  const Data = () => {
+    let a = Driver_no + Final1 + Final2;
+    if (a > 9) {
+      let B = a.toString();
       let C = B.split('');
       let ans2 = C;
       let X = ans2[0];
       let Y = ans2[1];
       let final = parseInt(X) + parseInt(Y);
-      console.log('final', final);
-      setFinal1(final);
+      setconductor_no(final);
     } else {
-      setFinal1(ans);
+      setconductor_no(a);
     }
+    // setconductor_no(a)
+    console.log('valueee===>...' + a);
   };
 
   const number = /^[6-9]\d{9}$/;
@@ -183,30 +213,13 @@ const Register = ({navigation}) => {
       await AsyncStorage.setItem('month', month);
       await AsyncStorage.setItem('year', year);
       await AsyncStorage.setItem('driver_no', JSON.stringify(Driver_no));
-      console.log('oooo', Driver_no);
+      // console.log('oooo', Driver_no);
       await AsyncStorage.setItem('conductor_no', JSON.stringify(conductor_no));
+      await AsyncStorage.setItem('total', JSON.stringify(total));
+      console.log('total sync', total);
     } catch (e) {
       console.log('error');
     }
-  };
-
-  // const driver = Driver_no.stringify(dri);
-
-  const Data = () => {
-    let a = Driver_no + Final1 + Final2;
-    if (a > 9) {
-      let B = a.toString();
-      let C = B.split('');
-      let ans2 = C;
-      let X = ans2[0];
-      let Y = ans2[1];
-      let final = parseInt(X) + parseInt(Y);
-      setconductor_no(final);
-    } else {
-      setconductor_no(a);
-    }
-    // setconductor_no(a)
-    console.log('valueee===>...' + a);
   };
 
   return (

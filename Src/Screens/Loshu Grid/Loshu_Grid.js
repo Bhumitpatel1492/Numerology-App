@@ -13,25 +13,24 @@ import Drawer_Blue from '../../../assets/Svg Image/Drawer_Blue';
 import Left_bluebtn from '../../../assets/Svg Image/Left_bluebtn';
 import Right_bluebtn from '../../../assets/Svg Image/Right_bluebtn';
 
-const Loshu_Grid = ({navigation, route}) => {
-  // const {firstName} = route.params; // first_name
-  // const {lastname} = route.params; // last_name
+const Loshu_Grid = ({navigation}) => {
   return (
     <View style={styles.container}>
       <View style={styles.subcontainer}>
         <Drawer_Blue />
         <View>
           <Text style={styles.title}>Numerology Report of</Text>
-          <Text style={styles.name}>Tejash Shash</Text>
+          <Text style={styles.name}>TEJASH SHAH</Text>
         </View>
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.background}>
           <Text
             style={{
-              fontSize: moderateScale(40),
+              fontSize: moderateScale(35),
               color: '#AAA0CE',
               fontFamily: fonts.ATSBI,
+              opacity: 0.8,
             }}>
             Loshu Grid
           </Text>
@@ -39,7 +38,7 @@ const Loshu_Grid = ({navigation, route}) => {
         <View>
           <GridView />
         </View>
-        <View style={{marginHorizontal: 20}}>
+        <View style={{marginHorizontal: 20, marginTop: 20}}>
           <Text style={[styles.txt2, {textAlign: 'center', lineHeight: 30}]}>
             Lo Shu Grid Numerology originated in China by an intelligent king.
             This Chinese numerology is based on the magic square of 3x3 in which
@@ -77,13 +76,13 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   title: {
-    fontSize: 20,
+    fontSize: moderateScale(20),
     color: '#AAA0CE',
     opacity: 0.8,
     fontFamily: fonts.ATR,
   },
   name: {
-    fontSize: 30,
+    fontSize: moderateScale(30),
     color: '#FFFFFF',
     opacity: 1,
     textDecorationLine: 'underline',
@@ -103,6 +102,7 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(24),
     fontFamily: fonts.ATSBI,
     color: '#AAA0CE',
+    opacity: 0.9,
   },
   arrow: {
     flexDirection: 'row',
@@ -110,7 +110,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     // marginVertical: 10,
     alignSelf: 'stretch',
-
-    bottom: 20,
+    bottom: 10,
   },
 });

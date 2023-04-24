@@ -26,7 +26,7 @@ const MentalYog = ({navigation}) => {
         <View style={styles.background}>
           <Text
             style={{
-              fontSize: moderateScale(35),
+              fontSize: moderateScale(32),
               color: '#2C1E5C',
               fontFamily: fonts.ATSBI,
             }}>
@@ -38,6 +38,7 @@ const MentalYog = ({navigation}) => {
             flexDirection: 'row',
             marginHorizontal: 10,
             alignItems: 'center',
+            marginTop: 20,
           }}>
           <View style={styles.round}>
             <Text style={styles.txt}>33%</Text>
@@ -100,13 +101,13 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   title: {
-    fontSize: 20,
+    fontSize: moderateScale(20),
     color: '#8175AC',
     opacity: 1,
     fontFamily: fonts.ATR,
   },
   name: {
-    fontSize: 30,
+    fontSize: moderateScale(30),
     color: '#2C1E5C',
     opacity: 1,
     textDecorationLine: 'underline',
@@ -120,7 +121,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     alignItems: 'center',
     justifyContent: 'center',
-    marginVertical: 20,
+    marginVertical: 15,
   },
   txt: {
     fontSize: 28,
@@ -137,14 +138,15 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
   },
   txt2: {
-    fontSize: moderateScale(42),
+    fontSize: moderateScale(34),
     color: '#2C1E5C',
     fontFamily: fonts.ATR,
   },
   txt3: {
-    fontSize: moderateScale(24),
+    fontSize: moderateScale(20),
     color: '#454545',
     fontFamily: fonts.ATSBI,
+    opacity: 0.8,
   },
   line: {
     fontFamily: fonts.ATSBI,
@@ -153,6 +155,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 18,
     lineHeight: 26,
     marginVertical: 12,
+    opacity: 0.8,
   },
   arrow: {
     flexDirection: 'row',
@@ -160,7 +163,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     // marginVertical: 10,
     alignSelf: 'stretch',
-
-    bottom: 20,
+    bottom: 10,
   },
 });

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -7,6 +7,8 @@ import {
   SafeAreaView,
   ScrollView,
   TouchableOpacity,
+  FlatList,
+  Dimensions,
 } from 'react-native';
 import Style from '../../Utils/Style';
 import fonts from '../../Utils/Fonts';
@@ -15,10 +17,37 @@ import Number5_red from '../../../assets/Svg Image/Number5_red';
 import {moderateScale} from '../../Utils/scalling';
 import Backbtn from '../../../assets/Svg Image/Left_redbtn';
 import Nextbtn from '../../../assets/Svg Image/Right_redbtn';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+const item = require('../../../Jsonfile/number-details.json'); // No,Plantes,
 
 const Mulyank = ({navigation, route}) => {
-  // const {fname} = route.params; // first_name
-  // const {lname} = route.params; // last_name
+  const windowWidth = Dimensions.get('window').width;
+  const [FirstName, setFirstName] = useState();
+  const [LastName, setLastName] = useState();
+  const [list, setlist] = useState(item);
+  const [driver_no, setdriver_no] = useState();
+
+  useEffect(() => {
+    setlist(list);
+    getData();
+  });
+
+  const getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('firstname');
+      const value1 = await AsyncStorage.getItem('lastname');
+      const value2 = await AsyncStorage.getItem('driver_no');
+      if (value !== null) {
+        setFirstName(value);
+      }
+      if (value1 !== null) {
+        setLastName(value1);
+      }
+      if (value2 !== null) {
+        setdriver_no(value2);
+      }
+    } catch (e) {}
+  };
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#FFF2F7'}}>
@@ -28,7 +57,7 @@ const Mulyank = ({navigation, route}) => {
           <View>
             <Text style={styles.title}>Numerology Report of</Text>
             <Text Text style={styles.name}>
-              Tejash Shash
+              {FirstName} {LastName}
             </Text>
           </View>
         </View>
@@ -39,26 +68,48 @@ const Mulyank = ({navigation, route}) => {
               <Text style={styles.text3}>Driver (Mulyank)</Text>
             </View>
           </View>
-          <View style={{marginHorizontal: 12}}>
-            <Text style={styles.low}>Symptoms - Low Energy</Text>
-            <Text style={styles.Mobile}>
-              Mobile phones not working, tore pencil and pen without ink or
-              refill and tore books has kept in house.
-            </Text>
-          </View>
-          <View style={{marginHorizontal: 12, marginTop: 20}}>
-            <Text style={styles.low}>Solutions - Low Energy</Text>
-            <Text style={styles.Mobile}>
-              Keep greenary or small plant near your work station and give daily
-              water to it
-            </Text>
-          </View>
-          <View style={{marginHorizontal: 12, marginTop: 20}}>
-            <Text style={styles.low}>Enhance Mulyank</Text>
-            <Text style={styles.Mobile}>
-              Kindly repair them or change them and throw out from home.
-            </Text>
-          </View>
+          <FlatList
+            data={list}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({item}) => (
+              <View>
+                <View
+                  style={{
+                    marginHorizontal: 12,
+                    // backgroundColor: 'red',
+                  }}>
+                  <View style={{marginVertical: 10}}>
+                    {driver_no == item.No ? (
+                      <Text style={styles.low}>Symptoms - Low Energy</Text>
+                    ) : null}
+                    {driver_no == item.No ? (
+                      <Text style={styles.Mobile}>
+                        {' '}
+                        {item.SymptomsLowEnergy}
+                      </Text>
+                    ) : null}
+                  </View>
+                  <View style={{marginVertical: 10}}>
+                    {driver_no == item.No ? (
+                      <Text style={styles.low}>Solutions - Low Energy</Text>
+                    ) : null}
+                    {driver_no == item.No ? (
+                      <Text style={styles.Mobile}> {item.Solutions}</Text>
+                    ) : null}
+                  </View>
+
+                  <View style={{marginVertical: 10}}>
+                    {driver_no == item.No ? (
+                      <Text style={styles.low}>Enhance Mulyank</Text>
+                    ) : null}
+                    {driver_no == item.No ? (
+                      <Text style={styles.Mobile}> {item.EnhanceMulyank}</Text>
+                    ) : null}
+                  </View>
+                </View>
+              </View>
+            )}
+          />
         </ScrollView>
         <View style={styles.footer}>
           <TouchableOpacity
@@ -126,7 +177,7 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(35),
     color: '#A02056',
     fontFamily: fonts.ATSBI,
-    lineHeight: 45,
+    lineHeight: 48,
   },
   Mobile: {
     fontSize: moderateScale(22),
