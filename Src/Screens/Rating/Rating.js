@@ -8,6 +8,7 @@ import {
   SafeAreaView,
   TouchableOpacity,
   FlatList,
+  useWindowDimensions,
 } from 'react-native';
 import Drawer2 from '../../../assets/Svg Image/Drawer2';
 import fonts from '../../Utils/Fonts';
@@ -25,13 +26,11 @@ const Rating = ({navigation, route}) => {
   const [LastName, setLastName] = useState();
   const [list, setlist] = useState(item);
   // console.log('ook', list);
-  const [total, setTotal] = useState();
-  console.log('ttt', total);
+  const [Combinevalue, setCombinevalue] = useState();
+  console.log('ttt', Combinevalue);
 
   useEffect(() => {
     getData();
-  });
-  useEffect(() => {
     setlist(list);
   });
 
@@ -39,7 +38,7 @@ const Rating = ({navigation, route}) => {
     try {
       const value = await AsyncStorage.getItem('firstname');
       const value1 = await AsyncStorage.getItem('lastname');
-      const value2 = await AsyncStorage.getItem('total');
+      const value2 = await AsyncStorage.getItem('Combinevalue');
 
       if (value !== null) {
         setFirstName(value);
@@ -48,7 +47,7 @@ const Rating = ({navigation, route}) => {
         setLastName(value1);
       }
       if (value2 !== null) {
-        setTotal(value2);
+        setCombinevalue(value2);
       }
     } catch (e) {}
   };
@@ -76,38 +75,87 @@ const Rating = ({navigation, route}) => {
             <Image source={Images.number} style={styles.imgstyle} />
           </View>
 
-          <FlatList
-            data={list}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({item}) => (
-              <View style={styles.rating}>
-                <View style={{justifyContent: 'center', alignItems: 'center'}}>
-                  {total == item.MB ? (
-                    <Text style={{fontSize: 22, color: 'black'}}>
-                      {item.Ranking}
-                    </Text>
-                  ) : null}
+          <View style={{paddingVertical: 22}}>
+            <FlatList
+              data={list}
+              keyExtractor={(item, index) => index.toString()}
+              renderItem={({item}) => (
+                <View
+                  style={{
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    backgroundColor: '#FFFFFF',
+                    marginHorizontal: 10,
+                    borderRadius: 28,
+                  }}>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      // justifyContent: 'center',
+                    }}>
+                    {Combinevalue == item.MB ? (
+                      <Text
+                        style={{
+                          fontSize: 26,
+                          color: '#454545',
+                          marginVertical: 10,
+                          marginRight: 12,
+                        }}>
+                        {item.Ranking}
+                      </Text>
+                    ) : null}
+                    {Combinevalue == item.MB ? (
+                      <Text
+                        style={{
+                          fontSize: 26,
+                          color: 'black',
+                          marginVertical: 10,
+                          fontFamily: fonts.ATR,
+                          color: '#454545',
+                          opacity: 1,
+                        }}>
+                        Stars
+                      </Text>
+                    ) : null}
+                  </View>
+                  <View>
+                    {Combinevalue == item.MB ? (
+                      <Text
+                        style={{
+                          fontSize: 46,
+                          color: '#0096A5',
+                        }}>
+                        {item.Stars}
+                      </Text>
+                    ) : null}
+                  </View>
                 </View>
-              </View>
-            )}
-          />
-
-          <View
-            style={{
-              marginHorizontal: 25,
-            }}>
-            <Text style={[styles.txt2, {textAlign: 'center', lineHeight: 30}]}>
-              This is a very lucky number to have. They will be very successful
-              and quick in handling tasks. A prince got the company of prince in
-              this number. We are getting two five here. They will adopt new
-              methods to achieve the goals. Always willing & ready to help
-              people, will earn huge respect and support from people. They have
-              enough mental strength that they do not lose their balance when
-              faced with problems. In case the name number mismatches, the
-              success would not be as much as in case with a perfect name
-              number. They will get into evil ways like womanizing, cheating,
-              and conducting forgery etc..
-            </Text>
+              )}
+            />
+            <View
+              style={{
+                marginHorizontal: 25,
+                // backgroundColor: 'pink',
+                paddingVertical: 18,
+              }}>
+              <FlatList
+                data={list}
+                keyExtractor={(item, index) => index.toString()}
+                renderItem={({item}) => (
+                  <View>
+                    {Combinevalue == item.MB ? (
+                      <Text
+                        style={[
+                          styles.txt2,
+                          {textAlign: 'center', lineHeight: 30},
+                        ]}>
+                        {item.Remarks}
+                      </Text>
+                    ) : null}
+                  </View>
+                )}
+              />
+            </View>
           </View>
         </ScrollView>
         <View style={styles.arrow}>

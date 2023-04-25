@@ -1,5 +1,5 @@
 //import liraries
-import React, {Component} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -20,6 +20,30 @@ import {
 } from '../../Utils/scalling';
 
 const ReportDriver1 = ({navigation, route}) => {
+  const [FirstName, setFirstName] = useState();
+  console.log('fname', FirstName);
+  const [LastName, setLastName] = useState();
+  console.log('lname', LastName);
+  useEffect(() => {
+    // setlist(list);
+    getData();
+  });
+
+  const getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('FirstName');
+      const value1 = await AsyncStorage.getItem('LastName');
+
+      console.log('value==>' + value);
+      if (value !== null) {
+        setFirstName(value);
+      }
+      if (value1 !== null) {
+        setLastName(value1);
+      }
+    } catch (e) {}
+  };
+
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#0096A5'}}>
       <View style={styles.container}>
@@ -28,7 +52,11 @@ const ReportDriver1 = ({navigation, route}) => {
             <Drawer2 />
             <View>
               <Text style={styles.title}>Numerology Report of</Text>
-              <Text style={styles.name}>Tejash Shash</Text>
+              <Text style={styles.name}>
+                {/* {FirstName} {LastName}
+                 */}
+                Tejash Shah
+              </Text>
             </View>
           </View>
           <View style={styles.image}>
