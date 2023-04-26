@@ -41,7 +41,7 @@ const Wallpaper = ({navigation}) => {
           <TouchableOpacity onPress={() => navigation.navigate('Profession')}>
             <Backbtn_Blue />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate('occultree')}>
+          <TouchableOpacity onPress={() => navigation.navigate('Occultree')}>
             <Nextbtn_Blue />
           </TouchableOpacity>
         </View>

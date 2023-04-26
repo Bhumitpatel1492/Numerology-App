@@ -28,6 +28,7 @@ import Profession from '../Profession/Profession';
 import Wallpaper from '../Screens/Wallpaper on mobile/Wallpaper';
 import occultree from '../Screens/closer/occultree';
 import ExtraScreen from '../Screens/extra';
+import Occultree from '../Screens/closer/occultree';
 // import Registercopy from '../Screens/RegisterScreen/Registercopy';
 // import Copy from '../Screens/RegisterScreen/Registercopy';
 
@@ -65,7 +66,7 @@ const Root = () => {
         <Stack.Screen name="Number_9" component={Number_9} />
         <Stack.Screen name="Profession" component={Profession} />
         <Stack.Screen name="Wallpaper" component={Wallpaper} />
-        <Stack.Screen name="occultree" component={occultree} />
+        <Stack.Screen name="occultree" component={Occultree} />
         <Stack.Screen name="ExtraScreen" component={ExtraScreen} />
       </Stack.Navigator>
     </NavigationContainer>

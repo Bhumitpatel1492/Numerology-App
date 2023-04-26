@@ -13,7 +13,7 @@ import Logo1 from '../../../assets/Svg Image/Logo1';
 import Headerlogo from '../../../assets/Svg Image/headerlogo';
 import Close from '../../../assets/Svg Image/Close';
 
-const occultree = () => {
+const Occultree = () => {
   return (
     <View style={styles.container}>
       <View style={styles.subcontainer}>
@@ -79,7 +79,7 @@ const occultree = () => {
   );
 };
 
-export default occultree;
+export default Occultree;
 
 const styles = StyleSheet.create({
   container: {

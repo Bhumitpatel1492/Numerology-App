@@ -24,8 +24,8 @@ const ReportDriverDetails = ({navigation, route}) => {
   const [list, setlist] = useState(item);
   const [FirstName, setFirstName] = useState();
   const [LastName, setLastName] = useState();
-  const [Email, setEmail] = useState();
-  const [driver_no, setdriver_no] = useState();
+  // const [Email, setEmail] = useState();
+  const [driver_no, setdriver_no] = useState(1);
 
   useEffect(() => {
     setlist(list);

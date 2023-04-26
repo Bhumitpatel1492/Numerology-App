@@ -6,7 +6,7 @@ import {
   StyleSheet,
   SafeAreaView,
   TouchableOpacity,
-  ScrollView,
+  // ScrollView,
 } from 'react-native';
 import Drawer from '../../../assets/Svg Image/Drawer_red';
 import Onbording from '../../../assets/Svg Image/onbording';
@@ -20,6 +20,7 @@ import {
   verticalScale,
   horizontalScale,
 } from '../../Utils/scalling';
+// import { List } from 'react-native-paper';
 
 var number_json = require('../../../Jsonfile/number-details.json'); // No,Plantes,
 
@@ -27,12 +28,14 @@ const ReportDriver = ({navigation, route}) => {
   // console.log('item', item);
   const [FirstName, setFirstName] = useState();
   const [LastName, setLastName] = useState();
-  const [driver_no, setdriver_no] = useState();
-  console.log('fffffffffffff', driver_no);
+  const [driver_no, setDriver_no] = useState();
+  const [list, setList] = useState(number_json);
+  console.log('fffffffffffff===========>' + driver_no);
 
   useEffect(() => {
     getData();
-  });
+    setList();
+  }, []);
   const getData = async () => {
     try {
       const value = await AsyncStorage.getItem('firstname');
@@ -48,7 +51,7 @@ const ReportDriver = ({navigation, route}) => {
       }
       if (value2 !== null) {
         console.log('dno', value2);
-        setdriver_no(value2);
+        setDriver_no(value2);
       }
     } catch (e) {}
   };
@@ -56,56 +59,53 @@ const ReportDriver = ({navigation, route}) => {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#A02056'}}>
       <View style={styles.container}>
-        <ScrollView>
-          <View style={styles.subcontainer}>
-            <TouchableOpacity>
-              <Drawer />
-            </TouchableOpacity>
+        {/* <ScrollView> */}
+        <View style={styles.subcontainer}>
+          <TouchableOpacity>
+            <Drawer />
+          </TouchableOpacity>
 
-            <View>
-              <Text style={styles.title}>Numerology Report of</Text>
-              <View
-                style={{flexDirection: 'row', textDecorationLine: 'underline'}}>
-                <Text style={styles.name}>
-                  {FirstName}
-                  {LastName}
-                </Text>
-              </View>
+          <View>
+            <Text style={styles.title}>Numerology Report of</Text>
+            <View
+              style={{flexDirection: 'row', textDecorationLine: 'underline'}}>
+              <Text style={styles.name}>
+                {FirstName}
+                {LastName}
+              </Text>
             </View>
           </View>
-          <View style={styles.image}>
-            <Onbording />
-          </View>
-          {driver_no != 0 && (
-            <FlatList
-              style={{alignSelf: 'center'}}
-              data={number_json}
-              keyExtractor={(item, index) => index.toString()}
-              renderItem={({item}) => (
-                <View>
-                  <View
-                    style={{alignItems: 'center', justifyContent: 'center'}}>
-                    {driver_no == item.No ? (
-                      <Text style={styles.numberTextConatiner}>{item.No}</Text>
-                    ) : null}
-                  </View>
+        </View>
+        <View style={styles.image}>
+          <Onbording />
+        </View>
+        {driver_no != 0 && (
+          <FlatList
+            style={{alignSelf: 'center'}}
+            data={list}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({item}) => (
+              <View>
+                <View style={{alignItems: 'center', justifyContent: 'center'}}>
                   {driver_no == item.No ? (
-                    <Text style={styles.HeaderTextConatiner}>
-                      {item.Plantes}
+                    <Text style={styles.numberTextConatiner}>{item.No}</Text>
+                  ) : null}
+                </View>
+                {driver_no == item.No ? (
+                  <Text style={styles.HeaderTextConatiner}>{item.Plantes}</Text>
+                ) : null}
+                <View style={{paddingHorizontal: moderateScale(35)}}>
+                  {driver_no == item.No ? (
+                    <Text style={styles.DescriptionContainer}>
+                      {item.WallpaperSuggestion}
                     </Text>
                   ) : null}
-                  <View style={{paddingHorizontal: moderateScale(35)}}>
-                    {driver_no == item.No ? (
-                      <Text style={styles.DescriptionContainer}>
-                        {item.WallpaperSuggestion}
-                      </Text>
-                    ) : null}
-                  </View>
                 </View>
-              )}
-            />
-          )}
-        </ScrollView>
+              </View>
+            )}
+          />
+        )}
+        {/* </ScrollView> */}
         <View style={styles.arrow}>
           <TouchableOpacity onPress={() => navigation.navigate('Register')}>
             <Backbtn />

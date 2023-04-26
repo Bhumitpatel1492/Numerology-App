@@ -15,7 +15,7 @@ import Headerlogo from '../../../assets/Svg Image/headerlogo';
 import Checkbox from '../../Components/Chechbox';
 import {moderateScale} from '../../Utils/scalling';
 import CustomTextInput from '../../Components/Textinput';
-import DateCollect from '../../Components/Datecollect';
+// import DateCollect from '../../Components/Datecollect';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import SelectDropdown from 'react-native-select-dropdown';
 
@@ -39,16 +39,20 @@ const Register = ({navigation}) => {
   const [yearpicker, setYearPicker] = useState([]);
   // console.log('pyear', yearpicker);
   const [selectedValue, setSelectedValue] = useState();
-  const [Driver_no, setDriver_no] = useState(); // driver no
-  // console.log('jsjsjsjsjsjs', Driver_no);
+  const [Driver_no, setDriver_no] = useState(3); // driver no
+  // console.log('driver_no', Driver_no);
   const [Final1, setFinal1] = useState(); // for month
+  // console.log('monthsum', Final1);
   const [Final2, setFinal2] = useState(); // for year
+  // console.log('yearsum', Final2);
   const [conductor_no, setConductor_no] = useState(); // Conductor value
+  // console.log('conductor_no', conductor_no);
   const [valueoftotal, setvalueoftotal] = useState(); // driver + Conductor value
+  // console.log('combinevalue', valueoftotal);
+  const [allNumber, setAllNumber] = useState();
+  // console.log('allnumber', allNumber);
 
-  // console.log('vvvvvvv======', valueoftotal);
-
-  console.log();
+  const [s_value, setS_value] = useState();
 
   useEffect(() => {
     setFirstName('Bhumit');
@@ -58,11 +62,12 @@ const Register = ({navigation}) => {
   }, []);
 
   useEffect(() => {
-    handledatesum();
-    handleyearsum();
-    handlemonthsum();
-    Conductorsum();
-    handlecombinevalue();
+    handledatesum(); // datesum function
+    handlemonthsum(); // monthsum function
+    handleyearsum(); // yearsum function
+    Conductorsum(); // date+month+year sum
+    handlecombinevalue(); // driver + conductor
+    handleallnumber(); // full b_date + driver + monthsum + yearsum + conductorsum
   });
 
   useEffect(() => {
@@ -86,7 +91,7 @@ const Register = ({navigation}) => {
         value: element,
       });
     }
-    console.log('Months===>', months);
+    // console.log('Months===>', months);
     setMonthPicker(months);
 
     const d = new Date();
@@ -107,26 +112,25 @@ const Register = ({navigation}) => {
     var format = `${selectedDate}/${selectedMonth}/${selectedYear}`;
     var dateFormat = 'DD/MM/YYYY';
     const checkDate = format.trim();
-    console.log('checkDate====>', checkDate);
-    console.log('meon====>', moment(checkDate, dateFormat, true).isValid());
+    // console.log('checkDate====>', checkDate);
+    // console.log('meon====>', moment(checkDate, dateFormat, true).isValid());
     return moment(checkDate.toString(), dateFormat, true).isValid();
   };
 
   const handleSelection = value => {
+    console.log('Value======>', value);
     setSelectedValue(value);
   };
 
   // sum addition
-  const handledatesum = async value => {
+  const handledatesum = async () => {
     const user = selectedDate;
-    console.log('sssssdate', user);
-    let item = user.split('');
-    console.log('hshshshshhs', item);
+    const abc = user.toString();
+    let item = abc.split('');
     var value = item[0];
-    console.log('jcvunsndvnssnsngnf========>' + value);
     var value0 = item[1];
-    // console.log('ooosososoososo', value);
     let ans = parseInt(value) + parseInt(value0);
+
     if (ans > 9) {
       let B = ans.toString();
       let C = B.split('');
@@ -134,30 +138,36 @@ const Register = ({navigation}) => {
       let X = ans2[0];
       let Y = ans2[1];
       let final = parseInt(X) + parseInt(Y);
+
       setDriver_no(final);
     } else {
       setDriver_no(ans);
     }
+    console.log('ans=======>', ans);
+    console.log('bdcdddd=====>', value);
   };
 
   // monthaddition
 
   const handlemonthsum = async value => {
     const user = selectedMonth;
-    let item = user.split('');
-    console.log('monthhjnhh', +user);
+    console.log('monthsumn====>', selectedMonth);
+    const month = user.toString();
+    let item = month.split('');
     var value = item[0];
     var value0 = item[1];
     let ans = parseInt(value) + parseInt(value0);
 
     if (ans > 9) {
       let B = ans.toString();
+      // console.log('ddfdfdfdfddfdfdf', B);
       let C = B.split('');
+      // console.log('scadafadfaddfadf', C);
       let ans2 = C;
       let X = ans2[0];
       let Y = ans2[1];
       let final = parseInt(X) + parseInt(Y);
-
+      // console.log('sgsggsgsgsgsg', final);
       setFinal1(final);
     } else {
       setFinal1(ans);
@@ -167,15 +177,18 @@ const Register = ({navigation}) => {
   // yead addtion
   const handleyearsum = async value => {
     const user = selectedYear;
-    console.log('yearrrr', +user);
-    let item = user.split('');
+    // console.log('yearrrr', +user);
+    const year = user.toString();
+    // console.log('sting', year);
+    let item = year.split('');
+    // console.log('iteeeee', year);
     var value = item[0];
     var value0 = item[1];
     var value1 = item[2];
     var value2 = item[3];
     let ans =
       parseInt(value) + parseInt(value0) + parseInt(value1) + parseInt(value2);
-
+    // console.log('amsssss', ans);
     if (ans > 9) {
       let B = ans.toString();
       let C = B.split('');
@@ -183,7 +196,7 @@ const Register = ({navigation}) => {
       let X = ans2[0];
       let Y = ans2[1];
       let final = parseInt(X) + parseInt(Y);
-
+      console.log('finaifidndnd', final);
       if (final > 9) {
         let B = final.toString();
         let C = B.split('');
@@ -191,7 +204,7 @@ const Register = ({navigation}) => {
         let X = ans3[0];
         let Y = ans3[1];
         let last = parseInt(X) + parseInt(Y);
-
+        console.log('laststss', last);
         setFinal2(last);
       }
     } else {
@@ -202,6 +215,7 @@ const Register = ({navigation}) => {
   // Conductor value
   const Conductorsum = () => {
     let a = Driver_no + Final1 + Final2;
+
     if (a > 9) {
       let B = a.toString();
       let C = B.split('');
@@ -209,19 +223,56 @@ const Register = ({navigation}) => {
       let X = ans2[0];
       let Y = ans2[1];
       let final = parseInt(X) + parseInt(Y);
-      console.log('condctor', final);
+      // console.log('condctor', final);
       setConductor_no(final);
     } else {
       setConductor_no(a);
     }
   };
 
+  // driver + conductor
+
   const handlecombinevalue = () => {
     const value1 = Driver_no;
     const value2 = conductor_no;
 
     const ans = value1 + ' ' + value2;
+    // console.log('ydyxtrxtrxtrxtrx', ans);
     setvalueoftotal(ans);
+  };
+
+  // full b_date + driver + monthsum + yearsum + conductorsum
+
+  const handleallnumber = () => {
+    const item = selectedDate;
+    const item1 = selectedMonth;
+    const item2 = selectedYear;
+    const item3 = Driver_no;
+    const item4 = Final1;
+    const item5 = Final2;
+    const item6 = conductor_no;
+    const allnumber =
+      item +
+      '' +
+      item1 +
+      '' +
+      '' +
+      item2 +
+      '' +
+      item3 +
+      '' +
+      '' +
+      item4 +
+      '' +
+      item5 +
+      '' +
+      item6;
+
+    const num = allnumber.toString();
+    console.log('=====>' + num);
+
+    setAllNumber(num);
+    // console.log('allnumber', allnumber);
   };
 
   // const newData1 = ITEM.filter(item => {
@@ -265,24 +316,42 @@ const Register = ({navigation}) => {
     }
   };
 
-  const storeData = async Final => {
+  const storeData = Final => {
     try {
-      await AsyncStorage.setItem('firstname', FirstName);
-      await AsyncStorage.setItem('lastname', LastName);
-      await AsyncStorage.setItem('email', Email);
-      await AsyncStorage.setItem('mobile', MobileNo);
-      await AsyncStorage.setItem('gender', selectedValue);
-      // await AsyncStorage.setItem('date', date);
-      await AsyncStorage.setItem('month', month);
-      // await AsyncStorage.setItem('year', year);
-      await AsyncStorage.setItem('driver_no', JSON.stringify(1));
-      // console.log('xoxoox', Driver_no);
-      await AsyncStorage.setItem('conductor_no', JSON.stringify(conductor_no));
-      await AsyncStorage.setItem('valueoftotal', JSON.stringify(valueoftotal));
+      AsyncStorage.setItem('firstname', FirstName);
+      AsyncStorage.setItem('lastname', LastName);
+      // await AsyncStorage.setItem('email', Email);
+
+      // await AsyncStorage.setItem('mobile', MobileNo);
+
+      AsyncStorage.setItem('gender', selectedValue);
+
+      // await AsyncStorage.setItem('date', selectedDate);
+
+      // await AsyncStorage.setItem('month', selectedMonth);
+      // await AsyncStorage.setItem('year', selectedYear);
+      AsyncStorage.setItem('driver_no', JSON.stringify(Driver_no));
+      AsyncStorage.setItem('conductor_no', JSON.stringify(conductor_no));
+      AsyncStorage.setItem('v_total', JSON.stringify(valueoftotal));
+      AsyncStorage.setItem('allnumbers', JSON.stringify(allNumber));
     } catch (e) {
-      console.log('error', 'notsave');
+      console.log('error ===========>', e);
     }
   };
+
+  // console.log('ASY_allnumber', allNumber);
+  // console.log('ASY_fname', FirstName);
+  // console.log('ASY_lname', LastName);
+  // console.log('ASY_date', selectedDate);
+  // console.log('ASY_month', selectedMonth);
+  // console.log('ASY_year', selectedYear);
+  console.log('ASY_driver', Driver_no);
+  console.log('ASY_monthsum', Final1);
+  console.log('ASY_yearsum', Final2);
+  console.log('ASY_conductor_no', conductor_no);
+  console.log('ASY_combinevalue', valueoftotal);
+  console.log('ASY_allvalues', allNumber);
+  console.log('gender======>', selectedValue);
 
   return (
     <SafeAreaView style={Style.maincontainer}>

@@ -24,20 +24,21 @@ const number_json = require('../../../Jsonfile/mulyank-bhaagyank-combination.jso
 const Rating = ({navigation, route}) => {
   const [FirstName, setFirstName] = useState();
   const [LastName, setLastName] = useState();
-  // const [list, setlist] = useState(item);
-  const [valueoftotal, setvalueoftotal] = useState();
-  console.log('ttt', valueoftotal);
+  const [list, setlist] = useState(number_json);
+  console.log('list============>' + list);
+  const [v_total, setV_Total] = useState(55);
+  console.log('ttt=============>' + v_total);
 
   useEffect(() => {
     getData();
-    // setlist(list);
+    setlist(list);
   });
 
   const getData = async () => {
     try {
       const value = await AsyncStorage.getItem('firstname');
       const value1 = await AsyncStorage.getItem('lastname');
-      const value2 = await AsyncStorage.getItem('valueoftotal');
+      const value2 = await AsyncStorage.getItem('v_total');
 
       if (value !== null) {
         setFirstName(value);
@@ -46,7 +47,7 @@ const Rating = ({navigation, route}) => {
         setLastName(value1);
       }
       if (value2 !== null) {
-        setvalueoftotal(value2);
+        setV_Total(value2);
       }
     } catch (e) {}
   };
@@ -76,7 +77,7 @@ const Rating = ({navigation, route}) => {
 
           <View style={{paddingVertical: 22}}>
             <FlatList
-              data={number_json}
+              data={list}
               keyExtractor={(item, index) => index.toString()}
               renderItem={({item}) => (
                 <View
@@ -92,7 +93,7 @@ const Rating = ({navigation, route}) => {
                       flexDirection: 'row',
                       // justifyContent: 'center',
                     }}>
-                    {valueoftotal == item.MB ? (
+                    {v_total == item.MB ? (
                       <Text
                         style={{
                           fontSize: 26,
@@ -103,7 +104,7 @@ const Rating = ({navigation, route}) => {
                         {item.Ranking}
                       </Text>
                     ) : null}
-                    {valueoftotal == item.MB ? (
+                    {v_total == item.MB ? (
                       <Text
                         style={{
                           fontSize: 26,
@@ -118,11 +119,12 @@ const Rating = ({navigation, route}) => {
                     ) : null}
                   </View>
                   <View>
-                    {valueoftotal == item.MB ? (
+                    {v_total == item.MB ? (
                       <Text
                         style={{
                           fontSize: 46,
                           color: '#0096A5',
+                          backgroundColor: 'red',
                         }}>
                         {item.Stars}
                       </Text>
@@ -138,11 +140,11 @@ const Rating = ({navigation, route}) => {
                 paddingVertical: 18,
               }}>
               <FlatList
-                data={number_json}
+                data={list}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({item}) => (
                   <View>
-                    {valueoftotal == item.MB ? (
+                    {v_total == item.MB ? (
                       <Text
                         style={[
                           styles.txt2,
