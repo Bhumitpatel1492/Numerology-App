@@ -28,6 +28,8 @@ import Profession from '../Profession/Profession';
 import Wallpaper from '../Screens/Wallpaper on mobile/Wallpaper';
 import occultree from '../Screens/closer/occultree';
 import ExtraScreen from '../Screens/extra';
+// import Registercopy from '../Screens/RegisterScreen/Registercopy';
+// import Copy from '../Screens/RegisterScreen/Registercopy';
 
 const Stack = createNativeStackNavigator();
 const Root = () => {
@@ -36,6 +38,7 @@ const Root = () => {
       <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name="Splesh" component={Splesh} />
         <Stack.Screen name="Register" component={Register} />
+        {/* <Stack.Screen name="Copy" component={Copy} /> */}
         <Stack.Screen name="ReportDriver" component={ReportDriver} />
         <Stack.Screen
           name="ReportDriverDetails"

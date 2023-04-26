@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   ImageBackground,
   Alert,
+  Image,
 } from 'react-native';
 import Style from '../../Utils/Style';
 import Headerlogo from '../../../assets/Svg Image/headerlogo';
@@ -16,67 +17,115 @@ import {moderateScale} from '../../Utils/scalling';
 import CustomTextInput from '../../Components/Textinput';
 import DateCollect from '../../Components/Datecollect';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import SelectDropdown from 'react-native-select-dropdown';
+
+import moment from 'moment';
 
 const Register = ({navigation}) => {
   const [FirstName, setFirstName] = useState();
   const [LastName, setLastName] = useState('');
   const [Email, setEmail] = useState();
   const [MobileNo, setMobileNo] = useState();
-  const [date, setdate] = useState();
-  const [month, setmonth] = useState();
-  const [year, setyear] = useState();
+  const [selectedDate, setSelectedDate] = useState(null);
+  // console.log('sDate', selectedDate);
+  const [selectedMonth, setSelectedMonth] = useState(null);
+  // console.log('smonth', selectedMonth);
+  const [selectedYear, setSelectedYear] = useState(null);
+  // console.log('syear', selectedYear);
+  const [datepicker, setDatePicker] = useState([]);
+  // console.log('pdate', datepicker);
+  const [monthpicker, setMonthPicker] = useState([]);
+  // console.log('pmonth', monthpicker);
+  const [yearpicker, setYearPicker] = useState([]);
+  // console.log('pyear', yearpicker);
   const [selectedValue, setSelectedValue] = useState();
-  const [Driver_no, setDriver_no] = useState();
-  const [Final1, setFinal1] = useState();
-  const [Final2, setFinal2] = useState();
-  const [conductor_no, setconductor_no] = useState();
-  const [total, setTotal] = useState();
-  const [Combinevalue, setCombinevalue] = useState();
+  const [Driver_no, setDriver_no] = useState(); // driver no
+  // console.log('jsjsjsjsjsjs', Driver_no);
+  const [Final1, setFinal1] = useState(); // for month
+  const [Final2, setFinal2] = useState(); // for year
+  const [conductor_no, setConductor_no] = useState(); // Conductor value
+  const [valueoftotal, setvalueoftotal] = useState(); // driver + Conductor value
 
-  console
-    .log
-    // 'fname>' + FirstName,
-    // 'lname>' + LastName,
-    // 'email>' + Email,
-    // 'mn>' + MobileNo,
-    // 'date>' + date,
-    // 'month>' + month,
-    // 'year>' + year,
+  // console.log('vvvvvvv======', valueoftotal);
 
-    // selectedValue,
-    // 'dno>' + Driver_no,
-    // 'cno>' + conductor_no,
-    // 'total>' + total,
-    ();
+  console.log();
 
   useEffect(() => {
     setFirstName('Bhumit');
     setLastName('Patel');
     setEmail('abc123@gmail.com');
     setMobileNo('9988662211');
-    setdate('');
-    setmonth('');
-    setyear('');
-    setTotal('');
   }, []);
 
   useEffect(() => {
     handledatesum();
     handleyearsum();
     handlemonthsum();
-    handletotalsum();
-    Data();
+    Conductorsum();
+    handlecombinevalue();
   });
+
+  useEffect(() => {
+    var dates = [];
+    const datesLength = 31;
+    for (let index = 1; index <= datesLength; index++) {
+      const element = index;
+      dates.push({
+        label: element.toString(),
+        value: element,
+      });
+    }
+    setDatePicker(dates);
+
+    var months = [];
+    const monthsLength = 12;
+    for (let index = 1; index <= monthsLength; index++) {
+      const element = index < 10 ? `0${index}` : index;
+      months.push({
+        label: element.toString(),
+        value: element,
+      });
+    }
+    console.log('Months===>', months);
+    setMonthPicker(months);
+
+    const d = new Date();
+    let yearsLength = d.getFullYear();
+    var years = [];
+    for (let index = 1965; index <= yearsLength; index++) {
+      const element = index;
+      years.push({
+        label: element.toString(),
+        value: element,
+      });
+    }
+    setYearPicker(years);
+  }, [selectedMonth]);
+
+  // date validation
+  const checkDateIsValid = () => {
+    var format = `${selectedDate}/${selectedMonth}/${selectedYear}`;
+    var dateFormat = 'DD/MM/YYYY';
+    const checkDate = format.trim();
+    console.log('checkDate====>', checkDate);
+    console.log('meon====>', moment(checkDate, dateFormat, true).isValid());
+    return moment(checkDate.toString(), dateFormat, true).isValid();
+  };
 
   const handleSelection = value => {
     setSelectedValue(value);
   };
 
+  // sum addition
   const handledatesum = async value => {
-    const user = date;
+    const user = selectedDate;
+    console.log('sssssdate', user);
     let item = user.split('');
+    console.log('hshshshshhs', item);
     var value = item[0];
+    console.log('jcvunsndvnssnsngnf========>' + value);
     var value0 = item[1];
+    // console.log('ooosososoososo', value);
     let ans = parseInt(value) + parseInt(value0);
     if (ans > 9) {
       let B = ans.toString();
@@ -91,13 +140,16 @@ const Register = ({navigation}) => {
     }
   };
 
+  // monthaddition
+
   const handlemonthsum = async value => {
-    const user = month;
+    const user = selectedMonth;
     let item = user.split('');
+    console.log('monthhjnhh', +user);
     var value = item[0];
     var value0 = item[1];
     let ans = parseInt(value) + parseInt(value0);
-    // console.log('okok', ans);
+
     if (ans > 9) {
       let B = ans.toString();
       let C = B.split('');
@@ -105,15 +157,17 @@ const Register = ({navigation}) => {
       let X = ans2[0];
       let Y = ans2[1];
       let final = parseInt(X) + parseInt(Y);
-      // console.log('final', final);
+
       setFinal1(final);
     } else {
       setFinal1(ans);
     }
   };
 
+  // yead addtion
   const handleyearsum = async value => {
-    const user = year;
+    const user = selectedYear;
+    console.log('yearrrr', +user);
     let item = user.split('');
     var value = item[0];
     var value0 = item[1];
@@ -121,7 +175,7 @@ const Register = ({navigation}) => {
     var value2 = item[3];
     let ans =
       parseInt(value) + parseInt(value0) + parseInt(value1) + parseInt(value2);
-    // console.log('ans', ans);
+
     if (ans > 9) {
       let B = ans.toString();
       let C = B.split('');
@@ -129,7 +183,6 @@ const Register = ({navigation}) => {
       let X = ans2[0];
       let Y = ans2[1];
       let final = parseInt(X) + parseInt(Y);
-      // console.log('okok', final);
 
       if (final > 9) {
         let B = final.toString();
@@ -138,7 +191,7 @@ const Register = ({navigation}) => {
         let X = ans3[0];
         let Y = ans3[1];
         let last = parseInt(X) + parseInt(Y);
-        // console.log('less10', last);
+
         setFinal2(last);
       }
     } else {
@@ -146,7 +199,8 @@ const Register = ({navigation}) => {
     }
   };
 
-  const handletotalsum = () => {
+  // Conductor value
+  const Conductorsum = () => {
     let a = Driver_no + Final1 + Final2;
     if (a > 9) {
       let B = a.toString();
@@ -155,30 +209,27 @@ const Register = ({navigation}) => {
       let X = ans2[0];
       let Y = ans2[1];
       let final = parseInt(X) + parseInt(Y);
-      console.log('driver====>>>>>>>>>>>>', final);
-      setCombinevalue(final);
+      console.log('condctor', final);
+      setConductor_no(final);
     } else {
-      setCombinevalue(a);
+      setConductor_no(a);
     }
-    // setTotal(a);
   };
 
-  const Data = () => {
-    let a = Driver_no + Final1 + Final2;
-    if (a > 9) {
-      let B = a.toString();
-      let C = B.split('');
-      let ans2 = C;
-      let X = ans2[0];
-      let Y = ans2[1];
-      let final = parseInt(X) + parseInt(Y);
-      setconductor_no(final);
-    } else {
-      setconductor_no(a);
-    }
-    // setconductor_no(a)
-    // console.log('valueee===>...' + a);
+  const handlecombinevalue = () => {
+    const value1 = Driver_no;
+    const value2 = conductor_no;
+
+    const ans = value1 + ' ' + value2;
+    setvalueoftotal(ans);
   };
+
+  // const newData1 = ITEM.filter(item => {
+  //   const itemData1 = item.product_name.toLowerCase();
+  //   const textData1 = text.toLowerCase();
+  //   return itemData1.indexOf(textData1) > -1;
+  // });
+  // setFilteredData1(newData1);
 
   const number = /^[6-9]\d{9}$/;
   const email = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -199,12 +250,14 @@ const Register = ({navigation}) => {
       Alert.alert('Invalid Number');
     } else if (selectedValue === null) {
       Alert.alert('select Your Gender');
-    } else if (date === '') {
+    } else if (selectedDate === null) {
       Alert.alert('Please Enter Birth Date');
-    } else if (month === '') {
+    } else if (selectedMonth === null) {
       Alert.alert('Please Enter month');
-    } else if (year === '') {
+    } else if (selectedYear === null) {
       Alert.alert('Please Enter year');
+    } else if (checkDateIsValid() == false) {
+      Alert.alert('Please Select Valid Date');
     } else {
       Alert.alert('success');
       storeData();
@@ -219,17 +272,15 @@ const Register = ({navigation}) => {
       await AsyncStorage.setItem('email', Email);
       await AsyncStorage.setItem('mobile', MobileNo);
       await AsyncStorage.setItem('gender', selectedValue);
-      await AsyncStorage.setItem('date', date);
+      // await AsyncStorage.setItem('date', date);
       await AsyncStorage.setItem('month', month);
-      await AsyncStorage.setItem('year', year);
-      await AsyncStorage.setItem('driver_no', JSON.stringify(Driver_no));
+      // await AsyncStorage.setItem('year', year);
+      await AsyncStorage.setItem('driver_no', JSON.stringify(1));
+      // console.log('xoxoox', Driver_no);
       await AsyncStorage.setItem('conductor_no', JSON.stringify(conductor_no));
-      await AsyncStorage.setItem('total', JSON.stringify(total));
-      await AsyncStorage.setItem('Combinevalue', Combinevalue);
-
-      // console.log('okok', total);
+      await AsyncStorage.setItem('valueoftotal', JSON.stringify(valueoftotal));
     } catch (e) {
-      console.log('error');
+      console.log('error', 'notsave');
     }
   };
 
@@ -313,30 +364,156 @@ const Register = ({navigation}) => {
               </View>
             </View>
 
-            <View style={{flexDirection: 'row', marginHorizontal: 18}}>
-              <DateCollect
-                label="Date"
-                style={styles.input}
-                keyboardType="numeric"
-                maxLength={2}
-                value={date}
-                onChangeText={value => setdate(value)}
+            <View
+              style={{
+                flexDirection: 'row',
+                marginHorizontal: 18,
+                justifyContent: 'space-between',
+              }}>
+              <SelectDropdown
+                data={datepicker}
+                buttonStyle={{
+                  backgroundColor: 'white',
+                  padding: 8,
+                  margin: 0,
+                  height: 50,
+                  borderColor: '#9D8081',
+                  borderWidth: 1,
+                  borderRadius: 8,
+                  paddingHorizontal: 8,
+                  width: '30%',
+                }}
+                buttonTextStyle={{
+                  fontSize: 16,
+                  margin: 0,
+                  padding: 0,
+                  textAlign: 'left',
+                }}
+                defaultButtonText={' '}
+                onSelect={(selectedItem, index) => {
+                  console.log(selectedItem, index);
+                  setSelectedDate(selectedItem.value);
+                  return selectedItem.label;
+                }}
+                buttonTextAfterSelection={(selectedItem, index) => {
+                  return selectedItem.label;
+                }}
+                rowTextForSelection={(item, index) => {
+                  return item.label;
+                }}
+                renderDropdownIcon={isOpened => {
+                  return (
+                    <Image
+                      style={{height: 14, width: 14}}
+                      source={
+                        isOpened
+                          ? require('../../Images/ic_up_arrow.png')
+                          : require('../../Images/ic_down-arrow.png')
+                      }
+                    />
+                  );
+                }}
+                dropdownIconPosition={'right'}
               />
-              <DateCollect
-                label="Month"
-                style={styles.input}
-                maxLength={2}
-                keyboardType="numeric"
-                value={month}
-                onChangeText={value => setmonth(value)}
+              <SelectDropdown
+                data={monthpicker}
+                buttonStyle={{
+                  backgroundColor: 'white',
+                  padding: 8,
+                  margin: 0,
+                  height: 50,
+                  borderColor: '#9D8081',
+                  borderWidth: 1,
+                  borderRadius: 8,
+                  paddingHorizontal: 8,
+                  width: '30%',
+                }}
+                buttonTextStyle={{
+                  fontSize: 16,
+                  margin: 0,
+                  padding: 0,
+                  textAlign: 'left',
+                }}
+                defaultButtonText={' '}
+                onSelect={(selectedItem, index) => {
+                  console.log(selectedItem, index);
+                  setSelectedMonth(selectedItem.value);
+                  return selectedItem.label;
+                }}
+                buttonTextAfterSelection={(selectedItem, index) => {
+                  return selectedItem.label;
+                  // text represented after item is selected
+                  // if data array is an array of objects then return selectedItem.property to render after item is selected
+                  // return selectedItem;
+                }}
+                rowTextForSelection={(item, index) => {
+                  console.log('item', item);
+                  return item.label;
+                  // text represented for each item in dropdown
+                  // if data array is an array of objects then return item.property to represent item in dropdown
+                  // return item;
+                }}
+                renderDropdownIcon={isOpened => {
+                  return (
+                    <Image
+                      style={{height: 14, width: 14}}
+                      source={
+                        isOpened
+                          ? require('../../Images/ic_up_arrow.png')
+                          : require('../../Images/ic_down-arrow.png')
+                      }
+                    />
+                  );
+                }}
+                dropdownIconPosition={'right'}
               />
-              <DateCollect
-                label="Year"
-                style={[styles.input, {width: moderateScale(160)}]}
-                keyboardType="numeric"
-                maxLength={4}
-                value={year}
-                onChangeText={value => setyear(value)}
+              <SelectDropdown
+                data={yearpicker}
+                buttonStyle={{
+                  backgroundColor: 'white',
+                  padding: 8,
+                  margin: 0,
+                  height: 50,
+                  borderColor: '#9D8081',
+                  borderWidth: 1,
+                  borderRadius: 8,
+                  paddingHorizontal: 8,
+                  width: '30%',
+
+                  // flex: 1,
+                }}
+                buttonTextStyle={{
+                  fontSize: 16,
+                  margin: 0,
+                  padding: 0,
+                  // includeFontPadding: false,
+                  textAlign: 'left',
+                }}
+                defaultButtonText={' '}
+                onSelect={(selectedItem, index) => {
+                  setSelectedYear(selectedItem.value);
+                  return selectedItem.label;
+                }}
+                buttonTextAfterSelection={(selectedItem, index) => {
+                  return selectedItem.label;
+                }}
+                renderDropdownIcon={isOpened => {
+                  return (
+                    <Image
+                      style={{height: 14, width: 14}}
+                      source={
+                        isOpened
+                          ? require('../../Images/ic_up_arrow.png')
+                          : require('../../Images/ic_down-arrow.png')
+                      }
+                    />
+                  );
+                }}
+                dropdownIconPosition={'right'}
+                rowTextForSelection={(item, index) => {
+                  console.log('item', item);
+                  return item.label;
+                }}
               />
             </View>
 

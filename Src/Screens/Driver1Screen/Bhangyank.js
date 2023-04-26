@@ -22,8 +22,8 @@ const Bhagyank = ({navigation, route}) => {
   const [FirstName, setFirstName] = useState();
   const [LastName, setLastName] = useState();
   const [list, setlist] = useState(item);
-  const [driver_no, setdriver_no] = useState();
-  console.log('ttt', driver_no);
+  const [conductor_no, setconductor_no] = useState();
+  console.log('ttt', conductor_no);
 
   useEffect(() => {
     getData();
@@ -34,7 +34,7 @@ const Bhagyank = ({navigation, route}) => {
     try {
       const value = await AsyncStorage.getItem('firstname');
       const value1 = await AsyncStorage.getItem('lastname');
-      const value2 = await AsyncStorage.getItem('driver_no');
+      const value2 = await AsyncStorage.getItem('conductor_no');
 
       if (value !== null) {
         setFirstName(value);
@@ -43,7 +43,7 @@ const Bhagyank = ({navigation, route}) => {
         setLastName(value1);
       }
       if (value2 !== null) {
-        setdriver_no(value2);
+        setconductor_no(value2);
       }
     } catch (e) {}
   };
@@ -81,7 +81,7 @@ const Bhagyank = ({navigation, route}) => {
             keyExtractor={(item, index) => index.toString()}
             renderItem={({item}) => (
               <View>
-                {driver_no == item.No ? (
+                {conductor_no == item.No ? (
                   <Text style={styles.Mobile}>{item.EnhanceBhagyank}</Text>
                 ) : null}
               </View>

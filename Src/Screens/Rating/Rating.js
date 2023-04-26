@@ -19,26 +19,25 @@ import Leftbtn from '../../../assets/Svg Image/Leftbtn';
 import Rightbtn from '../../../assets/Svg Image/Rightbtn';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const item = require('../../../Jsonfile/mulyank-bhaagyank-combination.json');
+const number_json = require('../../../Jsonfile/mulyank-bhaagyank-combination.json');
 
 const Rating = ({navigation, route}) => {
   const [FirstName, setFirstName] = useState();
   const [LastName, setLastName] = useState();
-  const [list, setlist] = useState(item);
-  // console.log('ook', list);
-  const [Combinevalue, setCombinevalue] = useState();
-  console.log('ttt', Combinevalue);
+  // const [list, setlist] = useState(item);
+  const [valueoftotal, setvalueoftotal] = useState();
+  console.log('ttt', valueoftotal);
 
   useEffect(() => {
     getData();
-    setlist(list);
+    // setlist(list);
   });
 
   const getData = async () => {
     try {
       const value = await AsyncStorage.getItem('firstname');
       const value1 = await AsyncStorage.getItem('lastname');
-      const value2 = await AsyncStorage.getItem('Combinevalue');
+      const value2 = await AsyncStorage.getItem('valueoftotal');
 
       if (value !== null) {
         setFirstName(value);
@@ -47,7 +46,7 @@ const Rating = ({navigation, route}) => {
         setLastName(value1);
       }
       if (value2 !== null) {
-        setCombinevalue(value2);
+        setvalueoftotal(value2);
       }
     } catch (e) {}
   };
@@ -77,7 +76,7 @@ const Rating = ({navigation, route}) => {
 
           <View style={{paddingVertical: 22}}>
             <FlatList
-              data={list}
+              data={number_json}
               keyExtractor={(item, index) => index.toString()}
               renderItem={({item}) => (
                 <View
@@ -93,7 +92,7 @@ const Rating = ({navigation, route}) => {
                       flexDirection: 'row',
                       // justifyContent: 'center',
                     }}>
-                    {Combinevalue == item.MB ? (
+                    {valueoftotal == item.MB ? (
                       <Text
                         style={{
                           fontSize: 26,
@@ -104,7 +103,7 @@ const Rating = ({navigation, route}) => {
                         {item.Ranking}
                       </Text>
                     ) : null}
-                    {Combinevalue == item.MB ? (
+                    {valueoftotal == item.MB ? (
                       <Text
                         style={{
                           fontSize: 26,
@@ -119,7 +118,7 @@ const Rating = ({navigation, route}) => {
                     ) : null}
                   </View>
                   <View>
-                    {Combinevalue == item.MB ? (
+                    {valueoftotal == item.MB ? (
                       <Text
                         style={{
                           fontSize: 46,
@@ -139,11 +138,11 @@ const Rating = ({navigation, route}) => {
                 paddingVertical: 18,
               }}>
               <FlatList
-                data={list}
+                data={number_json}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({item}) => (
                   <View>
-                    {Combinevalue == item.MB ? (
+                    {valueoftotal == item.MB ? (
                       <Text
                         style={[
                           styles.txt2,

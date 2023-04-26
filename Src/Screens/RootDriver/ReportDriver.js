@@ -1,4 +1,4 @@
-import React, {Component, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   FlatList,
@@ -7,7 +7,6 @@ import {
   SafeAreaView,
   TouchableOpacity,
   ScrollView,
-  Alert,
 } from 'react-native';
 import Drawer from '../../../assets/Svg Image/Drawer_red';
 import Onbording from '../../../assets/Svg Image/onbording';
@@ -15,24 +14,22 @@ import Backbtn from '../../../assets/Svg Image/Left_redbtn';
 import Nextbtn from '../../../assets/Svg Image/Right_redbtn';
 import fonts from '../../Utils/Fonts';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import {
   moderateScale,
   verticalScale,
   horizontalScale,
 } from '../../Utils/scalling';
 
-const item = require('../../../Jsonfile/number-details.json'); // No,Plantes,
+var number_json = require('../../../Jsonfile/number-details.json'); // No,Plantes,
 
 const ReportDriver = ({navigation, route}) => {
-  const [list, setlist] = useState(item);
-  // console.log('driver_no', list);
+  // console.log('item', item);
   const [FirstName, setFirstName] = useState();
   const [LastName, setLastName] = useState();
   const [driver_no, setdriver_no] = useState();
+  console.log('fffffffffffff', driver_no);
 
-  useEffect(() => {
-    setlist(list);
-  });
   useEffect(() => {
     getData();
   });
@@ -41,6 +38,7 @@ const ReportDriver = ({navigation, route}) => {
       const value = await AsyncStorage.getItem('firstname');
       const value1 = await AsyncStorage.getItem('lastname');
       const value2 = await AsyncStorage.getItem('driver_no');
+
       console.log('value==>' + value2);
       if (value !== null) {
         setFirstName(value);
@@ -49,6 +47,7 @@ const ReportDriver = ({navigation, route}) => {
         setLastName(value1);
       }
       if (value2 !== null) {
+        console.log('dno', value2);
         setdriver_no(value2);
       }
     } catch (e) {}
@@ -77,31 +76,35 @@ const ReportDriver = ({navigation, route}) => {
           <View style={styles.image}>
             <Onbording />
           </View>
-
-          <FlatList
-            style={{alignSelf: 'center'}}
-            data={list}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({item}) => (
-              <View>
-                <View style={{alignItems: 'center', justifyContent: 'center'}}>
+          {driver_no != 0 && (
+            <FlatList
+              style={{alignSelf: 'center'}}
+              data={number_json}
+              keyExtractor={(item, index) => index.toString()}
+              renderItem={({item}) => (
+                <View>
+                  <View
+                    style={{alignItems: 'center', justifyContent: 'center'}}>
+                    {driver_no == item.No ? (
+                      <Text style={styles.numberTextConatiner}>{item.No}</Text>
+                    ) : null}
+                  </View>
                   {driver_no == item.No ? (
-                    <Text style={styles.numberTextConatiner}>{item.No}</Text>
-                  ) : null}
-                </View>
-                {driver_no == item.No ? (
-                  <Text style={styles.HeaderTextConatiner}>{item.Plantes}</Text>
-                ) : null}
-                <View style={{paddingHorizontal: moderateScale(35)}}>
-                  {driver_no == item.No ? (
-                    <Text style={styles.DescriptionContainer}>
-                      {item.WallpaperSuggestion}
+                    <Text style={styles.HeaderTextConatiner}>
+                      {item.Plantes}
                     </Text>
                   ) : null}
+                  <View style={{paddingHorizontal: moderateScale(35)}}>
+                    {driver_no == item.No ? (
+                      <Text style={styles.DescriptionContainer}>
+                        {item.WallpaperSuggestion}
+                      </Text>
+                    ) : null}
+                  </View>
                 </View>
-              </View>
-            )}
-          />
+              )}
+            />
+          )}
         </ScrollView>
         <View style={styles.arrow}>
           <TouchableOpacity onPress={() => navigation.navigate('Register')}>

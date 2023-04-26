@@ -1,26 +1,35 @@
 import React, {useState, useEffect} from 'react';
-import {View, TextInput, Text, Button} from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import {View, TextInput, Text} from 'react-native';
 
-const ExtraScreen = () => {
-  const [data, setData] = useState();
+const MergeStates = () => {
+  const [state1, setState1] = useState('');
+  const [state2, setState2] = useState('');
+  const [mergedState, setMergedState] = useState('');
 
-  const getData = async () => {
-    try {
-      const name = await AsyncStorage.getItem('Year');
-      setData(name);
-      console.log('name', name);
-    } catch (error) {}
+  const updateState1 = value => {
+    setState1(value);
+  };
+
+  const updateState2 = value => {
+    setState2(value);
+  };
+
+  const mergeStrings = () => {
+    const mergedString = state1 + ' ' + state2;
+    setMergedState(mergedString);
   };
 
   useEffect(() => {
-    getData();
-  }, []);
+    mergeStrings();
+  }, [state1, state2]);
 
   return (
-    <View style={{flex: 1}}>
-      <Text>{data}</Text>
+    <View>
+      <TextInput value={state1} onChangeText={updateState1} />
+      <TextInput value={state2} onChangeText={updateState2} />
+      <Text>Merged state: {mergedState}</Text>
     </View>
   );
 };
-export default ExtraScreen;
+
+export default MergeStates;

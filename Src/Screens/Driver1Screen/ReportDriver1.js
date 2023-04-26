@@ -21,9 +21,10 @@ import {
 
 const ReportDriver1 = ({navigation, route}) => {
   const [FirstName, setFirstName] = useState();
-  console.log('fname', FirstName);
+  // console.log('fname', FirstName);
   const [LastName, setLastName] = useState();
-  console.log('lname', LastName);
+  // console.log('lname', LastName);
+
   useEffect(() => {
     // setlist(list);
     getData();
@@ -31,10 +32,10 @@ const ReportDriver1 = ({navigation, route}) => {
 
   const getData = async () => {
     try {
-      const value = await AsyncStorage.getItem('FirstName');
-      const value1 = await AsyncStorage.getItem('LastName');
+      const value = await AsyncStorage.getItem('firstname');
+      console.log('fnnmn', FirstName);
+      const value1 = await AsyncStorage.getItem('lastname');
 
-      console.log('value==>' + value);
       if (value !== null) {
         setFirstName(value);
       }
@@ -53,9 +54,7 @@ const ReportDriver1 = ({navigation, route}) => {
             <View>
               <Text style={styles.title}>Numerology Report of</Text>
               <Text style={styles.name}>
-                {/* {FirstName} {LastName}
-                 */}
-                Tejash Shah
+                {FirstName} {LastName}
               </Text>
             </View>
           </View>

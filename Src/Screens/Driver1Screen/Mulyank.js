@@ -25,7 +25,8 @@ const Mulyank = ({navigation, route}) => {
   const [FirstName, setFirstName] = useState();
   const [LastName, setLastName] = useState();
   const [list, setlist] = useState(item);
-  const [driver_no, setdriver_no] = useState();
+  const [driver_no, setdriver_no] = useState(1);
+  console.log('dkdkdkdkdkdkdkdkdk', driver_no);
 
   useEffect(() => {
     setlist(list);
@@ -61,56 +62,52 @@ const Mulyank = ({navigation, route}) => {
             </Text>
           </View>
         </View>
-        <ScrollView>
-          <View style={styles.view1}>
-            <Number5_red />
-            <View style={styles.view2}>
-              <Text style={styles.text3}>Driver (Mulyank)</Text>
-            </View>
-          </View>
-          <FlatList
-            data={list}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({item}) => (
-              <View>
-                <View
-                  style={{
-                    marginHorizontal: 12,
-                    // backgroundColor: 'red',
-                  }}>
-                  <View style={{marginVertical: 10}}>
-                    {driver_no == item.No ? (
-                      <Text style={styles.low}>Symptoms - Low Energy</Text>
-                    ) : null}
-                    {driver_no == item.No ? (
-                      <Text style={styles.Mobile}>
-                        {' '}
-                        {item.SymptomsLowEnergy}
-                      </Text>
-                    ) : null}
-                  </View>
-                  <View style={{marginVertical: 10}}>
-                    {driver_no == item.No ? (
-                      <Text style={styles.low}>Solutions - Low Energy</Text>
-                    ) : null}
-                    {driver_no == item.No ? (
-                      <Text style={styles.Mobile}> {item.Solutions}</Text>
-                    ) : null}
-                  </View>
 
-                  <View style={{marginVertical: 10}}>
-                    {driver_no == item.No ? (
-                      <Text style={styles.low}>Enhance Mulyank</Text>
-                    ) : null}
-                    {driver_no == item.No ? (
-                      <Text style={styles.Mobile}> {item.EnhanceMulyank}</Text>
-                    ) : null}
-                  </View>
-                </View>
+        <View style={styles.view1}>
+          <Number5_red />
+          <View style={styles.view2}>
+            <Text style={styles.text3}>Driver (Mulyank)</Text>
+          </View>
+        </View>
+
+        <FlatList
+          data={list}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({item}) => (
+            <View
+              style={{
+                marginHorizontal: 12,
+                // backgroundColor: 'red',
+              }}>
+              <View>
+                {driver_no == item.No ? (
+                  <Text style={styles.low}>Symptoms - Low Energy</Text>
+                ) : null}
+                {driver_no == item.No ? (
+                  <Text style={styles.Mobile}> {item.SymptomsLowEnergy}</Text>
+                ) : null}
               </View>
-            )}
-          />
-        </ScrollView>
+              <View>
+                {driver_no == item.No ? (
+                  <Text style={styles.low}>Solutions - Low Energy</Text>
+                ) : null}
+                {driver_no == item.No ? (
+                  <Text style={styles.Mobile}> {item.Solutions}</Text>
+                ) : null}
+              </View>
+
+              <View>
+                {driver_no == item.No ? (
+                  <Text style={styles.low}>Enhance Mulyank</Text>
+                ) : null}
+                {driver_no == item.No ? (
+                  <Text style={styles.Mobile}> {item.EnhanceMulyank}</Text>
+                ) : null}
+              </View>
+            </View>
+          )}
+        />
+
         <View style={styles.footer}>
           <TouchableOpacity
             onPress={() => navigation.navigate('ReportDriverDetails')}>
@@ -121,6 +118,8 @@ const Mulyank = ({navigation, route}) => {
             <Nextbtn />
           </TouchableOpacity>
         </View>
+
+        {/* </ScrollView> */}
       </View>
     </SafeAreaView>
   );
