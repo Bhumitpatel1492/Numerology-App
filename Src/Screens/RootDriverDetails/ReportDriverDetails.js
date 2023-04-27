@@ -18,14 +18,14 @@ import {moderateScale} from '../../Utils/scalling';
 import Drawer from '../../../assets/Svg Image/Drawer_red';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const item = require('../../../Jsonfile/number-details.json'); // No,Plantes,
+const number_json = require('../../../Jsonfile/number-details.json'); // No,Plantes,
 const ReportDriverDetails = ({navigation, route}) => {
   const windowWidth = Dimensions.get('window').width;
-  const [list, setlist] = useState(item);
+  const [list, setlist] = useState(number_json);
   const [FirstName, setFirstName] = useState();
   const [LastName, setLastName] = useState();
   // const [Email, setEmail] = useState();
-  const [driver_no, setdriver_no] = useState(1);
+  const [driver_no, setdriver_no] = useState();
 
   useEffect(() => {
     setlist(list);
@@ -37,7 +37,7 @@ const ReportDriverDetails = ({navigation, route}) => {
       const value = await AsyncStorage.getItem('firstname');
       const value1 = await AsyncStorage.getItem('lastname');
       const value2 = await AsyncStorage.getItem('driver_no');
-      const Email = await AsyncStorage.getItem('email');
+      // const Email = await AsyncStorage.getItem('email');
       console.log('value==>' + value);
       if (value !== null) {
         setFirstName(value);
@@ -48,9 +48,9 @@ const ReportDriverDetails = ({navigation, route}) => {
       if (value2 !== null) {
         setdriver_no(value2);
       }
-      if (Email !== null) {
-        setEmail(Email);
-      }
+      // if (Email !== null) {
+      //   setEmail(Email);
+      // }
     } catch (e) {}
   };
 
@@ -66,6 +66,7 @@ const ReportDriverDetails = ({navigation, route}) => {
                 style={{flexDirection: 'row', textDecorationLine: 'underline'}}>
                 <Text style={styles.name}>
                   {FirstName} {LastName}
+                  {/* {driver_no} */}
                 </Text>
               </View>
             </View>
@@ -93,7 +94,7 @@ const ReportDriverDetails = ({navigation, route}) => {
               style={{
                 marginStart: moderateScale(18),
               }}
-              data={list}
+              data={number_json}
               keyExtractor={(item, index) => index.toString()}
               renderItem={({item}) => (
                 <View>

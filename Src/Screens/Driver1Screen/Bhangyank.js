@@ -23,7 +23,7 @@ const Bhagyank = ({navigation, route}) => {
   const [LastName, setLastName] = useState();
   const [list, setlist] = useState(item);
   const [conductor_no, setconductor_no] = useState();
-  console.log('ttt', conductor_no);
+  console.log('ttttttttt============>', conductor_no);
 
   useEffect(() => {
     getData();
@@ -36,6 +36,7 @@ const Bhagyank = ({navigation, route}) => {
       const value1 = await AsyncStorage.getItem('lastname');
       const value2 = await AsyncStorage.getItem('conductor_no');
 
+      // console.log('value==>' + value2);
       if (value !== null) {
         setFirstName(value);
       }
@@ -43,9 +44,12 @@ const Bhagyank = ({navigation, route}) => {
         setLastName(value1);
       }
       if (value2 !== null) {
+        console.log('dno', value2);
         setconductor_no(value2);
       }
-    } catch (e) {}
+    } catch (e) {
+      console.log('notget', e);
+    }
   };
 
   return (
@@ -55,10 +59,14 @@ const Bhagyank = ({navigation, route}) => {
           <Drawer2 />
           <View>
             <Text style={styles.title}>Numerology Report of</Text>
-            <Text style={styles.name}>
-              {FirstName}
-              {LastName}
-            </Text>
+            <View
+              style={{flexDirection: 'row', textDecorationLine: 'underline'}}>
+              <Text style={styles.name}>
+                {FirstName}
+                {LastName}
+                {/* {driver_no} */}
+              </Text>
+            </View>
           </View>
         </View>
         <View style={styles.view1}>

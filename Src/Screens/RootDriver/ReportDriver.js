@@ -53,7 +53,9 @@ const ReportDriver = ({navigation, route}) => {
         console.log('dno', value2);
         setDriver_no(value2);
       }
-    } catch (e) {}
+    } catch (e) {
+      console.log('notget', e);
+    }
   };
 
   return (
@@ -72,6 +74,7 @@ const ReportDriver = ({navigation, route}) => {
               <Text style={styles.name}>
                 {FirstName}
                 {LastName}
+                {/* {driver_no} */}
               </Text>
             </View>
           </View>
@@ -79,32 +82,32 @@ const ReportDriver = ({navigation, route}) => {
         <View style={styles.image}>
           <Onbording />
         </View>
-        {driver_no != 0 && (
-          <FlatList
-            style={{alignSelf: 'center'}}
-            data={list}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({item}) => (
-              <View>
-                <View style={{alignItems: 'center', justifyContent: 'center'}}>
-                  {driver_no == item.No ? (
-                    <Text style={styles.numberTextConatiner}>{item.No}</Text>
-                  ) : null}
-                </View>
+
+        <FlatList
+          style={{alignSelf: 'center'}}
+          data={number_json}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({item}) => (
+            <View>
+              <View style={{alignItems: 'center', justifyContent: 'center'}}>
                 {driver_no == item.No ? (
-                  <Text style={styles.HeaderTextConatiner}>{item.Plantes}</Text>
+                  <Text style={styles.numberTextConatiner}>{item.No}</Text>
                 ) : null}
-                <View style={{paddingHorizontal: moderateScale(35)}}>
-                  {driver_no == item.No ? (
-                    <Text style={styles.DescriptionContainer}>
-                      {item.WallpaperSuggestion}
-                    </Text>
-                  ) : null}
-                </View>
               </View>
-            )}
-          />
-        )}
+              {driver_no == item.No ? (
+                <Text style={styles.HeaderTextConatiner}>{item.Plantes}</Text>
+              ) : null}
+              <View style={{paddingHorizontal: moderateScale(35)}}>
+                {driver_no == item.No ? (
+                  <Text style={styles.DescriptionContainer}>
+                    {item.WallpaperSuggestion}
+                  </Text>
+                ) : null}
+              </View>
+            </View>
+          )}
+        />
+
         {/* </ScrollView> */}
         <View style={styles.arrow}>
           <TouchableOpacity onPress={() => navigation.navigate('Register')}>

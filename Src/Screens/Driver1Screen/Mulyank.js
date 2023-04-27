@@ -18,14 +18,14 @@ import {moderateScale} from '../../Utils/scalling';
 import Backbtn from '../../../assets/Svg Image/Left_redbtn';
 import Nextbtn from '../../../assets/Svg Image/Right_redbtn';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-const item = require('../../../Jsonfile/number-details.json'); // No,Plantes,
+const number_json = require('../../../Jsonfile/number-details.json'); // No,Plantes,
 
 const Mulyank = ({navigation, route}) => {
   const windowWidth = Dimensions.get('window').width;
   const [FirstName, setFirstName] = useState();
   const [LastName, setLastName] = useState();
-  const [list, setlist] = useState(item);
-  const [driver_no, setdriver_no] = useState(1);
+  const [list, setlist] = useState(number_json);
+  const [driver_no, setdriver_no] = useState();
   console.log('dkdkdkdkdkdkdkdkdk', driver_no);
 
   useEffect(() => {
@@ -71,7 +71,7 @@ const Mulyank = ({navigation, route}) => {
         </View>
 
         <FlatList
-          data={list}
+          data={number_json}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({item}) => (
             <View

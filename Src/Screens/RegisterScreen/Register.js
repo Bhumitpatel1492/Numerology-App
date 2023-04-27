@@ -46,7 +46,7 @@ const Register = ({navigation}) => {
   const [Final2, setFinal2] = useState(); // for year
   // console.log('yearsum', Final2);
   const [conductor_no, setConductor_no] = useState(); // Conductor value
-  // console.log('conductor_no', conductor_no);
+  console.log('conductor_no', conductor_no);
   const [valueoftotal, setvalueoftotal] = useState(); // driver + Conductor value
   // console.log('combinevalue', valueoftotal);
   const [allNumber, setAllNumber] = useState();
@@ -74,7 +74,7 @@ const Register = ({navigation}) => {
     var dates = [];
     const datesLength = 31;
     for (let index = 1; index <= datesLength; index++) {
-      const element = index;
+      const element = index < 10 ? `0${index}` : index;
       dates.push({
         label: element.toString(),
         value: element,
@@ -149,7 +149,7 @@ const Register = ({navigation}) => {
 
   // monthaddition
 
-  const handlemonthsum = async value => {
+  const handlemonthsum = async () => {
     const user = selectedMonth;
     console.log('monthsumn====>', selectedMonth);
     const month = user.toString();
@@ -175,7 +175,7 @@ const Register = ({navigation}) => {
   };
 
   // yead addtion
-  const handleyearsum = async value => {
+  const handleyearsum = async () => {
     const user = selectedYear;
     // console.log('yearrrr', +user);
     const year = user.toString();
@@ -213,8 +213,9 @@ const Register = ({navigation}) => {
   };
 
   // Conductor value
-  const Conductorsum = () => {
+  const Conductorsum = async () => {
     let a = Driver_no + Final1 + Final2;
+    console.log('aaaaaaaa===============', a);
 
     if (a > 9) {
       let B = a.toString();
@@ -311,6 +312,7 @@ const Register = ({navigation}) => {
       Alert.alert('Please Select Valid Date');
     } else {
       Alert.alert('success');
+
       storeData();
       navigation.navigate('ReportDriver');
     }
