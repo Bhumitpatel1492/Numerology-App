@@ -16,12 +16,12 @@ import {moderateScale} from '../../Utils/scalling';
 import fonts from '../../Utils/Fonts';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const item = require('../../../Jsonfile/number-details.json');
+const number_json = require('../../../Jsonfile/number-details.json');
 
 const Bhagyank = ({navigation, route}) => {
   const [FirstName, setFirstName] = useState();
   const [LastName, setLastName] = useState();
-  const [list, setlist] = useState(item);
+  const [list, setlist] = useState(number_json);
   const [conductor_no, setconductor_no] = useState();
   console.log('ttttttttt============>', conductor_no);
 
@@ -36,7 +36,7 @@ const Bhagyank = ({navigation, route}) => {
       const value1 = await AsyncStorage.getItem('lastname');
       const value2 = await AsyncStorage.getItem('conductor_no');
 
-      // console.log('value==>' + value2);
+      console.log('value5585858585==>' + value2);
       if (value !== null) {
         setFirstName(value);
       }
@@ -64,7 +64,7 @@ const Bhagyank = ({navigation, route}) => {
               <Text style={styles.name}>
                 {FirstName}
                 {LastName}
-                {/* {driver_no} */}
+                {/* {conductor_no} */}
               </Text>
             </View>
           </View>
@@ -75,7 +75,7 @@ const Bhagyank = ({navigation, route}) => {
             <Text
               style={{
                 fontSize: moderateScale(28),
-                color: '#A02056',
+                color: '#0096A5',
                 fontFamily: fonts.ATSBI,
               }}>
               Conductor (Bhagyank)
@@ -85,7 +85,7 @@ const Bhagyank = ({navigation, route}) => {
         <View style={{marginHorizontal: 12, marginTop: 20}}>
           <Text style={styles.low}>Enhance Bhagyank</Text>
           <FlatList
-            data={list}
+            data={number_json}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({item}) => (
               <View>

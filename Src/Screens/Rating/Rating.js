@@ -24,15 +24,21 @@ const number_json = require('../../../Jsonfile/mulyank-bhaagyank-combination.jso
 const Rating = ({navigation, route}) => {
   const [FirstName, setFirstName] = useState();
   const [LastName, setLastName] = useState();
-  const [list, setlist] = useState(number_json);
-  console.log('list============>' + list);
-  const [v_total, setV_Total] = useState(55);
-  console.log('ttt=============>' + v_total);
+  const [v_total, setV_Total] = useState(0);
+  var total = 0;
+  console.log('vtotooo=====>' + v_total);
+  // const [list, setList] = useState(number_json);
+  // console.log('fffffffffffff===========>' + list);
 
-  useEffect(() => {
-    getData();
-    setlist(list);
-  });
+  useEffect(
+    () => async () => {
+      total = await AsyncStorage.getItem('v_total');
+      console.log('SSSSS' + (await AsyncStorage.getItem('v_total')));
+      getData();
+      // setList();
+    },
+    [],
+  );
 
   const getData = async () => {
     try {
@@ -40,6 +46,7 @@ const Rating = ({navigation, route}) => {
       const value1 = await AsyncStorage.getItem('lastname');
       const value2 = await AsyncStorage.getItem('v_total');
 
+      console.log('value==>' + value2);
       if (value !== null) {
         setFirstName(value);
       }
@@ -49,7 +56,10 @@ const Rating = ({navigation, route}) => {
       if (value2 !== null) {
         setV_Total(value2);
       }
-    } catch (e) {}
+      console.log('conddddno', value2);
+    } catch (e) {
+      console.log('notget', e);
+    }
   };
 
   return (
@@ -62,103 +72,57 @@ const Rating = ({navigation, route}) => {
             <Text style={styles.name}>
               {FirstName}
               {LastName}
+              {v_total}
             </Text>
           </View>
         </View>
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <View style={styles.imageview}>
-            <Image source={Images.number} style={styles.imgstyle} />
-            <View>
-              <Text style={styles.txt1}>Compatibility</Text>
-              <Text style={styles.txt2}>Janmank & Bhagyank</Text>
-            </View>
-            <Image source={Images.number} style={styles.imgstyle} />
-          </View>
 
-          <View style={{paddingVertical: 22}}>
-            <FlatList
-              data={list}
-              keyExtractor={(item, index) => index.toString()}
-              renderItem={({item}) => (
-                <View
-                  style={{
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    backgroundColor: '#FFFFFF',
-                    marginHorizontal: 10,
-                    borderRadius: 28,
-                  }}>
-                  <View
-                    style={{
-                      flexDirection: 'row',
-                      // justifyContent: 'center',
-                    }}>
-                    {v_total == item.MB ? (
-                      <Text
-                        style={{
-                          fontSize: 26,
-                          color: '#454545',
-                          marginVertical: 10,
-                          marginRight: 12,
-                        }}>
-                        {item.Ranking}
-                      </Text>
-                    ) : null}
-                    {v_total == item.MB ? (
-                      <Text
-                        style={{
-                          fontSize: 26,
-                          color: 'black',
-                          marginVertical: 10,
-                          fontFamily: fonts.ATR,
-                          color: '#454545',
-                          opacity: 1,
-                        }}>
-                        Stars
-                      </Text>
-                    ) : null}
-                  </View>
-                  <View>
-                    {v_total == item.MB ? (
-                      <Text
-                        style={{
-                          fontSize: 46,
-                          color: '#0096A5',
-                          backgroundColor: 'red',
-                        }}>
-                        {item.Stars}
-                      </Text>
-                    ) : null}
-                  </View>
-                </View>
-              )}
-            />
+        <View style={styles.imageview}>
+          <Image source={Images.number} style={styles.imgstyle} />
+          <View>
+            <Text style={styles.txt1}>Compatibility</Text>
+            <Text style={styles.txt2}>Janmank & Bhagyank</Text>
+          </View>
+          <Image source={Images.number} style={styles.imgstyle} />
+        </View>
+
+        <FlatList
+          data={number_json}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({item}) => (
             <View
               style={{
-                marginHorizontal: 25,
-                // backgroundColor: 'pink',
-                paddingVertical: 18,
+                // marginHorizontal: 12,
+                backgroundColor: 'red',
               }}>
-              <FlatList
-                data={list}
-                keyExtractor={(item, index) => index.toString()}
-                renderItem={({item}) => (
-                  <View>
-                    {v_total == item.MB ? (
-                      <Text
-                        style={[
-                          styles.txt2,
-                          {textAlign: 'center', lineHeight: 30},
-                        ]}>
-                        {item.Remarks}
-                      </Text>
-                    ) : null}
-                  </View>
-                )}
-              />
+              <View>
+                {total == item.No ? (
+                  <Text style={styles.low}>Symptoms - Low Energy</Text>
+                ) : null}
+                {total == item.No ? (
+                  <Text style={styles.Mobile}> {item.SymptomsLowEnergy}</Text>
+                ) : null}
+              </View>
+              <View>
+                {total == item.No ? (
+                  <Text style={styles.low}>Solutions - Low Energy</Text>
+                ) : null}
+                {total == item.No ? (
+                  <Text style={styles.Mobile}> {item.Solutions}</Text>
+                ) : null}
+              </View>
+
+              <View>
+                {total == item.No ? (
+                  <Text style={styles.low}>Enhance Mulyank</Text>
+                ) : null}
+                {total == item.No ? (
+                  <Text style={styles.Mobile}> {item.EnhanceMulyank}</Text>
+                ) : null}
+              </View>
             </View>
-          </View>
-        </ScrollView>
+          )}
+        />
         <View style={styles.arrow}>
           <TouchableOpacity
             onPress={() => navigation.navigate('ReportDriver1')}>
@@ -185,6 +149,7 @@ const styles = StyleSheet.create({
     marginVertical: 15,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    // backgroundColor: 'red',
   },
   title: {
     fontSize: 20,
@@ -204,6 +169,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+    // backgroundColor: 'green',
   },
   imgstyle: {
     resizeMode: 'contain',
