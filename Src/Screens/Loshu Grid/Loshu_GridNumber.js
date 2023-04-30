@@ -36,7 +36,9 @@ const Loshu_GridNumber = ({navigation}) => {
   return (
     <View style={styles.container}>
       <View style={styles.subcontainer}>
-        <Drawer_green />
+        <TouchableOpacity onPress={() => navigation.openDrawer()}>
+          <Drawer_green />
+        </TouchableOpacity>
         <View>
           <Text style={styles.title}>Numerology Report of</Text>
           <Text style={styles.name}>TEJASH SHAH</Text>

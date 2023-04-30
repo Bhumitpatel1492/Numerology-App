@@ -57,132 +57,133 @@ const ReportDriverDetails = ({navigation, route}) => {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#FFF2F7'}}>
       <View style={styles.container}>
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <View style={styles.subcontainer}>
+        <View style={styles.subcontainer}>
+          <TouchableOpacity onPress={() => navigation.openDrawer()}>
             <Drawer />
-            <View>
-              <Text style={styles.title}>Numerology Report of</Text>
-              <View
-                style={{flexDirection: 'row', textDecorationLine: 'underline'}}>
-                <Text style={styles.name}>
-                  {FirstName} {LastName}
-                  {/* {driver_no} */}
-                </Text>
-              </View>
+          </TouchableOpacity>
+          <View>
+            <Text style={styles.title}>Numerology Report of</Text>
+            <View
+              style={{flexDirection: 'row', textDecorationLine: 'underline'}}>
+              <Text style={styles.name}>
+                {FirstName} {LastName}
+                {/* {driver_no} */}
+              </Text>
             </View>
           </View>
+        </View>
 
-          <View style={styles.background}>
-            <Text
-              style={{
-                fontSize: moderateScale(40),
-                color: '#A02056',
-                fontFamily: fonts.ATSBI,
-              }}>
-              Driver (Mulyank)
-            </Text>
-          </View>
-          <View
+        <View style={styles.background}>
+          <Text
             style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'center',
+              fontSize: moderateScale(40),
+              color: '#A02056',
+              fontFamily: fonts.ATSBI,
             }}>
-            <Onbording2 />
-
-            <FlatList
-              style={{
-                marginStart: moderateScale(18),
-              }}
-              data={number_json}
-              keyExtractor={(item, index) => index.toString()}
-              renderItem={({item}) => (
-                <View>
-                  <View
-                    style={{
-                      width: windowWidth,
-                      alignItems: 'flex-end',
-                    }}>
-                    <View style={styles.profile}>
-                      {driver_no == item.No ? (
-                        <Text style={Style.types}>Plantes </Text>
-                      ) : null}
-                      {driver_no == item.No ? (
-                        <Text style={Style.details}> {item.Plantes}</Text>
-                      ) : null}
-                    </View>
-                    <View style={styles.profile}>
-                      {driver_no == item.No ? (
-                        <Text style={Style.types}>Relations</Text>
-                      ) : null}
-                      {driver_no == item.No ? (
-                        <Text style={Style.details}> {item.Relations}</Text>
-                      ) : null}
-                    </View>
-
-                    <View style={styles.profile}>
-                      {driver_no == item.No ? (
-                        <Text style={Style.types}>Qualities </Text>
-                      ) : null}
-                      {driver_no == item.No ? (
-                        <Text style={Style.details}> {item.Qualities}</Text>
-                      ) : null}
-                    </View>
-                  </View>
-                </View>
-              )}
-            />
-          </View>
+            Driver (Mulyank)
+          </Text>
+        </View>
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+          <Onbording2 />
 
           <FlatList
-            data={list}
+            style={{
+              marginStart: moderateScale(18),
+            }}
+            data={number_json}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({item}) => (
-              <View style={{marginTop: moderateScale(10)}}>
-                <View style={{flexDirection: 'row'}}>
-                  {driver_no == item.No ? (
-                    <Text style={Style.lines}>•</Text>
-                  ) : null}
-                  {driver_no == item.No ? (
-                    <Text style={Style.lines}>{item.SymptomsLowEnergy}</Text>
-                  ) : null}
-                </View>
-                <View style={{flexDirection: 'row'}}>
-                  {driver_no == item.No ? (
-                    <Text style={Style.lines}>•</Text>
-                  ) : null}
-                  {driver_no == item.No ? (
-                    <Text style={Style.lines}>{item.Solutions}</Text>
-                  ) : null}
-                </View>
-                <View style={{flexDirection: 'row'}}>
-                  {driver_no == item.No ? (
-                    <Text style={Style.lines}>•</Text>
-                  ) : null}
-                  {driver_no == item.No ? (
-                    <Text style={Style.lines}>{item.EnhanceMulyank}</Text>
-                  ) : null}
-                </View>
-                <View style={{flexDirection: 'row'}}>
-                  {driver_no == item.No ? (
-                    <Text style={Style.lines}>•</Text>
-                  ) : null}
-                  {driver_no == item.No ? (
-                    <Text style={Style.lines}>{item.EnhanceBhagyank}</Text>
-                  ) : null}
-                </View>
-                <View style={{flexDirection: 'row'}}>
-                  {driver_no == item.No ? (
-                    <Text style={Style.lines}>•</Text>
-                  ) : null}
-                  {driver_no == item.No ? (
-                    <Text style={Style.lines}>{item.WallpaperSuggestion}</Text>
-                  ) : null}
+              <View>
+                <View
+                  style={{
+                    width: windowWidth,
+                    alignItems: 'flex-end',
+                  }}>
+                  <View style={styles.profile}>
+                    {driver_no == item.No ? (
+                      <Text style={Style.types}>Plantes </Text>
+                    ) : null}
+                    {driver_no == item.No ? (
+                      <Text style={Style.details}> {item.Plantes}</Text>
+                    ) : null}
+                  </View>
+                  <View style={styles.profile}>
+                    {driver_no == item.No ? (
+                      <Text style={Style.types}>Relations</Text>
+                    ) : null}
+                    {driver_no == item.No ? (
+                      <Text style={Style.details}> {item.Relations}</Text>
+                    ) : null}
+                  </View>
+
+                  <View style={styles.profile}>
+                    {driver_no == item.No ? (
+                      <Text style={Style.types}>Qualities </Text>
+                    ) : null}
+                    {driver_no == item.No ? (
+                      <Text style={Style.details}> {item.Qualities}</Text>
+                    ) : null}
+                  </View>
                 </View>
               </View>
             )}
           />
-        </ScrollView>
+        </View>
+
+        <FlatList
+          data={list}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({item}) => (
+            <View style={{marginTop: moderateScale(10)}}>
+              <View style={{flexDirection: 'row'}}>
+                {driver_no == item.No ? (
+                  <Text style={Style.lines}>•</Text>
+                ) : null}
+                {driver_no == item.No ? (
+                  <Text style={Style.lines}>{item.SymptomsLowEnergy}</Text>
+                ) : null}
+              </View>
+              <View style={{flexDirection: 'row'}}>
+                {driver_no == item.No ? (
+                  <Text style={Style.lines}>•</Text>
+                ) : null}
+                {driver_no == item.No ? (
+                  <Text style={Style.lines}>{item.Solutions}</Text>
+                ) : null}
+              </View>
+              <View style={{flexDirection: 'row'}}>
+                {driver_no == item.No ? (
+                  <Text style={Style.lines}>•</Text>
+                ) : null}
+                {driver_no == item.No ? (
+                  <Text style={Style.lines}>{item.EnhanceMulyank}</Text>
+                ) : null}
+              </View>
+              <View style={{flexDirection: 'row'}}>
+                {driver_no == item.No ? (
+                  <Text style={Style.lines}>•</Text>
+                ) : null}
+                {driver_no == item.No ? (
+                  <Text style={Style.lines}>{item.EnhanceBhagyank}</Text>
+                ) : null}
+              </View>
+              <View style={{flexDirection: 'row'}}>
+                {driver_no == item.No ? (
+                  <Text style={Style.lines}>•</Text>
+                ) : null}
+                {driver_no == item.No ? (
+                  <Text style={Style.lines}>{item.WallpaperSuggestion}</Text>
+                ) : null}
+              </View>
+            </View>
+          )}
+        />
+
         <View style={styles.arrow}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Backbtn />

@@ -29,6 +29,7 @@ import Wallpaper from '../Screens/Wallpaper on mobile/Wallpaper';
 import occultree from '../Screens/closer/occultree';
 import ExtraScreen from '../Screens/extra';
 import Occultree from '../Screens/closer/occultree';
+import customedrawernavigation from './Customdrawer';
 // import Registercopy from '../Screens/RegisterScreen/Registercopy';
 // import Copy from '../Screens/RegisterScreen/Registercopy';
 
@@ -40,7 +41,7 @@ const Root = () => {
         <Stack.Screen name="Splesh" component={Splesh} />
         <Stack.Screen name="Register" component={Register} />
         {/* <Stack.Screen name="Copy" component={Copy} /> */}
-        <Stack.Screen name="ReportDriver" component={ReportDriver} />
+        <Stack.Screen name="ReportDriver" component={customedrawernavigation} />
         <Stack.Screen
           name="ReportDriverDetails"
           component={ReportDriverDetails}

@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   SafeAreaView,
   FlatList,
+  ImageBackground,
 } from 'react-native';
 import Rightbtn from '../../../assets/Svg Image/Rightbtn';
 import Leftbtn from '../../../assets/Svg Image/Leftbtn';
@@ -15,6 +16,7 @@ import Number5 from '../../../assets/Svg Image/Number_5';
 import {moderateScale} from '../../Utils/scalling';
 import fonts from '../../Utils/Fonts';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Images from '../../Utils/Images';
 
 const number_json = require('../../../Jsonfile/number-details.json');
 
@@ -23,7 +25,7 @@ const Bhagyank = ({navigation, route}) => {
   const [LastName, setLastName] = useState();
   const [list, setlist] = useState(number_json);
   const [conductor_no, setconductor_no] = useState();
-  console.log('ttttttttt============>', conductor_no);
+  // console.log('ttttttttt============>', conductor_no);
 
   useEffect(() => {
     getData();
@@ -36,7 +38,7 @@ const Bhagyank = ({navigation, route}) => {
       const value1 = await AsyncStorage.getItem('lastname');
       const value2 = await AsyncStorage.getItem('conductor_no');
 
-      console.log('value5585858585==>' + value2);
+      // console.log('value5585858585==>' + value2);
       if (value !== null) {
         setFirstName(value);
       }
@@ -44,7 +46,7 @@ const Bhagyank = ({navigation, route}) => {
         setLastName(value1);
       }
       if (value2 !== null) {
-        console.log('dno', value2);
+        // console.log('dno', value2);
         setconductor_no(value2);
       }
     } catch (e) {
@@ -56,7 +58,9 @@ const Bhagyank = ({navigation, route}) => {
     <SafeAreaView style={{flex: 1, backgroundColor: '#E8FDFF'}}>
       <View style={styles.container}>
         <View style={styles.subcontainer}>
-          <Drawer2 />
+          <TouchableOpacity onPress={() => navigation.openDrawer()}>
+            <Drawer2 />
+          </TouchableOpacity>
           <View>
             <Text style={styles.title}>Numerology Report of</Text>
             <View
@@ -70,7 +74,12 @@ const Bhagyank = ({navigation, route}) => {
           </View>
         </View>
         <View style={styles.view1}>
-          <Number5 />
+          <ImageBackground
+            source={Images.Bg_green}
+            resizeMode="cover"
+            style={styles.image}>
+            <Text style={styles.Bg_txt}>{conductor_no}</Text>
+          </ImageBackground>
           <View style={styles.view2}>
             <Text
               style={{
@@ -168,6 +177,20 @@ const styles = StyleSheet.create({
   footer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+  },
+  image: {
+    alignSelf: 'center',
+
+    height: 92,
+    width: 84,
+
+    justifyContent: 'center',
+  },
+  Bg_txt: {
+    fontSize: 32,
+    textAlign: 'center',
+    color: '#FFFFFF',
+    fontFamily: fonts.ATSBI,
   },
 });
 

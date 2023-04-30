@@ -19,7 +19,9 @@ const Prectice = ({navigation}) => {
   return (
     <View style={styles.container}>
       <View style={styles.subcontainer}>
-        <Drawer_Blue />
+        <TouchableOpacity onPress={() => navigation.openDrawer()}>
+          <Drawer_Blue />
+        </TouchableOpacity>
         <View>
           <Text style={styles.title}>Numerology Report of</Text>
           <Text style={styles.name}>TEJASH SHAH</Text>

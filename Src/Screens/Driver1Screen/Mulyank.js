@@ -26,7 +26,7 @@ const Mulyank = ({navigation, route}) => {
   const [LastName, setLastName] = useState();
   const [list, setlist] = useState(number_json);
   const [driver_no, setdriver_no] = useState();
-  console.log('dkdkdkdkdkdkdkdkdk', driver_no);
+  // console.log('dkdkdkdkdkdkdkdkdk', driver_no);
 
   useEffect(() => {
     setlist(list);
@@ -54,7 +54,9 @@ const Mulyank = ({navigation, route}) => {
     <SafeAreaView style={{flex: 1, backgroundColor: '#FFF2F7'}}>
       <View style={styles.container}>
         <View style={Style.subcontainer}>
-          <Drawer />
+          <TouchableOpacity onPress={() => navigation.openDrawer()}>
+            <Drawer />
+          </TouchableOpacity>
           <View>
             <Text style={styles.title}>Numerology Report of</Text>
             <Text Text style={styles.name}>

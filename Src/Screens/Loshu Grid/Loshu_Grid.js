@@ -12,12 +12,15 @@ import GridView from '../../Components/GridView';
 import Drawer_Blue from '../../../assets/Svg Image/Drawer_Blue';
 import Left_bluebtn from '../../../assets/Svg Image/Left_bluebtn';
 import Right_bluebtn from '../../../assets/Svg Image/Right_bluebtn';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Loshu_Grid = ({navigation}) => {
   return (
     <View style={styles.container}>
       <View style={styles.subcontainer}>
-        <Drawer_Blue />
+        <TouchableOpacity onPress={() => navigation.openDrawer()}>
+          <Drawer_Blue />
+        </TouchableOpacity>
         <View>
           <Text style={styles.title}>Numerology Report of</Text>
           <Text style={styles.name}>TEJASH SHAH</Text>

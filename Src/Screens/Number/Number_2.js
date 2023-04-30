@@ -19,7 +19,9 @@ const Number_2 = ({navigation}) => {
   return (
     <View style={styles.container}>
       <View style={Style.subcontainer}>
-        <Drawer_green />
+        <TouchableOpacity>
+          <Drawer_green />
+        </TouchableOpacity>
         <View>
           <Text style={styles.title}>Numerology Report of</Text>
           <Text style={styles.name}>TEJASH SHAH</Text>

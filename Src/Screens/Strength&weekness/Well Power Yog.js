@@ -7,10 +7,10 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import fonts from '../../Utils/Fonts';
-import Drawer2 from '../../../assets/Svg Image/Drawer2';
+// import Drawer2 from '../../../assets/Svg Image/Drawer2';
 import {moderateScale} from '../../Utils/scalling';
-import Leftbtn from '../../../assets/Svg Image/Leftbtn';
-import Rightbtn from '../../../assets/Svg Image/Rightbtn';
+// import Leftbtn from '../../../assets/Svg Image/Leftbtn';
+// import Rightbtn from '../../../assets/Svg Image/Rightbtn';
 import Drawer_Blue from '../../../assets/Svg Image/Drawer_Blue';
 import Left_bluebtn from '../../../assets/Svg Image/Left_bluebtn';
 import Right_bluebtn from '../../../assets/Svg Image/Right_bluebtn';
@@ -19,7 +19,9 @@ const WellPowerYog = ({navigation}) => {
   return (
     <View style={styles.container}>
       <View style={styles.subcontainer}>
-        <Drawer_Blue />
+        <TouchableOpacity>
+          <Drawer_Blue />
+        </TouchableOpacity>
         <View>
           <Text style={styles.title}>Numerology Report of</Text>
           <Text style={styles.name}>TEJASH SHAH</Text>

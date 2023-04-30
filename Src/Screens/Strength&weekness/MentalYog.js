@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -11,15 +11,64 @@ import {moderateScale} from '../../Utils/scalling';
 import Drawer_Blue from '../../../assets/Svg Image/Drawer_Blue';
 import Left_bluebtn from '../../../assets/Svg Image/Left_bluebtn';
 import Right_bluebtn from '../../../assets/Svg Image/Right_bluebtn';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const MentalYog = ({navigation}) => {
+  const [FirstName, setFirstName] = useState();
+  const [LastName, setLastName] = useState();
+  // const [allnumbers, setAllNumbers] = useState();
+  // console.log('allnumber===>' + allnumbers);
+
+  // var map = intArray.reduce(function (obj, b) {
+  //   obj[b] = ++obj[b] || 1;
+  //   return obj;
+  // }, {});
+
+  // console.log(map);
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  // useEffect(() => {
+  //   if (allnumbers) {
+  //     const intArray = allnumbers.split(',').map(Number);
+  //     setAllNumbers(intArray);
+  //   }
+  // }, [allnumbers]);
+
+  const getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('firstname');
+      const value1 = await AsyncStorage.getItem('lastname');
+      // const value2 = await AsyncStorage.getItem('allnumbers');
+      // const sum = JSON.parse(value2);
+      if (value !== null) {
+        setFirstName(value);
+      }
+      if (value1 !== null) {
+        setLastName(value1);
+      }
+      // if (sum !== null) {
+      //   setAllNumbers(sum);
+      // }
+    } catch (e) {
+      console.log('notget', e);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.subcontainer}>
-        <Drawer_Blue />
+        <TouchableOpacity onPress={() => navigation.openDrawer()}>
+          <Drawer_Blue />
+        </TouchableOpacity>
         <View>
           <Text style={styles.title}>Numerology Report of</Text>
-          <Text style={styles.name}>TEJASH SHAH</Text>
+          <Text style={styles.name}>
+            {FirstName}
+            {LastName}
+          </Text>
         </View>
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>

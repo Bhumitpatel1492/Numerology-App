@@ -7,6 +7,7 @@ import {
   SafeAreaView,
   TouchableOpacity,
   // ScrollView,
+  ImageBackground,
 } from 'react-native';
 import Drawer from '../../../assets/Svg Image/Drawer_red';
 import Onbording from '../../../assets/Svg Image/onbording';
@@ -26,6 +27,7 @@ import Drawer2 from '../../../assets/Svg Image/Drawer2';
 import Leftbtn from '../../../assets/Svg Image/Leftbtn';
 import Rightbtn from '../../../assets/Svg Image/Rightbtn';
 import Onbording1 from '../../../assets/Svg Image/Onbording1';
+import Images from '../../Utils/Images';
 // import { List } from 'react-native-paper';
 
 var number_json = require('../../../Jsonfile/number-details.json'); // No,Plantes,
@@ -36,7 +38,7 @@ const ReportDriver1 = ({navigation, route}) => {
   const [LastName, setLastName] = useState();
   const [conductor_no, setConductor_no] = useState();
   const [list, setList] = useState(number_json);
-  console.log('fffffffffffff===========>' + conductor_no);
+  // console.log('fffffffffffff===========>' + conductor_no);
 
   useEffect(() => {
     getData();
@@ -56,20 +58,19 @@ const ReportDriver1 = ({navigation, route}) => {
         setLastName(value1);
       }
       if (value2 !== null) {
-        console.log('dno', value2);
+        // console.log('dno', value2);
         setConductor_no(value2);
       }
     } catch (e) {
-      console.log('notget', e);
+      // console.log('notget', e);
     }
   };
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#0096A5'}}>
       <View style={styles.container}>
-        {/* <ScrollView> */}
         <View style={styles.subcontainer}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.openDrawer()}>
             <Drawer2 />
           </TouchableOpacity>
 
@@ -86,7 +87,19 @@ const ReportDriver1 = ({navigation, route}) => {
           </View>
         </View>
         <View style={styles.image}>
-          <Onbording1 />
+          <ImageBackground
+            source={Images.Bg_red}
+            resizeMode="cover"
+            style={styles.image}>
+            <Text
+              style={{
+                fontSize: 200,
+                textAlign: 'center',
+                color: '#0096A5',
+              }}>
+              {conductor_no}
+            </Text>
+          </ImageBackground>
         </View>
 
         <FlatList
@@ -95,11 +108,6 @@ const ReportDriver1 = ({navigation, route}) => {
           keyExtractor={(item, index) => index.toString()}
           renderItem={({item}) => (
             <View>
-              <View style={{alignItems: 'center', justifyContent: 'center'}}>
-                {conductor_no == item.No ? (
-                  <Text style={styles.numberTextConatiner}>{item.No}</Text>
-                ) : null}
-              </View>
               {conductor_no == item.No ? (
                 <Text style={styles.HeaderTextConatiner}>{item.Plantes}</Text>
               ) : null}
@@ -114,7 +122,6 @@ const ReportDriver1 = ({navigation, route}) => {
           )}
         />
 
-        {/* </ScrollView> */}
         <View style={styles.arrow}>
           <TouchableOpacity onPress={() => navigation.navigate('Mulyank')}>
             <Leftbtn />
@@ -204,11 +211,20 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(25),
     fontFamily: fonts.ATSBI,
     alignSelf: 'center',
+    marginVertical: 12,
   },
   DescriptionContainer: {
     color: '#BFE5E8',
     fontSize: moderateScale(22),
     fontFamily: fonts.ATR,
     marginTop: moderateScale(25),
+  },
+  image: {
+    alignSelf: 'center',
+    // backgroundColor: 'green',
+    height: 290,
+    width: 310,
+    marginTop: 10,
+    justifyContent: 'center',
   },
 });

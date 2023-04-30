@@ -27,13 +27,10 @@ const Register = ({navigation}) => {
   const [Email, setEmail] = useState();
   const [MobileNo, setMobileNo] = useState();
   const [selectedDate, setSelectedDate] = useState(null);
-  // console.log('sDate', selectedDate);
   const [selectedMonth, setSelectedMonth] = useState(null);
-  // console.log('smonth', selectedMonth);
   const [selectedYear, setSelectedYear] = useState(null);
-  console.log('syear', selectedYear);
+  // console.log('syear', selectedYear);
   const [datepicker, setDatePicker] = useState([]);
-  // console.log('pdate', datepicker);
   const [monthpicker, setMonthPicker] = useState([]);
   // console.log('pmonth', monthpicker);
   const [yearpicker, setYearPicker] = useState([]);
@@ -46,15 +43,28 @@ const Register = ({navigation}) => {
   const [Final2, setFinal2] = useState(); // for year
   // console.log('yearsum', Final2);
   const [conductor_no, setConductor_no] = useState(); // Conductor value
-  console.log('conductor_no=====>' + conductor_no);
+  // console.log('conductor_no=====>' + conductor_no);
   const [valueoftotal, setvalueoftotal] = useState(); // driver + Conductor value
   // console.log('combinevalue', valueoftotal);
   const [allNumber, setAllNumber] = useState();
   // console.log('allnumber', allNumber);
 
+  const checkinarr = () => {
+    var arr = [2, 3, 1, 3, 4, 5, 3, 1];
+
+    function getOccurrence(array, value) {
+      var count = 0;
+      array.forEach(v => v === value && count++);
+      return count;
+    }
+
+    console.log(getOccurrence(arr, 1)); // 2
+    console.log(getOccurrence(arr, 3)); // 3
+  };
+
   useEffect(() => {
-    setFirstName('Bhumit');
-    setLastName('Patel');
+    setFirstName('ABC');
+    setLastName('DEF');
     setEmail('abc123@gmail.com');
     setMobileNo('9988662211');
   }, [selectedDate, selectedMonth, selectedYear]);
@@ -65,7 +75,7 @@ const Register = ({navigation}) => {
     handleyearsum(); // yearsum function
     Conductorsum(); // date+month+year sum
     handlecombinevalue(); // driver + conductor
-    // handleallnumber(); // full b_date + driver + monthsum + yearsum + conductorsum
+    handleallnumber(); // full b_date + driver + monthsum + yearsum + conductorsum
   });
 
   useEffect(() => {
@@ -116,7 +126,7 @@ const Register = ({navigation}) => {
   };
 
   const handleSelection = value => {
-    console.log('Value======>', value);
+    // console.log('Value======>', value);
     setSelectedValue(value);
   };
 
@@ -149,7 +159,7 @@ const Register = ({navigation}) => {
 
   const handlemonthsum = async () => {
     const user = selectedMonth;
-    console.log('monthsumn====>', selectedMonth);
+    // console.log('monthsumn====>', selectedMonth);
     const month = user.toString();
     let item = month.split('');
     var value = item[0];
@@ -175,18 +185,14 @@ const Register = ({navigation}) => {
   // yead addtion
   const handleyearsum = async () => {
     const user = selectedYear;
-
     const year = user.toString();
-    // console.log('sting', year);
     let item = year.split('');
-    // console.log('iteeeee', item);
     var value = item[0] == undefined ? 0 : item[0];
     var value0 = item[1] == undefined ? 0 : item[1];
     var value1 = item[2] == undefined ? 0 : item[2];
     var value2 = item[3] == undefined ? 0 : item[3];
     let sum1 =
       parseInt(value) + parseInt(value0) + parseInt(value1) + parseInt(value2);
-    // console.log('amsssss', sum1);
     setFinal2(sum1);
 
     if (sum1 > 9) {
@@ -196,7 +202,7 @@ const Register = ({navigation}) => {
       let X = ans2[0];
       let Y = ans2[1];
       let sum2 = parseInt(X) + parseInt(Y);
-      // console.log('finaifidndnd', sum2);
+      setFinal2(sum2);
 
       if (sum2 > 9) {
         let B = sum2.toString();
@@ -205,17 +211,16 @@ const Register = ({navigation}) => {
         let X = ans3[0];
         let Y = ans3[1];
         let sum3 = parseInt(X) + parseInt(Y);
-        // console.log('laststss=====>' + sum3);
+
         setFinal2(sum3);
       }
-      setFinal2(sum2);
     }
   };
 
   // Conductor value
   const Conductorsum = async () => {
     let a = Driver_no + Final1 + Final2;
-    console.log('aaaaaaaa===============', a);
+    // console.log('aaaaaaaa===============', Driver_no);
 
     if (a > 9) {
       let B = a.toString();
@@ -224,7 +229,7 @@ const Register = ({navigation}) => {
       let X = ans2[0] == undefined ? 0 : ans2[0];
       let Y = ans2[1] == undefined ? 0 : ans2[1];
       let final = parseInt(X) + parseInt(Y);
-      // console.log('condctor=====>', final);
+
       setConductor_no(final);
     } else {
       setConductor_no(a);
@@ -233,21 +238,21 @@ const Register = ({navigation}) => {
 
   // driver + conductor
 
-  // const handlecombinevalue = () => {
-  //   const value1 = Driver_no;
-  //   const value2 = conductor_no;
-  //   const ans = value1 + ' ' + value2;
-  //   console.log('ydyxtrxtrxtrxtrx', ans);
-  //   setvalueoftotal(ans);
-  // };
-
   const handlecombinevalue = () => {
-    // const value1 = Driver_no;
-    // const value2 = conductor_no;
-    setvalueoftotal(+Driver_no + +conductor_no);
-    console.log('gagsgs' + Driver_no + +conductor_no);
-    // console.log('ydyxtrxtrxtrxtrx',);
+    const intValue1 = parseInt(Driver_no);
+    const intValue2 = parseInt(conductor_no);
+    // const intValue3 = parseInt(value3);
+    setvalueoftotal('' + intValue1 + intValue2);
+    // console.log('SSSSSSSSSSSSS=======>' + intValue1);
   };
+
+  // const handlecombinevalue = () => {
+  //   // const value1 = Driver_no;
+  //   // const value2 = conductor_no;
+  //   setvalueoftotal('' + Driver_no + +conductor_no);
+  //   console.log('gagsgs' + Driver_no + +conductor_no);
+  //   // console.log('ydyxtrxtrxtrxtrx',);
+  // };
 
   // full b_date + driver + monthsum + yearsum + conductorsum
 
@@ -277,18 +282,10 @@ const Register = ({navigation}) => {
       item6;
 
     const num = allnumber.toString();
-    console.log('=====>' + num);
+    // console.log('=====>' + num);
 
     setAllNumber(num);
-    // console.log('allnumber', allnumber);
   };
-
-  // const newData1 = ITEM.filter(item => {
-  //   const itemData1 = item.product_name.toLowerCase();
-  //   const textData1 = text.toLowerCase();
-  //   return itemData1.indexOf(textData1) > -1;
-  // });
-  // setFilteredData1(newData1);
 
   const number = /^[6-9]\d{9}$/;
   const email = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -330,13 +327,15 @@ const Register = ({navigation}) => {
       AsyncStorage.setItem('firstname', FirstName);
       AsyncStorage.setItem('lastname', LastName);
       AsyncStorage.setItem('gender', selectedValue);
-      AsyncStorage.setItem('date', selectedDate);
-      AsyncStorage.setItem('month', selectedMonth);
-      AsyncStorage.setItem('year', selectedYear);
+      AsyncStorage.setItem('date', JSON.stringify(selectedDate));
+      AsyncStorage.setItem('month', JSON.stringify(selectedMonth));
+      AsyncStorage.setItem('year', JSON.stringify(selectedYear));
       AsyncStorage.setItem('driver_no', JSON.stringify(Driver_no));
       AsyncStorage.setItem('conductor_no', JSON.stringify(conductor_no));
       AsyncStorage.setItem('v_total', JSON.stringify(valueoftotal));
-      // AsyncStorage.setItem('allnumbers', JSON.stringify(allNumber));
+      AsyncStorage.setItem('allnumbers', JSON.stringify(allNumber));
+      AsyncStorage.setItem('final_month', JSON.stringify(Final1));
+      AsyncStorage.setItem('final_year', JSON.stringify(Final2));
     } catch (e) {
       console.log('error ===========>', e);
     }
@@ -351,10 +350,11 @@ const Register = ({navigation}) => {
   // console.log('ASY_driver', Driver_no);
   // console.log('ASY_monthsum', Final1);
   // console.log('ASY_yearsum', Final2);
-  console.log('ASY_conductor_no', conductor_no);
-  console.log('ASY_combinevalue', JSON.stringify(valueoftotal));
-  // console.log('ASY_allvalues', allNumber);
-  console.log('gender======>', selectedValue);
+  // console.log('ASY_conductor_no', conductor_no);
+  // console.log('ASY_combinevalue', valueoftotal);
+  console.log('ASY_allvalues', allNumber);
+  // console.log('final1', Final1);
+  // console.log('fina2', Final2);
 
   return (
     <SafeAreaView style={Style.maincontainer}>

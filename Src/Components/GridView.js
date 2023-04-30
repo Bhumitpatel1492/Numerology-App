@@ -1,9 +1,32 @@
-import React, {Component} from 'react';
-import {View, Text, StyleSheet, FlatList, Dimensions} from 'react-native';
+import React, {useEffect} from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  Dimensions,
+  ImageBackground,
+} from 'react-native';
 import {moderateScale} from '../Utils/scalling';
 import fonts from '../Utils/Fonts';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const GridView = () => {
+  useEffect(() => {
+    getData();
+    // setList();
+  }, []);
+
+  const getData = async () => {
+    try {
+      const value2 = await AsyncStorage.getItem('allnumbers');
+
+      console.log('valiedd===>', value2);
+    } catch (e) {
+      console.log('notget', e);
+    }
+  };
+
   const data = [
     {id: 'a', value: 4444},
     {id: 'b', value: 999},
@@ -20,6 +43,7 @@ const GridView = () => {
 
   return (
     <View style={styles.container}>
+      {/* <ImageBackground> */}
       <FlatList
         data={data}
         renderItem={({item}) => (
@@ -30,6 +54,7 @@ const GridView = () => {
         keyExtractor={item => item.id}
         numColumns={numColumns}
       />
+      {/* </ImageBackground> */}
     </View>
   );
 };
@@ -40,10 +65,10 @@ const styles = StyleSheet.create({
   container: {
     // flex: 1,
     alignItems: 'center',
-    borderRadius: 40,
+    // borderRadius: 40,
     //borderWidth: 1,
     // marginVertical: 20,
-    backgroundColor: '#45357C',
+    // backgroundColor: '#45357C',
     marginHorizontal: 10,
     paddingVertical: 20,
   },
