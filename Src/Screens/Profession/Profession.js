@@ -7,13 +7,13 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import Drawer2_Purple from '../../assets/Svg Image/Drawer2_Purple';
-import {moderateScale} from '../Utils/scalling';
-import fonts from '../Utils/Fonts';
-import Style from '../Utils/Style';
-import Round from '../../assets/Svg Image/Round';
-import Backbtn_Purple from '../../assets/Svg Image/Backbtn_Purple';
-import Nextbtn_Purple from '../../assets/Svg Image/Nextbtn_Purple';
+import Drawer2_Purple from '../../../assets/Svg Image/Drawer2_Purple';
+import {moderateScale} from '../../Utils/scalling';
+import fonts from '../../Utils/Fonts';
+import Style from '../../Utils/Style';
+import Round from '../../../assets/Svg Image/Round';
+import Backbtn_Purple from '../../../assets/Svg Image/Backbtn_Purple';
+import Nextbtn_Purple from '../../../assets/Svg Image/Nextbtn_Purple';
 
 const Profession = ({navigation}) => {
   return (

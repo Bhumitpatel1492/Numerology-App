@@ -5,7 +5,7 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
-  Image,
+  ImageBackground,
 } from 'react-native';
 import fonts from '../../Utils/Fonts';
 import {moderateScale} from '../../Utils/scalling';
@@ -14,6 +14,7 @@ import Style from '../../Utils/Style';
 import Drawer from '../../../assets/Svg Image/Drawer_red';
 import Backbtn from '../../../assets/Svg Image/Left_redbtn';
 import Nextbtn from '../../../assets/Svg Image/Right_redbtn';
+import Images from '../../Utils/Images';
 
 const Number_6 = ({navigation}) => {
   return (
@@ -27,7 +28,19 @@ const Number_6 = ({navigation}) => {
       </View>
       <ScrollView>
         <View style={Style.middle}>
-          <Lucky6 />
+          <ImageBackground
+            source={Images.Bg_Red_number}
+            resizeMode="cover"
+            style={styles.image}>
+            <Text
+              style={{
+                fontSize: 150,
+                textAlign: 'center',
+                color: '#FFFFFF',
+              }}>
+              {/* {driver_no} */}6
+            </Text>
+          </ImageBackground>
 
           <Text style={styles.txt2}>Missing</Text>
           <Text style={Style.Number_txt}>
@@ -77,5 +90,12 @@ const styles = StyleSheet.create({
     fontFamily: fonts.ATSBI,
     color: '#8B1A1A',
     marginVertical: 15,
+  },
+  image: {
+    alignSelf: 'center',
+    height: 310,
+    width: 280,
+    marginTop: 10,
+    justifyContent: 'center',
   },
 });

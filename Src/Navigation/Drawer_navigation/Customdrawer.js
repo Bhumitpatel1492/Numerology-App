@@ -1,7 +1,7 @@
 import React from 'react';
 import {createDrawerNavigator} from '@react-navigation/drawer';
-import Drawerview from './Drawer_item';
-import ReportDriver from '../Screens/RootDriver/ReportDriver';
+// import Drawerview from './Drawer_item';
+// import ReportDriver from '../Screens/RootDriver/ReportDriver';
 import ReportDriver1 from '../Screens/Driver1Screen/ReportDriver1';
 import Rating from '../Screens/Rating/Rating';
 import Loshu_Grid from '../Screens/Loshu Grid/Loshu_Grid';
@@ -25,6 +25,9 @@ import Number_7 from '../Screens/Number/Number_7';
 import Number_8 from '../Screens/Number/Number_8';
 import Number_9 from '../Screens/Number/Number_9';
 import WellPowerYog from '../Screens/Strength&weekness/Well Power Yog';
+import Drawerview from './Drawer_item';
+import ReportDriver from '../../Screens/RootDriver/ReportDriver';
+// import DriverStackScreens from '../Driver_stack/Driver_stack';
 
 const Drawer = createDrawerNavigator();
 
@@ -50,6 +53,7 @@ function customedrawernavigation() {
         name="ReportDriver"
         component={ReportDriver}
       />
+
       <Drawer.Screen
         name="ReportDriverDetails"
         component={ReportDriverDetails}

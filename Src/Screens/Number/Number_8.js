@@ -5,7 +5,7 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
-  Image,
+  ImageBackground,
 } from 'react-native';
 import fonts from '../../Utils/Fonts';
 import {moderateScale} from '../../Utils/scalling';
@@ -13,6 +13,7 @@ import Drawer from '../../../assets/Svg Image/Drawer_red';
 import Backbtn from '../../../assets/Svg Image/Left_redbtn';
 import Nextbtn from '../../../assets/Svg Image/Right_redbtn';
 import Lucky8 from '../../../assets/Svg Image/Lucky8';
+import Images from '../../Utils/Images';
 
 const Number_8 = ({navigation}) => {
   return (
@@ -25,7 +26,19 @@ const Number_8 = ({navigation}) => {
         </View>
       </View>
       <View style={styles.middle}>
-        <Lucky8 />
+        <ImageBackground
+          source={Images.Bg_Red_number}
+          resizeMode="cover"
+          style={styles.image}>
+          <Text
+            style={{
+              fontSize: 150,
+              textAlign: 'center',
+              color: '#FFFFFF',
+            }}>
+            {/* {driver_no} */}8
+          </Text>
+        </ImageBackground>
         <Text style={styles.txt}>
           May be Poor In Financial Management / Spend Thrift
         </Text>
@@ -87,5 +100,12 @@ const styles = StyleSheet.create({
     fontFamily: fonts.ATSBI,
     lineHeight: 45,
     marginVertical: 25,
+  },
+  image: {
+    alignSelf: 'center',
+    height: 310,
+    width: 280,
+    marginTop: 10,
+    justifyContent: 'center',
   },
 });

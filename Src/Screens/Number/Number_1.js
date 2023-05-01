@@ -1,11 +1,18 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ImageBackground,
+} from 'react-native';
 import fonts from '../../Utils/Fonts';
 import Style from '../../Utils/Style';
 import Lucky1 from '../../../assets/Svg Image/Lucky1';
 import Drawer_green from '../../../assets/Svg Image/Drawer_green';
 import Left_greenbtn from '../../../assets/Svg Image/Left_greenbtn';
 import Right_greenbtn from '../../../assets/Svg Image/Right_greenbtn';
+import Images from '../../Utils/Images';
 
 const Number_1 = ({navigation}) => {
   return (
@@ -20,7 +27,20 @@ const Number_1 = ({navigation}) => {
         </View>
       </View>
       <View style={Style.middle}>
-        <Lucky1 />
+        <ImageBackground
+          source={Images.Bg_number}
+          resizeMode="cover"
+          style={styles.image}>
+          <Text
+            style={{
+              fontSize: 150,
+              textAlign: 'center',
+              color: '#FFFFFF',
+            }}>
+            {/* {driver_no} */}1
+          </Text>
+        </ImageBackground>
+
         <Text style={Style.Number_txt}>
           Excellent Communication & Orator/ Articulate / Impartial{' '}
         </Text>
@@ -59,5 +79,12 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline',
     textAlign: 'right',
     fontFamily: fonts.ATR,
+  },
+  image: {
+    alignSelf: 'center',
+    height: 310,
+    width: 280,
+    marginTop: 10,
+    justifyContent: 'center',
   },
 });

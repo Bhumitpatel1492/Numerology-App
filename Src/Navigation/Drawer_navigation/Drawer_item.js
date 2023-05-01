@@ -2,18 +2,21 @@ import React from 'react';
 import {
   View,
   Text,
-  Image,
+  // Image,
   Pressable,
   ScrollView,
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
 import {DrawerContentScrollView} from '@react-navigation/drawer';
-import Close from '../../assets/Svg Image/Close';
-import Headerlogo from '../../assets/Svg Image/headerlogo';
-import Logo1 from '../../assets/Svg Image/Logo1';
+// import Close from '../../assets/Svg Image/Close';
+// import Headerlogo from '../../assets/Svg Image/headerlogo';
+// import Logo1 from '../../assets/Svg Image/Logo1';
 import {moderateScale} from '../Utils/scalling';
 import fonts from '../Utils/Fonts';
+import Close from '../../../assets/Svg Image/Close';
+import Headerlogo from '../../../assets/Svg Image/headerlogo';
+import Logo1 from '../../../assets/Svg Image/Logo1';
 
 const Drawer_item = ({name, onPress}) => {
   return (

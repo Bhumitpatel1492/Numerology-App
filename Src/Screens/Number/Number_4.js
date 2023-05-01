@@ -6,6 +6,7 @@ import {
   ScrollView,
   TouchableOpacity,
   Image,
+  ImageBackground,
 } from 'react-native';
 import fonts from '../../Utils/Fonts';
 import Images from '../../Utils/Images';
@@ -25,7 +26,19 @@ const Number_4 = ({navigation}) => {
         </View>
       </View>
       <View style={Style.middle}>
-        <Image source={Images.No_4} style={Style.Number_Image} />
+        <ImageBackground
+          source={Images.Bg_Red_number}
+          resizeMode="cover"
+          style={styles.image}>
+          <Text
+            style={{
+              fontSize: 150,
+              textAlign: 'center',
+              color: '#FFFFFF',
+            }}>
+            {/* {driver_no} */}4
+          </Text>
+        </ImageBackground>
         <Text style={Style.Number_txt}>
           Good And Creative Brain/ Tend To Imagine Everything.
         </Text>
@@ -63,5 +76,12 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline',
     textAlign: 'right',
     fontFamily: fonts.ATR,
+  },
+  image: {
+    alignSelf: 'center',
+    height: 310,
+    width: 280,
+    marginTop: 10,
+    justifyContent: 'center',
   },
 });

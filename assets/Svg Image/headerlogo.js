@@ -2,7 +2,7 @@ import React from 'react';
 
 import Svg, {G, Path, TSpan, Text} from 'react-native-svg';
 
-function headerlogo() {
+function Headerlogo() {
   return (
     <Svg
       xmlns="http://www.w3.org/2000/svg"
@@ -105,4 +105,4 @@ function headerlogo() {
   );
 }
 
-export default headerlogo;
+export default Headerlogo;

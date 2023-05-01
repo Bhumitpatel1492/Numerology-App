@@ -5,6 +5,7 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
+  ImageBackground,
 } from 'react-native';
 import fonts from '../../Utils/Fonts';
 import Drawer2 from '../../../assets/Svg Image/Drawer2';
@@ -14,6 +15,7 @@ import Rightbtn from '../../../assets/Svg Image/Rightbtn';
 import Drawer_Blue from '../../../assets/Svg Image/Drawer_Blue';
 import Left_bluebtn from '../../../assets/Svg Image/Left_bluebtn';
 import Right_bluebtn from '../../../assets/Svg Image/Right_bluebtn';
+import Images from '../../Utils/Images';
 
 const Prectice = ({navigation}) => {
   return (
@@ -45,8 +47,13 @@ const Prectice = ({navigation}) => {
             alignItems: 'center',
             marginTop: 20,
           }}>
-          <View style={styles.round}>
-            <Text style={styles.txt}>33%</Text>
+          <View>
+            <ImageBackground
+              source={Images.Bg_percentage}
+              resizeMode="cover"
+              style={styles.image}>
+              <Text style={styles.Bg_txt}>33%</Text>
+            </ImageBackground>
           </View>
           <View>
             <Text style={styles.txt2}>Practical Yog</Text>
@@ -66,8 +73,13 @@ const Prectice = ({navigation}) => {
             alignItems: 'center',
             marginVertical: 30,
           }}>
-          <View style={styles.round}>
-            <Text style={styles.txt}>100%</Text>
+          <View>
+            <ImageBackground
+              source={Images.Bg_percentage}
+              resizeMode="cover"
+              style={styles.image}>
+              <Text style={styles.Bg_txt}>100%</Text>
+            </ImageBackground>
           </View>
           <View>
             <Text style={styles.txt2}>Thought Yog</Text>
@@ -169,5 +181,19 @@ const styles = StyleSheet.create({
     // marginVertical: 10,
     alignSelf: 'stretch',
     bottom: 10,
+  },
+
+  image: {
+    alignSelf: 'center',
+    height: 92,
+    width: 100,
+
+    justifyContent: 'center',
+  },
+  Bg_txt: {
+    fontSize: 32,
+    textAlign: 'center',
+    color: '#FFFFFF',
+    fontFamily: fonts.ATR,
   },
 });

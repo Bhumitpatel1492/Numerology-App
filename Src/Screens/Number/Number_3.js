@@ -6,6 +6,7 @@ import {
   ScrollView,
   TouchableOpacity,
   Image,
+  ImageBackground,
 } from 'react-native';
 import fonts from '../../Utils/Fonts';
 import Drawer2 from '../../../assets/Svg Image/Drawer2';
@@ -32,7 +33,19 @@ const Number_3 = ({navigation}) => {
         </View>
       </View>
       <View style={Style.middle}>
-        <Lucky3 />
+        <ImageBackground
+          source={Images.Bg_number}
+          resizeMode="cover"
+          style={styles.image}>
+          <Text
+            style={{
+              fontSize: 150,
+              textAlign: 'center',
+              color: '#FFFFFF',
+            }}>
+            {/* {driver_no} */}3
+          </Text>
+        </ImageBackground>
         <Text style={Style.Number_txt}>
           Good And Creative Brain/ Tend To Imagine Everything.
         </Text>
@@ -70,5 +83,13 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline',
     textAlign: 'right',
     fontFamily: fonts.ATR,
+  },
+
+  image: {
+    alignSelf: 'center',
+    height: 310,
+    width: 280,
+    marginTop: 10,
+    justifyContent: 'center',
   },
 });

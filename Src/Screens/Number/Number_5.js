@@ -6,6 +6,7 @@ import {
   ScrollView,
   TouchableOpacity,
   Image,
+  ImageBackground,
 } from 'react-native';
 import fonts from '../../Utils/Fonts';
 import Drawer_green from '../../../assets/Svg Image/Drawer_green';
@@ -13,6 +14,7 @@ import Style from '../../Utils/Style';
 import Lucky5 from '../../../assets/Svg Image/Lucky5';
 import Left_greenbtn from '../../../assets/Svg Image/Left_greenbtn';
 import Right_greenbtn from '../../../assets/Svg Image/Right_greenbtn';
+import Images from '../../Utils/Images';
 
 const Number_5 = ({navigation}) => {
   return (
@@ -25,7 +27,19 @@ const Number_5 = ({navigation}) => {
         </View>
       </View>
       <View style={Style.middle}>
-        <Lucky5 />
+        <ImageBackground
+          source={Images.Bg_number}
+          resizeMode="cover"
+          style={styles.image}>
+          <Text
+            style={{
+              fontSize: 150,
+              textAlign: 'center',
+              color: '#FFFFFF',
+            }}>
+            {/* {driver_no} */}5
+          </Text>
+        </ImageBackground>
         <Text style={Style.Number_txt}>
           Highly Romantic/ Always Young At Heart/ Intense, Determined/ Lazy and
           Always Motivate and Inspire Others
@@ -64,5 +78,12 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline',
     textAlign: 'right',
     fontFamily: fonts.ATR,
+  },
+  image: {
+    alignSelf: 'center',
+    height: 310,
+    width: 280,
+    marginTop: 10,
+    justifyContent: 'center',
   },
 });
