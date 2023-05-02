@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -8,16 +8,67 @@ import {
   ImageBackground,
 } from 'react-native';
 import fonts from '../../Utils/Fonts';
-import Drawer2 from '../../../assets/Svg Image/Drawer2';
 import {moderateScale} from '../../Utils/scalling';
-import Leftbtn from '../../../assets/Svg Image/Leftbtn';
-import Rightbtn from '../../../assets/Svg Image/Rightbtn';
 import Drawer_Blue from '../../../assets/Svg Image/Drawer_Blue';
 import Left_bluebtn from '../../../assets/Svg Image/Left_bluebtn';
 import Right_bluebtn from '../../../assets/Svg Image/Right_bluebtn';
 import Images from '../../Utils/Images';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const yogs_json = require('../../../Jsonfile/yogs-details.json');
 
 const Prectice = ({navigation}) => {
+  const [FirstName, setFirstName] = useState();
+  const [LastName, setLastName] = useState();
+  const [update, setUpdate] = useState();
+
+  var three = 0;
+  var four = 0;
+
+  console.log('vgvgvgvgv gvvvvvv======>' + three);
+
+  useEffect(() => {
+    getData();
+  });
+
+  const getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('firstname');
+      const value1 = await AsyncStorage.getItem('lastname');
+      const value2 = await AsyncStorage.getItem('allnumbers');
+
+      var abc = value2.replace(/['"]+/g, '');
+
+      var myarr = [];
+      myarr = `${abc}`.split('').map(Number);
+
+      // var arr = [];
+      // var str = String(abc);
+      console.log('strrrrrr===>' + myarr);
+
+      function getOccurrence(arr, value) {
+        var count = 0;
+        arr.forEach(v => v === value && count++);
+        return count;
+      }
+
+      three = getOccurrence(myarr, 3);
+      four = getOccurrence(myarr, 4);
+
+      console.log('three======>' + three);
+      console.log('four======>' + four);
+
+      if (value !== null) {
+        setFirstName(value);
+      }
+      if (value1 !== null) {
+        setLastName(value1);
+      }
+    } catch (e) {
+      console.log('notget', e);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.subcontainer}>
@@ -26,7 +77,10 @@ const Prectice = ({navigation}) => {
         </TouchableOpacity>
         <View>
           <Text style={styles.title}>Numerology Report of</Text>
-          <Text style={styles.name}>TEJASH SHAH</Text>
+          <Text style={styles.name}>
+            {FirstName}
+            {LastName}
+          </Text>
         </View>
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -60,11 +114,21 @@ const Prectice = ({navigation}) => {
             <Text style={styles.txt3}>Line of Logic</Text>
           </View>
         </View>
-        <Text style={styles.line}>
-          You do not like to use facts, figures and logic You have a practical
-          approach and not like to get into depth of the situation by asking
-          questions. Try not to leave tasks unfinished
-        </Text>
+        {yogs_json.map(
+          p =>
+            p['No.'] == 3 &&
+            p.Times == three && (
+              <Text
+                style={{
+                  fontSize: 18,
+                  color: '#454545',
+                  fontFamily: fonts.ATR,
+                  marginHorizontal: 15,
+                }}>
+                {p.Details}
+              </Text>
+            ),
+        )}
 
         <View
           style={{
@@ -86,11 +150,21 @@ const Prectice = ({navigation}) => {
             <Text style={styles.txt3}>Line of Thinking</Text>
           </View>
         </View>
-        <Text style={[styles.line, {bottom: 30}]}>
-          Your farsightedness is average along with the thinking process. You
-          are not good in planning and organization. You are a creative person
-          or a visualizer.
-        </Text>
+        {yogs_json.map(
+          p =>
+            p['No.'] == 4 &&
+            p.Times == four && (
+              <Text
+                style={{
+                  fontSize: 18,
+                  color: '#454545',
+                  fontFamily: fonts.ATR,
+                  marginHorizontal: 18,
+                }}>
+                {p.Details}
+              </Text>
+            ),
+        )}
       </ScrollView>
       <View style={styles.arrow}>
         <TouchableOpacity onPress={() => navigation.navigate('MentalYog')}>

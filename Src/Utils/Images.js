@@ -18,5 +18,6 @@ const Images = {
   Bg_pink: require('../Images/Bg_pink.png'),
   Bg_number: require('../Images/Bg_number_.png'),
   Bg_Red_number: require('../Images/Bg_Red_number_.png'),
+  Bg_big: require('../Images/Bg_big.png'),
 };
 export default Images;

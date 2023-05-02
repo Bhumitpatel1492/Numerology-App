@@ -3,7 +3,6 @@ import {createStackNavigator} from '@react-navigation/stack';
 import ReportDriver from '../../Screens/RootDriver/ReportDriver';
 import ReportDriverDetails from '../../Screens/RootDriverDetails/ReportDriverDetails';
 import Mulyank from '../../Screens/Driver1Screen/Mulyank';
-import ReportDriver1 from '../../Screens/Driver1Screen/ReportDriver1';
 import ConductorStackScreens from '../Conductor_stack/Conductor_stack';
 
 const DriverStack = createStackNavigator();

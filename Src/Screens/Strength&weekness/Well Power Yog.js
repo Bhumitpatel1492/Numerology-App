@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -8,16 +8,62 @@ import {
   ImageBackground,
 } from 'react-native';
 import fonts from '../../Utils/Fonts';
-// import Drawer2 from '../../../assets/Svg Image/Drawer2';
 import {moderateScale} from '../../Utils/scalling';
-// import Leftbtn from '../../../assets/Svg Image/Leftbtn';
-// import Rightbtn from '../../../assets/Svg Image/Rightbtn';
 import Drawer_Blue from '../../../assets/Svg Image/Drawer_Blue';
 import Left_bluebtn from '../../../assets/Svg Image/Left_bluebtn';
 import Right_bluebtn from '../../../assets/Svg Image/Right_bluebtn';
 import Images from '../../Utils/Images';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
+const yogs_json = require('../../../Jsonfile/yogs-details.json');
 const WellPowerYog = ({navigation}) => {
+  const [FirstName, setFirstName] = useState();
+  const [LastName, setLastName] = useState();
+
+  var five = 0;
+  var six = 0;
+
+  useEffect(() => {
+    getData();
+  });
+
+  function getOccurrence(arr, value) {
+    var count = 0;
+    arr.forEach(v => v === value && count++);
+    return count;
+  }
+
+  const getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('firstname');
+      const value1 = await AsyncStorage.getItem('lastname');
+      const value2 = await AsyncStorage.getItem('allnumbers');
+
+      var abc = value2.replace(/['"]+/g, '');
+
+      var myarr = [];
+      myarr = `${abc}`.split('').map(Number);
+
+      var arr = [1, 1, 1, 1];
+      var str = String(abc);
+
+      five = getOccurrence(arr, 5);
+      six = getOccurrence(arr, 6);
+      // var seven = getOccurrence(arr, 7);
+      // var eight = getOccurrence(arr, 8);
+      // var nine = getOccurrence(arr, 9);
+
+      if (value !== null) {
+        setFirstName(value);
+      }
+      if (value1 !== null) {
+        setLastName(value1);
+      }
+    } catch (e) {
+      console.log('notget', e);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.subcontainer}>
@@ -26,7 +72,10 @@ const WellPowerYog = ({navigation}) => {
         </TouchableOpacity>
         <View>
           <Text style={styles.title}>Numerology Report of</Text>
-          <Text style={styles.name}>TEJASH SHAH</Text>
+          <Text style={styles.name}>
+            {FirstName}
+            {LastName}
+          </Text>
         </View>
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -60,13 +109,21 @@ const WellPowerYog = ({navigation}) => {
             <Text style={styles.txt3}>Line of Will</Text>
           </View>
         </View>
-        <Text style={styles.line}>
-          Your will power is very strong, you can adjust with any situation. You
-          can bounce back from difficult situations. Your determination and
-          fighting spirits are very good. work hard for your success which you
-          will get.
-        </Text>
-
+        {yogs_json.map(
+          p =>
+            p['No.'] == 5 &&
+            p.Times == five && (
+              <Text
+                style={{
+                  fontSize: 18,
+                  color: '#454545',
+                  fontFamily: fonts.ATR,
+                  marginHorizontal: 20,
+                }}>
+                {p.Details}
+              </Text>
+            ),
+        )}
         <View
           style={{
             flexDirection: 'row',
@@ -87,10 +144,21 @@ const WellPowerYog = ({navigation}) => {
             <Text style={styles.txt3}>Line of Action</Text>
           </View>
         </View>
-        <Text style={[styles.line, {bottom: 30}]}>
-          You are action oriented and take action easily some time without
-          thinking.
-        </Text>
+        {yogs_json.map(
+          p =>
+            p['No.'] == 6 &&
+            p.Times == six && (
+              <Text
+                style={{
+                  fontSize: 20,
+                  color: '#454545',
+                  fontFamily: fonts.ATR,
+                  marginHorizontal: 18,
+                }}>
+                {p.Details}
+              </Text>
+            ),
+        )}
       </ScrollView>
       <View style={styles.arrow}>
         <TouchableOpacity onPress={() => navigation.navigate('Prectice')}>

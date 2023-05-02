@@ -2,21 +2,18 @@ import React from 'react';
 import {
   View,
   Text,
-  // Image,
+  Image,
   Pressable,
   ScrollView,
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
 import {DrawerContentScrollView} from '@react-navigation/drawer';
-// import Close from '../../assets/Svg Image/Close';
-// import Headerlogo from '../../assets/Svg Image/headerlogo';
-// import Logo1 from '../../assets/Svg Image/Logo1';
-import {moderateScale} from '../Utils/scalling';
 import fonts from '../Utils/Fonts';
-import Close from '../../../assets/Svg Image/Close';
 import Headerlogo from '../../../assets/Svg Image/headerlogo';
+import Close from '../../../assets/Svg Image/Close';
 import Logo1 from '../../../assets/Svg Image/Logo1';
+import {moderateScale} from '../../Utils/scalling';
 
 const Drawer_item = ({name, onPress}) => {
   return (
@@ -65,37 +62,37 @@ const Drawerview = ({navigation}) => {
               }}>
               <View style={styles.line}>
                 <Drawer_item
-                  name={'Driver(Mulyank)'}
+                  name={'ReportDriver'}
                   onPress={() => navigation.navigate('ReportDriver')}
                 />
               </View>
               <View style={styles.line1}>
                 <Drawer_item
-                  name={'Conductor (Bhagyank)'}
+                  name={'ReportDriver1'}
                   onPress={() => navigation.navigate('ReportDriver1')}
                 />
               </View>
               <View style={styles.line1}>
                 <Drawer_item
-                  name={'Compatibility Janmank & Bhagyank'}
+                  name={'Rating'}
                   onPress={() => navigation.navigate('Rating')}
                 />
               </View>
               <View style={styles.line1}>
                 <Drawer_item
-                  name={' Loshu Grid'}
+                  name={'My Loshu_Grid'}
                   onPress={() => navigation.navigate('Loshu_Grid')}
                 />
               </View>
               <View style={styles.line1}>
                 <Drawer_item
-                  name={'Strengths & Weaknesses'}
+                  name={'MentalYog'}
                   onPress={() => navigation.navigate('MentalYog')}
                 />
               </View>
               <View style={styles.line1}>
                 <Drawer_item
-                  name={'Loshu Grid Numbers Represents'}
+                  name={'Loshu_GridNumber'}
                   onPress={() => navigation.navigate('Loshu_GridNumber')}
                 />
               </View>
@@ -107,7 +104,7 @@ const Drawerview = ({navigation}) => {
               </View>
               <View style={styles.line1}>
                 <Drawer_item
-                  name={'Wallpaper on Mobile'}
+                  name={'Wallpaper'}
                   onPress={() => navigation.navigate('Wallpaper')}
                 />
               </View>
@@ -132,13 +129,13 @@ export default Drawerview;
 
 const styles = StyleSheet.create({
   link: {
-    fontSize: moderateScale(15),
+    // fontSize: moderateScale(15),
     color: '#009A9A',
     fontFamily: fonts.ATSBI,
     textAlign: 'center',
   },
   link1: {
-    fontSize: moderateScale(31),
+    // fontSize: moderateScale(31),
     color: '#9D877E',
     fontFamily: fonts.ATSBI,
     textAlign: 'center',

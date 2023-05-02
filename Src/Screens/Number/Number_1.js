@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -13,8 +13,65 @@ import Drawer_green from '../../../assets/Svg Image/Drawer_green';
 import Left_greenbtn from '../../../assets/Svg Image/Left_greenbtn';
 import Right_greenbtn from '../../../assets/Svg Image/Right_greenbtn';
 import Images from '../../Utils/Images';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Number_1 = ({navigation}) => {
+  const [FirstName, setFirstName] = useState();
+  const [LastName, setLastName] = useState();
+  const [allnumbers, setAllNumbers] = useState([]);
+
+  var one = 0;
+  var two = 0;
+
+  console.log('value_one===>' + one);
+
+  useEffect(() => {
+    getData();
+  });
+
+  function getOccurrence(arr, value) {
+    var count = 0;
+    arr.forEach(v => v === value && count++);
+    return count;
+  }
+
+  const getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('firstname');
+      const value1 = await AsyncStorage.getItem('lastname');
+      const value2 = await AsyncStorage.getItem('allnumbers');
+
+      var abc = value2.replace(/['"]+/g, '');
+
+      var myarr = [];
+      myarr = `${abc}`.split('').map(Number);
+
+      const missingNumbers = [];
+
+      for (let i = 1; i <= 9; i++) {
+        if (!myarr.includes(i)) {
+          missingNumbers.push(i);
+        }
+      }
+
+      console.log('missing===========>' + missingNumbers);
+
+      one = getOccurrence(missingNumbers, 1);
+      console.log('one==>' + one);
+      two = getOccurrence(myarr, 2);
+      console.log('two===>' + two);
+
+      if (value !== null) {
+        setFirstName(value);
+      }
+      if (value1 !== null) {
+        setLastName(value1);
+      }
+    } catch (e) {
+      console.log('notget', e);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={Style.subcontainer}>
@@ -23,7 +80,10 @@ const Number_1 = ({navigation}) => {
         </TouchableOpacity>
         <View>
           <Text style={styles.title}>Numerology Report of</Text>
-          <Text style={styles.name}>TEJASH SHAH</Text>
+          <Text style={styles.name}>
+            {FirstName}
+            {LastName}
+          </Text>
         </View>
       </View>
       <View style={Style.middle}>

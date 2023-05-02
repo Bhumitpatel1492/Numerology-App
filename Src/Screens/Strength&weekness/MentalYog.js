@@ -15,45 +15,53 @@ import Right_bluebtn from '../../../assets/Svg Image/Right_bluebtn';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Images from '../../Utils/Images';
 
+const yogs_json = require('../../../Jsonfile/yogs-details.json');
+
 const MentalYog = ({navigation}) => {
   const [FirstName, setFirstName] = useState();
   const [LastName, setLastName] = useState();
-  // const [allnumbers, setAllNumbers] = useState();
-  // console.log('allnumber===>' + allnumbers);
+  const [allnumbers, setAllNumbers] = useState([]);
 
-  // var map = intArray.reduce(function (obj, b) {
-  //   obj[b] = ++obj[b] || 1;
-  //   return obj;
-  // }, {});
+  var one = 0;
+  var two = 0;
 
-  // console.log(map);
+  console.log('hhhh====>' + one);
 
   useEffect(() => {
     getData();
-  }, []);
+  });
 
-  // useEffect(() => {
-  //   if (allnumbers) {
-  //     const intArray = allnumbers.split(',').map(Number);
-  //     setAllNumbers(intArray);
-  //   }
-  // }, [allnumbers]);
+  function getOccurrence(arr, value) {
+    var count = 0;
+    arr.forEach(v => v === value && count++);
+    return count;
+  }
 
   const getData = async () => {
     try {
       const value = await AsyncStorage.getItem('firstname');
       const value1 = await AsyncStorage.getItem('lastname');
-      // const value2 = await AsyncStorage.getItem('allnumbers');
-      // const sum = JSON.parse(value2);
+      const value2 = await AsyncStorage.getItem('allnumbers');
+
+      var abc = value2.replace(/['"]+/g, '');
+
+      var myarr = [];
+      myarr = `${abc}`.split('').map(Number);
+
+      // var arr = [];
+      // var str = String(abc);
+
+      one = getOccurrence(myarr, 1);
+      console.log('one==>' + one);
+      two = getOccurrence(myarr, 2);
+      console.log('two==>' + two);
+
       if (value !== null) {
         setFirstName(value);
       }
       if (value1 !== null) {
         setLastName(value1);
       }
-      // if (sum !== null) {
-      //   setAllNumbers(sum);
-      // }
     } catch (e) {
       console.log('notget', e);
     }
@@ -104,10 +112,22 @@ const MentalYog = ({navigation}) => {
             <Text style={styles.txt3}>Line of Mental Capability</Text>
           </View>
         </View>
-        <Text style={styles.line}>
-          Your Mental Strength is good, Your Memory is good, Think differently
-          than others
-        </Text>
+        {/* {StrengthItem(yogs_json)} */}
+        {yogs_json.map(
+          p =>
+            p['No.'] == 1 &&
+            p.Times == one && (
+              <Text
+                style={{
+                  fontSize: 20,
+                  color: '#454545',
+                  fontFamily: fonts.ATR,
+                  marginHorizontal: 25,
+                }}>
+                {p.Details}
+              </Text>
+            ),
+        )}
 
         <View
           style={{
@@ -129,12 +149,28 @@ const MentalYog = ({navigation}) => {
             <Text style={styles.txt3}>Line of Emotions</Text>
           </View>
         </View>
-        <Text style={[styles.line, {bottom: 30}]}>
+        {/* <Text style={[styles.line, {bottom: 30}]}>
           You are very much emotional. Line of emotion shows that you are a good
           person. You can do your work peacefully without getting distracted.
           Your heart rules over the heads. You have golden heart. you can trust
           easily.
-        </Text>
+        </Text> */}
+
+        {yogs_json.map(
+          p =>
+            p['No.'] == 2 &&
+            p.Times == two && (
+              <Text
+                style={{
+                  fontSize: 20,
+                  color: '#454545',
+                  fontFamily: fonts.ATR,
+                  marginHorizontal: 25,
+                }}>
+                {p.Details}
+              </Text>
+            ),
+        )}
       </ScrollView>
       <View style={styles.arrow}>
         <TouchableOpacity onPress={() => navigation.navigate('Loshu_Grid')}>
