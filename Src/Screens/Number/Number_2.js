@@ -1,58 +1,188 @@
-import React, {Component} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
   StyleSheet,
-  ScrollView,
   TouchableOpacity,
-  Image,
   ImageBackground,
+  ScrollView,
 } from 'react-native';
 import fonts from '../../Utils/Fonts';
-import Images from '../../Utils/Images';
 import Style from '../../Utils/Style';
+import Lucky1 from '../../../assets/Svg Image/Lucky1';
 import Drawer_green from '../../../assets/Svg Image/Drawer_green';
 import Left_greenbtn from '../../../assets/Svg Image/Left_greenbtn';
 import Right_greenbtn from '../../../assets/Svg Image/Right_greenbtn';
-import Lucky2 from '../../../assets/Svg Image/Lucky2';
+import Images from '../../Utils/Images';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {getNumber, getNumber_2} from '../../Utils/Helper';
+import Backbtn from '../../../assets/Svg Image/Left_redbtn';
+import Leftbtn from '../../../assets/Svg Image/Leftbtn';
+import Nextbtn from '../../../assets/Svg Image/Right_redbtn';
+import Drawer from '../../../assets/Svg Image/Drawer_red';
+// import {Drawer} from 'react-native-paper';
+
+const loshu_grid_no = require('../../../Jsonfile/loshu-grid-no-says.json');
+const missing_no = require('../../../Jsonfile/missing-no-says.json');
 
 const Number_2 = ({navigation}) => {
+  const [FirstName, setFirstName] = useState();
+  const [LastName, setLastName] = useState();
+  const [avalible_number, setAvalible_Number] = useState();
+  const [not_avalible, setNot_avalible] = useState();
+
+  var two = avalible_number;
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  function getOccurrence(arr, value) {
+    var count = 0;
+    arr.forEach(v => v === value && count++);
+    return count;
+  }
+
+  const getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('firstname');
+      const value1 = await AsyncStorage.getItem('lastname');
+      const value2 = await AsyncStorage.getItem('allnumbers');
+
+      // data convert in arr
+      var abc = value2.replace(/['"]+/g, '');
+
+      var myarr = [];
+      let count = 0;
+
+      myarr = `${abc}`.split('').map(Number);
+      two = getOccurrence(myarr, 2);
+
+      console.log('how many time two number  repet ===>' + two);
+
+      setAvalible_Number(two);
+
+      for (let i = 0; i < myarr.length; i++) {
+        if (myarr[i] === 2) {
+          count++;
+        }
+      }
+      setNot_avalible(count);
+
+      console.log('not avalible two number===>' + count);
+
+      if (value !== null) {
+        setFirstName(value);
+      }
+      if (value1 !== null) {
+        setLastName(value1);
+      }
+    } catch (e) {
+      console.log('notget', e);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={Style.subcontainer}>
         <TouchableOpacity>
-          <Drawer_green />
+          {not_avalible ? <Drawer_green /> : <Drawer />}
         </TouchableOpacity>
         <View>
-          <Text style={styles.title}>Numerology Report of</Text>
-          <Text style={styles.name}>TEJASH SHAH</Text>
+          {not_avalible ? (
+            <Text style={styles.title}>Numerology Report of</Text>
+          ) : (
+            <Text style={styles.title2}>Numerology Report of</Text>
+          )}
+
+          {not_avalible ? (
+            <Text style={styles.name}>
+              {FirstName}
+              {LastName}
+            </Text>
+          ) : (
+            <Text style={styles.name2}>
+              {FirstName}
+              {LastName}
+            </Text>
+          )}
         </View>
       </View>
       <View style={Style.middle}>
-        <ImageBackground
-          source={Images.Bg_number}
-          resizeMode="cover"
-          style={styles.image}>
-          <Text
-            style={{
-              fontSize: 150,
-              textAlign: 'center',
-              color: '#FFFFFF',
-            }}>
-            {/* {driver_no} */}2
-          </Text>
-        </ImageBackground>
-        <Text style={Style.Number_txt}>
-          Sensitive And Good Intuition But May Not Use It Or Are Unable To Use
-          It
-        </Text>
+        {not_avalible ? (
+          <ImageBackground
+            source={Images.Bg_number}
+            resizeMode="cover"
+            style={styles.image}>
+            <Text
+              style={{
+                fontSize: 100,
+                textAlign: 'center',
+                color: '#FFFFFF',
+                fontFamily: fonts.ATR,
+              }}>
+              2
+            </Text>
+          </ImageBackground>
+        ) : (
+          <ImageBackground
+            source={Images.Bg_Red_number}
+            resizeMode="cover"
+            style={styles.image}>
+            <Text
+              style={{
+                fontSize: 100,
+                textAlign: 'center',
+                color: '#FFFFFF',
+                fontFamily: fonts.ATR,
+              }}>
+              2
+            </Text>
+          </ImageBackground>
+        )}
+
+        {avalible_number
+          ? loshu_grid_no.map((item, i) => (
+              <View style={{marginVertical: 4}}>
+                <View style={{alignItems: 'center', justifyContent: 'center'}}>
+                  {getNumber_2(two) == item.No && (
+                    <Text
+                      style={{
+                        fontSize: 18,
+                        color: '#454545',
+                        fontFamily: fonts.ATSBI,
+                        marginHorizontal: 18,
+                      }}>
+                      {item.WhatitsSays}
+                    </Text>
+                  )}
+                </View>
+              </View>
+            ))
+          : missing_no.map((item, i) => (
+              <View style={{marginVertical: 18}}>
+                <View>
+                  {getNumber_2(not_avalible) == item.MissingNo && (
+                    <Text
+                      style={{
+                        fontSize: 18,
+                        color: '#454545',
+                        fontFamily: fonts.ATSBI,
+                        marginHorizontal: 18,
+                      }}>
+                      {item.WhatitsSays}
+                    </Text>
+                  )}
+                </View>
+              </View>
+            ))}
       </View>
       <View style={Style.arrow}>
         <TouchableOpacity onPress={() => navigation.navigate('Number_1')}>
-          <Left_greenbtn />
+          {not_avalible ? <Left_greenbtn /> : <Backbtn />}
         </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate('Number_3')}>
-          <Right_greenbtn />
+          {not_avalible ? <Right_greenbtn /> : <Nextbtn />}
         </TouchableOpacity>
       </View>
     </View>
@@ -69,13 +199,27 @@ const styles = StyleSheet.create({
 
   title: {
     fontSize: 20,
-    color: '#8175AC',
+    color: '#A5A511',
+    opacity: 1,
+    fontFamily: fonts.ATR,
+  },
+  title2: {
+    fontSize: 20,
+    color: '#B25E5E',
     opacity: 1,
     fontFamily: fonts.ATR,
   },
   name: {
     fontSize: 30,
-    color: '#2C1E5C',
+    color: '#4B4B00',
+    opacity: 1,
+    textDecorationLine: 'underline',
+    textAlign: 'right',
+    fontFamily: fonts.ATR,
+  },
+  name2: {
+    fontSize: 30,
+    color: '#8B1A1A',
     opacity: 1,
     textDecorationLine: 'underline',
     textAlign: 'right',
@@ -83,8 +227,8 @@ const styles = StyleSheet.create({
   },
   image: {
     alignSelf: 'center',
-    height: 310,
-    width: 280,
+    height: 180,
+    width: 170,
     marginTop: 10,
     justifyContent: 'center',
   },

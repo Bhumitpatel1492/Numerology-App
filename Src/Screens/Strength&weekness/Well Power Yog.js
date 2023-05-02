@@ -147,16 +147,17 @@ const WellPowerYog = ({navigation}) => {
             <Text style={styles.txt3}>Line of Action</Text>
           </View>
         </View>
+
         {yogs_json.map(
           p =>
             p['No.'] == 6 &&
             p.Times == six && (
               <Text
                 style={{
-                  fontSize: 20,
+                  fontSize: 18,
                   color: '#454545',
                   fontFamily: fonts.ATR,
-                  marginHorizontal: 18,
+                  marginHorizontal: 20,
                 }}>
                 {p.Details}
               </Text>
