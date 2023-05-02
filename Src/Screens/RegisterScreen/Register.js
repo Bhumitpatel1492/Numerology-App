@@ -220,7 +220,7 @@ const Register = ({navigation}) => {
   // Conductor value
   const Conductorsum = async () => {
     let a = Driver_no + Final1 + Final2;
-    // console.log('aaaaaaaa===============', Driver_no);
+    console.log('aaaaaaaa===============', a);
 
     if (a > 9) {
       let B = a.toString();
@@ -228,11 +228,24 @@ const Register = ({navigation}) => {
       let ans2 = C;
       let X = ans2[0] == undefined ? 0 : ans2[0];
       let Y = ans2[1] == undefined ? 0 : ans2[1];
+
       let final = parseInt(X) + parseInt(Y);
 
       setConductor_no(final);
-    } else {
-      setConductor_no(a);
+      console.log('bbbbbbbbbbbbbbbbbbbbb=====>' + final);
+
+      if (final > 9) {
+        let B = final.toString();
+        let C = B.split('');
+        let ans3 = C;
+        let X = ans3[0] == undefined ? 0 : ans3[0];
+        let Y = ans3[1] == undefined ? 0 : ans3[1];
+
+        let Final2 = parseInt(X) + parseInt(Y);
+
+        setConductor_no(Final2);
+        console.log('cccccccccccccccccccccc=====>' + Final2);
+      }
     }
   };
 
