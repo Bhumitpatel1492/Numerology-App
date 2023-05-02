@@ -20,12 +20,17 @@ const yogs_json = require('../../../Jsonfile/yogs-details.json');
 const MentalYog = ({navigation}) => {
   const [FirstName, setFirstName] = useState();
   const [LastName, setLastName] = useState();
-  const [allnumbers, setAllNumbers] = useState([]);
+  const [onenumber, setOneNumber] = useState([]);
+  const [twonumber, setTwoNumber] = useState([]);
 
-  var one = 0;
-  var two = 0;
+  console.log('onenumner===>' + onenumber);
+  console.log('twonumner===>' + twonumber);
 
-  console.log('hhhh====>' + one);
+  var one = onenumber;
+  var two = twonumber;
+
+  console.log('update one ====>' + one);
+  console.log('update two ===>' + two);
 
   useEffect(() => {
     getData();
@@ -48,13 +53,13 @@ const MentalYog = ({navigation}) => {
       var myarr = [];
       myarr = `${abc}`.split('').map(Number);
 
-      // var arr = [];
-      // var str = String(abc);
-
       one = getOccurrence(myarr, 1);
+      setOneNumber(one);
+
       console.log('one==>' + one);
       two = getOccurrence(myarr, 2);
       console.log('two==>' + two);
+      setTwoNumber(two);
 
       if (value !== null) {
         setFirstName(value);

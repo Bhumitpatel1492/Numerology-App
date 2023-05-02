@@ -20,12 +20,14 @@ const yogs_json = require('../../../Jsonfile/yogs-details.json');
 const Prectice = ({navigation}) => {
   const [FirstName, setFirstName] = useState();
   const [LastName, setLastName] = useState();
-  const [update, setUpdate] = useState();
+  const [onenumber, setOneNumber] = useState([]);
+  const [twonumber, setTwoNumber] = useState([]);
 
-  var three = 0;
-  var four = 0;
+  var three = onenumber;
+  var four = twonumber;
 
-  console.log('vgvgvgvgv gvvvvvv======>' + three);
+  console.log('update three======>' + three);
+  console.log('update four=====>' + four);
 
   useEffect(() => {
     getData();
@@ -53,7 +55,9 @@ const Prectice = ({navigation}) => {
       }
 
       three = getOccurrence(myarr, 3);
+      setOneNumber(three);
       four = getOccurrence(myarr, 4);
+      setTwoNumber(four);
 
       console.log('three======>' + three);
       console.log('four======>' + four);

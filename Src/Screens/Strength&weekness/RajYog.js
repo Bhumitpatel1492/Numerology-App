@@ -22,9 +22,14 @@ const yogs_json = require('../../../Jsonfile/yogs-details.json');
 const RajYog = ({navigation}) => {
   const [FirstName, setFirstName] = useState();
   const [LastName, setLastName] = useState();
+  const [onenumber, setOneNumber] = useState([]);
+  const [twonumber, setTwoNumber] = useState([]);
 
-  var seven = 0;
-  var eight = 0;
+  var seven = onenumber;
+  var eight = twonumber;
+
+  console.log('update seven===>' + seven);
+  console.log('update eight===>' + eight);
 
   useEffect(() => {
     getData();
@@ -50,9 +55,13 @@ const RajYog = ({navigation}) => {
       var arr = [1, 1, 1, 1];
       var str = String(abc);
 
-      seven = getOccurrence(arr, 7);
-      eight = getOccurrence(arr, 8);
-      // var nine = getOccurrence(arr, 9);
+      seven = getOccurrence(myarr, 7);
+      setOneNumber(seven);
+      console.log('count seven==>' + seven);
+
+      eight = getOccurrence(myarr, 8);
+      setTwoNumber(eight);
+      console.log('count eight==>' + eight);
 
       if (value !== null) {
         setFirstName(value);

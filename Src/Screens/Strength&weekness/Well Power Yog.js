@@ -19,9 +19,14 @@ const yogs_json = require('../../../Jsonfile/yogs-details.json');
 const WellPowerYog = ({navigation}) => {
   const [FirstName, setFirstName] = useState();
   const [LastName, setLastName] = useState();
+  const [onenumber, setOneNumber] = useState([]);
+  const [twonumber, setTwoNumber] = useState([]);
 
-  var five = 0;
-  var six = 0;
+  var five = onenumber;
+  var six = twonumber;
+
+  console.log('update five==>' + five);
+  console.log('update six ===>' + six);
 
   useEffect(() => {
     getData();
@@ -44,14 +49,12 @@ const WellPowerYog = ({navigation}) => {
       var myarr = [];
       myarr = `${abc}`.split('').map(Number);
 
-      var arr = [1, 1, 1, 1];
-      var str = String(abc);
-
-      five = getOccurrence(arr, 5);
-      six = getOccurrence(arr, 6);
-      // var seven = getOccurrence(arr, 7);
-      // var eight = getOccurrence(arr, 8);
-      // var nine = getOccurrence(arr, 9);
+      five = getOccurrence(myarr, 5);
+      setOneNumber(five);
+      six = getOccurrence(myarr, 6);
+      setTwoNumber(six);
+      console.log(' countfive===>' + five);
+      console.log('countsix==>' + six);
 
       if (value !== null) {
         setFirstName(value);
