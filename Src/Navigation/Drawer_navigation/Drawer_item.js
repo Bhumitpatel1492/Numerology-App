@@ -46,7 +46,6 @@ const Drawerview = ({navigation}) => {
         <View
           style={{
             flex: 1,
-            //padding: 10,
           }}>
           <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
             <TouchableOpacity onPress={() => navigation.closeDrawer()}>
@@ -62,41 +61,37 @@ const Drawerview = ({navigation}) => {
               }}>
               <View style={styles.line}>
                 <Drawer_item
-                  name={'ReportDriver'}
-                  onPress={() =>
-                    navigation.navigate('ConductorStackScreens', {
-                      screen: 'ReportDriver1',
-                    })
-                  }
+                  name={'Driver (Mulyank)'}
+                  onPress={() => navigation.navigate('ReportDriver')}
                 />
               </View>
               <View style={styles.line1}>
                 <Drawer_item
-                  name={'ReportDriver1'}
+                  name={'Conductor (Bhagyank)'}
                   onPress={() => navigation.navigate('ReportDriver1')}
                 />
               </View>
               <View style={styles.line1}>
                 <Drawer_item
-                  name={'Rating'}
+                  name={'Compatibility Janmank & Bhagyank '}
                   onPress={() => navigation.navigate('Rating')}
                 />
               </View>
               <View style={styles.line1}>
                 <Drawer_item
-                  name={'My Loshu_Grid'}
+                  name={' Loshu Grid'}
                   onPress={() => navigation.navigate('Loshu_Grid')}
                 />
               </View>
               <View style={styles.line1}>
                 <Drawer_item
-                  name={'MentalYog'}
+                  name={'Strengths & Weaknesse'}
                   onPress={() => navigation.navigate('MentalYog')}
                 />
               </View>
               <View style={styles.line1}>
                 <Drawer_item
-                  name={'Loshu_GridNumber'}
+                  name={'Loshu GridNumber Represents'}
                   onPress={() => navigation.navigate('Loshu_GridNumber')}
                 />
               </View>
@@ -108,7 +103,7 @@ const Drawerview = ({navigation}) => {
               </View>
               <View style={styles.line1}>
                 <Drawer_item
-                  name={'Wallpaper'}
+                  name={'Wallpaper on Mobile'}
                   onPress={() => navigation.navigate('Wallpaper')}
                 />
               </View>
