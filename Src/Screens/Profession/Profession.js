@@ -33,12 +33,6 @@ const Profession = ({navigation}) => {
     setFirstName();
     setLastName();
     setV_Total();
-
-    ProfessionData.forEach(item => {
-      if (item.MB == v_total) {
-        setData(item.Profession.split(','));
-      }
-    });
   }, []);
 
   const getData = async () => {
@@ -48,7 +42,11 @@ const Profession = ({navigation}) => {
       const value2 = await AsyncStorage.getItem('v_total');
 
       const sum = JSON.parse(value2);
-
+      ProfessionData.forEach(item => {
+        if (item.MB == 11) {
+          setData(item.Profession.split(','));
+        }
+      });
       if (value !== null) {
         setFirstName(value);
       }
@@ -123,12 +121,12 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
   },
   text1: {
-    fontSize: moderateScale(26),
+    fontSize: moderateScale(20),
     color: '#E6C6E0',
     fontFamily: fonts.ATSBI,
   },
   text2: {
-    fontSize: moderateScale(39),
+    fontSize: moderateScale(38),
     color: '#FFFFFF',
     lineHeight: 42,
     textDecorationLine: 'underline',
@@ -137,12 +135,12 @@ const styles = StyleSheet.create({
   back: {
     backgroundColor: '#500942',
     borderRadius: 30,
-    flex: 0.5,
+    height: moderateScale(80),
     justifyContent: 'center',
     marginTop: 25,
   },
   text3: {
-    fontSize: moderateScale(45),
+    fontSize: moderateScale(35),
     color: '#E6C6E0',
     fontFamily: fonts.ATSBI,
     //margin: 14,
@@ -150,9 +148,10 @@ const styles = StyleSheet.create({
   },
   round: {
     flexDirection: 'row',
-    marginHorizontal: 20,
-    alignItems: 'center',
+    marginHorizontal: 10,
+    // alignItems: 'center',
     marginTop: 20,
+    paddingHorizontal: 10,
   },
   footer: {
     flexDirection: 'row',

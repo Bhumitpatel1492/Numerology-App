@@ -29,8 +29,10 @@ const Drawer_item = ({name, onPress}) => {
           style={{
             fontSize: moderateScale(28),
             color: '#5C5C5C',
-            fontFamily: fonts.ATSBI,
+            fontFamily: fonts.ATR,
             marginLeft: 10,
+            opacity: 0.8,
+            textAlign: 'center',
           }}>
           {name}
         </Text>
@@ -58,6 +60,7 @@ const Drawerview = ({navigation}) => {
               style={{
                 justifyContent: 'center',
                 alignItems: 'flex-start',
+                marginTop: moderateScale(35),
               }}>
               <View style={styles.line}>
                 <Drawer_item
@@ -109,16 +112,15 @@ const Drawerview = ({navigation}) => {
               </View>
             </View>
           </ScrollView>
-          <View
-            style={{
-              // marginHorizontal: 10,
-              alignItems: 'center',
-              marginTop: 20,
-            }}>
-            <Logo1 />
-            <Text style={styles.link}> Visit us</Text>
-            <Text style={styles.link1}> www.occultree.com</Text>
-          </View>
+        </View>
+        <View
+          style={{
+            alignItems: 'center',
+            marginTop: 20,
+          }}>
+          <Logo1 />
+          <Text style={styles.link}> Visit us</Text>
+          <Text style={styles.link1}> www.occultree.com</Text>
         </View>
       </DrawerContentScrollView>
     </>
@@ -142,12 +144,15 @@ const styles = StyleSheet.create({
   line: {
     borderBottomWidth: 1,
     borderTopWidth: 1,
-    width: '100%',
-    opacity: 0.5,
+    width: '95%',
+    // opacity: 0.5,
+    borderColor: '#c7c7c7',
+    alignSelf: 'center',
   },
   line1: {
     borderBottomWidth: 1,
-    width: '100%',
-    opacity: 0.5,
+    width: '95%',
+    borderColor: '#c7c7c7',
+    alignSelf: 'center',
   },
 });

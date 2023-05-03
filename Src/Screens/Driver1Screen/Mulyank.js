@@ -3,9 +3,8 @@ import {
   View,
   Text,
   StyleSheet,
-  Image,
+  ImageBackground,
   SafeAreaView,
-  ScrollView,
   TouchableOpacity,
   FlatList,
   Dimensions,
@@ -18,6 +17,7 @@ import {moderateScale} from '../../Utils/scalling';
 import Backbtn from '../../../assets/Svg Image/Left_redbtn';
 import Nextbtn from '../../../assets/Svg Image/Right_redbtn';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Images from '../../Utils/Images';
 const number_json = require('../../../Jsonfile/number-details.json'); // No,Plantes,
 
 const Mulyank = ({navigation, route}) => {
@@ -58,15 +58,22 @@ const Mulyank = ({navigation, route}) => {
             <Drawer />
           </TouchableOpacity>
           <View>
-            <Text style={styles.title}>Numerology Report of</Text>
-            <Text Text style={styles.name}>
+            <Text style={[Style.usertitle, {color: '#6B6B6B'}]}>
+              Numerology Report of
+            </Text>
+            <Text Text style={[Style.username, {color: '#A02056'}]}>
               {FirstName} {LastName}
             </Text>
           </View>
         </View>
 
         <View style={styles.view1}>
-          <Number5_red />
+          <ImageBackground
+            source={Images.Bg_pink}
+            resizeMode="cover"
+            style={Style.image}>
+            <Text style={Style.Bg_txt}>{driver_no}</Text>
+          </ImageBackground>
           <View style={styles.view2}>
             <Text style={styles.text3}>Driver (Mulyank)</Text>
           </View>
@@ -78,8 +85,7 @@ const Mulyank = ({navigation, route}) => {
           renderItem={({item}) => (
             <View
               style={{
-                marginHorizontal: 12,
-                // backgroundColor: 'red',
+                marginHorizontal: 18,
               }}>
               <View>
                 {driver_no == item.No ? (
@@ -109,8 +115,7 @@ const Mulyank = ({navigation, route}) => {
             </View>
           )}
         />
-
-        <View style={styles.footer}>
+        <View style={Style.B_Icon}>
           <TouchableOpacity
             onPress={() => navigation.navigate('ReportDriverDetails')}>
             <Backbtn />
@@ -120,8 +125,6 @@ const Mulyank = ({navigation, route}) => {
             <Nextbtn />
           </TouchableOpacity>
         </View>
-
-        {/* </ScrollView> */}
       </View>
     </SafeAreaView>
   );
@@ -133,6 +136,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FFF2F7',
+    // marginHorizontal: 10,
   },
   subcontainer: {
     marginTop: 20,
@@ -181,10 +185,10 @@ const styles = StyleSheet.create({
     lineHeight: 48,
   },
   Mobile: {
-    fontSize: moderateScale(22),
+    fontSize: moderateScale(24),
     color: '#454545',
     lineHeight: 30,
-    fontFamily: fonts.ATSBI,
+    fontFamily: fonts.CTR,
   },
   footer: {
     flexDirection: 'row',

@@ -28,17 +28,16 @@ import Leftbtn from '../../../assets/Svg Image/Leftbtn';
 import Rightbtn from '../../../assets/Svg Image/Rightbtn';
 import Onbording1 from '../../../assets/Svg Image/Onbording1';
 import Images from '../../Utils/Images';
+import Style from '../../Utils/Style';
 // import { List } from 'react-native-paper';
 
 var number_json = require('../../../Jsonfile/number-details.json'); // No,Plantes,
 
 const ReportDriver1 = ({navigation, route}) => {
-  // console.log('item', item);
   const [FirstName, setFirstName] = useState();
   const [LastName, setLastName] = useState();
   const [conductor_no, setConductor_no] = useState();
   const [list, setList] = useState(number_json);
-  // console.log('fffffffffffff===========>' + conductor_no);
 
   useEffect(() => {
     getData();
@@ -58,12 +57,9 @@ const ReportDriver1 = ({navigation, route}) => {
         setLastName(value1);
       }
       if (value2 !== null) {
-        // console.log('dno', value2);
         setConductor_no(value2);
       }
-    } catch (e) {
-      // console.log('notget', e);
-    }
+    } catch (e) {}
   };
 
   return (
@@ -75,13 +71,14 @@ const ReportDriver1 = ({navigation, route}) => {
           </TouchableOpacity>
 
           <View>
-            <Text style={styles.title}>Numerology Report of</Text>
+            <Text style={[Style.usertitle, {color: '#BFE5E8'}]}>
+              Numerology Report of
+            </Text>
             <View
               style={{flexDirection: 'row', textDecorationLine: 'underline'}}>
-              <Text style={styles.name}>
+              <Text style={[Style.username, {color: '#FFFFFF'}]}>
                 {FirstName}
                 {LastName}
-                {/* {conductor_no} */}
               </Text>
             </View>
           </View>
@@ -208,16 +205,18 @@ const styles = StyleSheet.create({
   },
   HeaderTextConatiner: {
     color: '#FFFFFF',
-    fontSize: moderateScale(25),
-    fontFamily: fonts.ATSBI,
+    fontSize: moderateScale(40),
+    fontFamily: fonts.ATR,
     alignSelf: 'center',
-    marginVertical: 12,
+    paddingVertical: 10,
+    top: 6,
   },
   DescriptionContainer: {
     color: '#BFE5E8',
-    fontSize: moderateScale(22),
-    fontFamily: fonts.ATR,
-    marginTop: moderateScale(25),
+    fontSize: moderateScale(28),
+    fontFamily: fonts.CTR,
+    lineHeight: 32,
+    paddingVertical: 10,
   },
   image: {
     alignSelf: 'center',

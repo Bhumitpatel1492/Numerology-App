@@ -7,7 +7,7 @@ function Headerlogo() {
     <Svg
       xmlns="http://www.w3.org/2000/svg"
       width="200.803"
-      height="192.832"
+      height="110"
       viewBox="0 0 410.803 192.832">
       <G data-name="Group 144" transform="translate(-3.353 -.464)">
         <Path

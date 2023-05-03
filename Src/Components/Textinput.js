@@ -12,7 +12,12 @@ const CustomTextInput = ({
 }) => {
   return (
     <View style={{marginVertical: 4, marginHorizontal: 20}}>
-      <Text style={{fontFamily: fonts.ATSBI, fontSize: moderateScale(24)}}>
+      <Text
+        style={{
+          fontFamily: fonts.CTR,
+          fontSize: moderateScale(25),
+          color: '#525252',
+        }}>
         {label}
       </Text>
       <TextInput

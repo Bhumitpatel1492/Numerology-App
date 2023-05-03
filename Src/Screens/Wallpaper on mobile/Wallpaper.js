@@ -13,6 +13,7 @@ import Backbtn_Blue from '../../../assets/Svg Image/Backbtn_Blue';
 import Nextbtn_Blue from '../../../assets/Svg Image/Nextbtn_Blue';
 import Blue_Drawer from '../../../assets/Svg Image/Blue_Drawer';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Style from '../../Utils/Style';
 
 var number_json = require('../../../Jsonfile/number-details.json');
 const Wallpaper = ({navigation}) => {
@@ -55,8 +56,10 @@ const Wallpaper = ({navigation}) => {
           </TouchableOpacity>
 
           <View>
-            <Text style={styles.text1}>Numerology Report of</Text>
-            <Text style={styles.text2}>
+            <Text style={[Style.usertitle, {color: '#A7BDE8'}]}>
+              Numerology Report of
+            </Text>
+            <Text style={[Style.username, {color: '#FFFFFF'}]}>
               {FirstName}
               {LastName}
             </Text>
@@ -125,13 +128,13 @@ const styles = StyleSheet.create({
   back: {
     backgroundColor: '#031D4E',
     borderRadius: 30,
-    padding: 16,
+    padding: 12,
     justifyContent: 'center',
     marginTop: 25,
     marginHorizontal: 10,
   },
   text3: {
-    fontSize: moderateScale(45),
+    fontSize: moderateScale(30),
     color: '#A7BDE8',
     fontFamily: fonts.ATSBI,
     //margin: 14,

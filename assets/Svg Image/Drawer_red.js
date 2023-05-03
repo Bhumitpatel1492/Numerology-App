@@ -5,8 +5,8 @@ function Drawer() {
   return (
     <Svg
       xmlns="http://www.w3.org/2000/svg"
-      width="75.736"
-      height="64.622"
+      width="65.736"
+      height="75.622"
       viewBox="0 0 75.736 64.622">
       <G data-name="Group 162" transform="translate(-15 -16.439)">
         <G

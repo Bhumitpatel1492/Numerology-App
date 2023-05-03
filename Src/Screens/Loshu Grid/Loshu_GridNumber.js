@@ -19,6 +19,7 @@ import Right_bluebtn from '../../../assets/Svg Image/Right_bluebtn';
 import Left_greenbtn from '../../../assets/Svg Image/Left_greenbtn';
 import Right_greenbtn from '../../../assets/Svg Image/Right_greenbtn';
 import Drawer_green from '../../../assets/Svg Image/Drawer_green';
+import Style from '../../Utils/Style';
 
 const Loshu_GridNumber = ({navigation}) => {
   const [FirstName, setFirstName] = useState();
@@ -134,8 +135,10 @@ const Loshu_GridNumber = ({navigation}) => {
         </TouchableOpacity>
 
         <View>
-          <Text style={styles.title}>Numerology Report of</Text>
-          <Text style={styles.name}>
+          <Text style={[Style.usertitle, {color: '#F0F0A0'}]}>
+            Numerology Report of
+          </Text>
+          <Text style={[Style.username, {color: '#FFFFFF'}]}>
             {FirstName}
             {LastName}
           </Text>
@@ -178,11 +181,12 @@ const Loshu_GridNumber = ({navigation}) => {
             style={{
               fontSize: moderateScale(40),
               textAlign: 'center',
-              fontFamily: fonts.ATSBI,
+              fontFamily: fonts.CTB,
               color: '#FFFFFF',
               marginTop: 20,
               marginBottom: 20,
               marginHorizontal: 20,
+              fontWeight: '700',
             }}>
             What your Loshu Grid number says
           </Text>

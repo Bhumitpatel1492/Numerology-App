@@ -5,6 +5,8 @@ const fonts = {
   ATE: 'RobotoSlab-ExtraBold',
   ATEB: 'RobotoSlab-ExtraLight',
   ATB: 'RobotoSlab-Bold',
+  CTR: 'calibri-regular',
+  CTB: 'calibri-bold',
 };
 
 export default fonts;

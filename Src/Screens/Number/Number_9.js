@@ -100,18 +100,22 @@ const Number_9 = ({navigation}) => {
         </TouchableOpacity>
         <View>
           {not_avalible ? (
-            <Text style={styles.title}>Numerology Report of</Text>
+            <Text style={[Style.usertitle, {color: '#A5A511'}]}>
+              Numerology Report of
+            </Text>
           ) : (
-            <Text style={styles.title2}>Numerology Report of</Text>
+            <Text style={[Style.usertitle, {color: '#8B1A1A'}]}>
+              Numerology Report of
+            </Text>
           )}
 
           {not_avalible ? (
-            <Text style={styles.name}>
+            <Text style={[Style.username, {color: '#4B4B00'}]}>
               {FirstName}
               {LastName}
             </Text>
           ) : (
-            <Text style={styles.name2}>
+            <Text style={[Style.username, {color: '#8B1A1A'}]}>
               {FirstName}
               {LastName}
             </Text>
@@ -153,35 +157,19 @@ const Number_9 = ({navigation}) => {
 
         {avalible_number
           ? loshu_grid_no.map((item, i) => (
-              <View style={{marginVertical: 2}}>
+              <View style={{marginTop: 1}}>
                 <View style={{alignItems: 'center', justifyContent: 'center'}}>
                   {getNumber_9(two) == item.No && (
-                    <Text
-                      style={{
-                        fontSize: 18,
-                        color: '#454545',
-                        fontFamily: fonts.ATSBI,
-                        marginHorizontal: 18,
-                      }}>
-                      {item.WhatitsSays}
-                    </Text>
+                    <Text style={Style.Number_txt}>{item.WhatitsSays}</Text>
                   )}
                 </View>
               </View>
             ))
           : missing_no.map((item, i) => (
-              <View style={{marginVertical: 2}}>
+              <View style={{marginVertical: 1}}>
                 <View>
                   {getNumber_9(not_avalible) == item.MissingNo && (
-                    <Text
-                      style={{
-                        fontSize: 18,
-                        color: '#454545',
-                        fontFamily: fonts.ATSBI,
-                        marginHorizontal: 18,
-                      }}>
-                      {item.WhatitsSays}
-                    </Text>
+                    <Text style={Style.Number_txt}>{item.WhatitsSays}</Text>
                   )}
                 </View>
               </View>

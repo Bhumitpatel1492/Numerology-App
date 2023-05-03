@@ -22,6 +22,7 @@ import {
   horizontalScale,
 } from '../../Utils/scalling';
 import Images from '../../Utils/Images';
+import Style from '../../Utils/Style';
 // import { List } from 'react-native-paper';
 
 var number_json = require('../../../Jsonfile/number-details.json'); // No,Plantes,
@@ -63,19 +64,16 @@ const ReportDriver = ({navigation, route}) => {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#A02056'}}>
       <View style={styles.container}>
-        {/* <ScrollView> */}
-        <View style={styles.subcontainer}>
+        <View style={Style.subcontainer}>
           <TouchableOpacity onPress={() => navigation.openDrawer()}>
             <Drawer />
           </TouchableOpacity>
-
           <View>
-            <Text style={styles.title}>Numerology Report of</Text>
+            <Text style={Style.usertitle}>Numerology Report of</Text>
             <View
               style={{flexDirection: 'row', textDecorationLine: 'underline'}}>
-              <Text style={styles.name}>
-                {FirstName}
-                {LastName}
+              <Text style={Style.username}>
+                {FirstName} {LastName}
               </Text>
             </View>
           </View>
@@ -106,7 +104,10 @@ const ReportDriver = ({navigation, route}) => {
               {driver_no == item.No ? (
                 <Text style={styles.HeaderTextConatiner}>{item.Plantes}</Text>
               ) : null}
-              <View style={{paddingHorizontal: moderateScale(35)}}>
+              <View
+                style={{
+                  paddingHorizontal: moderateScale(20),
+                }}>
                 {driver_no == item.No ? (
                   <Text style={styles.DescriptionContainer}>
                     {item.WallpaperSuggestion}
@@ -117,8 +118,7 @@ const ReportDriver = ({navigation, route}) => {
           )}
         />
 
-        {/* </ScrollView> */}
-        <View style={styles.arrow}>
+        <View style={Style.B_Icon}>
           <TouchableOpacity onPress={() => navigation.navigate('Register')}>
             <Backbtn />
           </TouchableOpacity>
@@ -138,12 +138,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#A02056',
+    // marginHorizontal: 10,
   },
   subcontainer: {
-    marginHorizontal: 15,
     marginVertical: 15,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    marginHorizontal: 12,
   },
   image: {
     alignSelf: 'center',
@@ -153,13 +154,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     justifyContent: 'center',
   },
-  arrow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginHorizontal: 10,
-    alignSelf: 'stretch',
-    bottom: 8,
-  },
+
   txt: {
     fontSize: 16,
     color: '#E7C7D4',
@@ -167,16 +162,16 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 20,
-    color: '#FFAFAF',
+    color: '#FFFFFF',
     opacity: 1,
     fontFamily: fonts.ATR,
   },
   name: {
-    fontSize: moderateScale(38),
+    fontSize: 28,
     color: '#FFFFFF',
     opacity: 1,
     textDecorationLine: 'underline',
-    fontFamily: fonts.ATSBI,
+    fontFamily: fonts.ATR,
   },
   name1: {
     fontSize: moderateScale(42),
@@ -210,15 +205,17 @@ const styles = StyleSheet.create({
   },
   HeaderTextConatiner: {
     color: '#FFFFFF',
-    fontSize: moderateScale(25),
+    fontSize: moderateScale(35),
     fontFamily: fonts.ATSBI,
     alignSelf: 'center',
-    marginVertical: 10,
+    marginTop: 10,
+    opacity: 0.8,
   },
   DescriptionContainer: {
     color: '#E7C7D4',
     fontSize: moderateScale(22),
     fontFamily: fonts.ATR,
     marginTop: moderateScale(25),
+    lineHeight: moderateScale(36),
   },
 });

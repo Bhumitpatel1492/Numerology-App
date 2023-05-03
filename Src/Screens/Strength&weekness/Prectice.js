@@ -14,6 +14,7 @@ import Left_bluebtn from '../../../assets/Svg Image/Left_bluebtn';
 import Right_bluebtn from '../../../assets/Svg Image/Right_bluebtn';
 import Images from '../../Utils/Images';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Style from '../../Utils/Style';
 
 const yogs_json = require('../../../Jsonfile/yogs-details.json');
 
@@ -80,8 +81,10 @@ const Prectice = ({navigation}) => {
           <Drawer_Blue />
         </TouchableOpacity>
         <View>
-          <Text style={styles.title}>Numerology Report of</Text>
-          <Text style={styles.name}>
+          <Text style={[Style.usertitle, {color: '#8175AC'}]}>
+            Numerology Report of
+          </Text>
+          <Text style={[Style.username, {color: '#2C1E5C'}]}>
             {FirstName}
             {LastName}
           </Text>
@@ -121,17 +124,7 @@ const Prectice = ({navigation}) => {
         {yogs_json.map(
           p =>
             p['No.'] == 3 &&
-            p.Times == three && (
-              <Text
-                style={{
-                  fontSize: 18,
-                  color: '#454545',
-                  fontFamily: fonts.ATR,
-                  marginHorizontal: 15,
-                }}>
-                {p.Details}
-              </Text>
-            ),
+            p.Times == three && <Text style={Style.yog_line}>{p.Details}</Text>,
         )}
 
         <View
@@ -157,17 +150,7 @@ const Prectice = ({navigation}) => {
         {yogs_json.map(
           p =>
             p['No.'] == 4 &&
-            p.Times == four && (
-              <Text
-                style={{
-                  fontSize: 18,
-                  color: '#454545',
-                  fontFamily: fonts.ATR,
-                  marginHorizontal: 18,
-                }}>
-                {p.Details}
-              </Text>
-            ),
+            p.Times == four && <Text style={Style.yog_line}>{p.Details}</Text>,
         )}
       </ScrollView>
       <View style={styles.arrow}>

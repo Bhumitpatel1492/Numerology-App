@@ -16,6 +16,7 @@ import Drawer_Blue from '../../../assets/Svg Image/Drawer_Blue';
 import {ScrollView} from 'react-native-gesture-handler';
 import Left_bluebtn from '../../../assets/Svg Image/Left_bluebtn';
 import Right_bluebtn from '../../../assets/Svg Image/Right_bluebtn';
+import Style from '../../Utils/Style';
 
 const Loshu_Grid = ({navigation}) => {
   const [FirstName, setFirstName] = useState();
@@ -38,6 +39,7 @@ const Loshu_Grid = ({navigation}) => {
   const getData = async () => {
     try {
       const array = await AsyncStorage.getItem('allnumbers');
+      console.log('allnumber', array);
       const gridArray = JSON.parse(array).split('');
       var arr = [];
       var isPresent = false;
@@ -131,8 +133,10 @@ const Loshu_Grid = ({navigation}) => {
         </TouchableOpacity>
 
         <View>
-          <Text style={styles.title}>Numerology Report of</Text>
-          <Text style={styles.name}>
+          <Text style={[Style.usertitle, {color: '#AAA0CE'}]}>
+            Numerology Report of
+          </Text>
+          <Text style={Style.username}>
             {FirstName}
             {LastName}
           </Text>
@@ -168,7 +172,11 @@ const Loshu_Grid = ({navigation}) => {
             />
           </ImageBackground>
           <View style={{marginHorizontal: 20, marginTop: 50}}>
-            <Text style={[styles.txt2, {textAlign: 'center', lineHeight: 30}]}>
+            <Text
+              style={[
+                styles.txt2,
+                {textAlign: 'center', lineHeight: 30, fontFamily: fonts.CTR},
+              ]}>
               Lo Shu Grid Numerology originated in China by an intelligent king.
               This Chinese numerology is based on the magic square of 3x3 in
               which the location of the digits does not change and its sum
@@ -181,7 +189,7 @@ const Loshu_Grid = ({navigation}) => {
         </View>
       </ScrollView>
       <View style={styles.arrow}>
-        <TouchableOpacity onPress={() => navigation.navigate('ReportDriver1')}>
+        <TouchableOpacity onPress={() => navigation.navigate('Bhagyank')}>
           <Left_bluebtn />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate('MentalYog')}>

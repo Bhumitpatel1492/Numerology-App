@@ -20,8 +20,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import SelectDropdown from 'react-native-select-dropdown';
 
 import moment from 'moment';
+import fonts from '../../Utils/Fonts';
+import {AlertView} from '../../Components/AlertView';
 
 const Register = ({navigation}) => {
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMessage, showAlertMessage] = useState('');
   const [FirstName, setFirstName] = useState();
   const [LastName, setLastName] = useState('');
   const [Email, setEmail] = useState();
@@ -47,20 +51,8 @@ const Register = ({navigation}) => {
   const [valueoftotal, setvalueoftotal] = useState(); // driver + Conductor value
   // console.log('combinevalue', valueoftotal);
   const [allNumber, setAllNumber] = useState();
+  const date = [{title: '01'}, {title: '02'}, {title: '03'}];
   // console.log('allnumber', allNumber);
-
-  const checkinarr = () => {
-    var arr = [2, 3, 1, 3, 4, 5, 3, 1];
-
-    function getOccurrence(array, value) {
-      var count = 0;
-      array.forEach(v => v === value && count++);
-      return count;
-    }
-
-    console.log(getOccurrence(arr, 1)); // 2
-    console.log(getOccurrence(arr, 3)); // 3
-  };
 
   useEffect(() => {
     setFirstName('ABC');
@@ -84,7 +76,7 @@ const Register = ({navigation}) => {
     for (let index = 1; index <= datesLength; index++) {
       const element = index < 10 ? `0${index}` : index;
       dates.push({
-        label: element.toString(),
+        title: element,
         value: element,
       });
     }
@@ -220,7 +212,6 @@ const Register = ({navigation}) => {
   // Conductor value
   const Conductorsum = async () => {
     let a = Driver_no + Final1 + Final2;
-    console.log('aaaaaaaa===============', a);
 
     if (a > 9) {
       let B = a.toString();
@@ -259,43 +250,17 @@ const Register = ({navigation}) => {
     // console.log('SSSSSSSSSSSSS=======>' + intValue1);
   };
 
-  // const handlecombinevalue = () => {
-  //   // const value1 = Driver_no;
-  //   // const value2 = conductor_no;
-  //   setvalueoftotal('' + Driver_no + +conductor_no);
-  //   console.log('gagsgs' + Driver_no + +conductor_no);
-  //   // console.log('ydyxtrxtrxtrxtrx',);
-  // };
-
-  // full b_date + driver + monthsum + yearsum + conductorsum
-
   const handleallnumber = () => {
     const item = selectedDate;
     const item1 = selectedMonth;
     const item2 = selectedYear;
     const item3 = Driver_no;
-    const item4 = Final1;
-    const item5 = Final2;
-    const item6 = conductor_no;
+    const item4 = conductor_no;
     const allnumber =
-      item +
-      '' +
-      item1 +
-      '' +
-      '' +
-      item2 +
-      '' +
-      item3 +
-      '' +
-      '' +
-      item4 +
-      '' +
-      item5 +
-      '' +
-      item6;
+      item + '' + item1 + '' + '' + item2 + '' + item3 + '' + '' + item4;
 
     const num = allnumber.toString();
-    // console.log('=====>' + num);
+    console.log('=====>' + num);
 
     setAllNumber(num);
   };
@@ -305,8 +270,8 @@ const Register = ({navigation}) => {
 
   const checkTextInput = () => {
     if (FirstName === '') {
-      Alert.alert('Please Enter FirstName');
-      return;
+      showAlertMessage('Please Enter FirstName');
+      setShowAlert(true);
     } else if (LastName === '') {
       Alert.alert('Please Enter LastName');
     } else if (Email === '') {
@@ -355,24 +320,18 @@ const Register = ({navigation}) => {
     }
   };
 
-  // console.log('ASY_allnumber', allNumber);
-  // console.log('ASY_fname', FirstName);
-  // console.log('ASY_lname', LastName);
-  // console.log('ASY_date', selectedDate);
-  // console.log('ASY_month', selectedMonth);
-  // console.log('ASY_year', selectedYear);
-  // console.log('ASY_driver', Driver_no);
-  // console.log('ASY_monthsum', Final1);
-  // console.log('ASY_yearsum', Final2);
-  // console.log('ASY_conductor_no', conductor_no);
-  // console.log('ASY_combinevalue', valueoftotal);
   console.log('ASY_allvalues', allNumber);
-  // console.log('final1', Final1);
-  // console.log('fina2', Final2);
 
   return (
     <SafeAreaView style={Style.maincontainer}>
       <ScrollView showsVerticalScrollIndicator={false}>
+        <AlertView
+          showAlert={showAlert}
+          message={alertMessage}
+          onConfirmPressed={() => {
+            setShowAlert(false);
+          }}
+          onDismiss={() => setShowAlert(false)}></AlertView>
         <ImageBackground
           style={{flex: 1, overflow: 'hidden'}}
           source={require('../../Images/Background.png')}
@@ -421,12 +380,12 @@ const Register = ({navigation}) => {
                 marginHorizontal: 24,
                 marginVertical: moderateScale(10),
               }}>
-              <Text style={Style.txt}>Gender : </Text>
+              <Text style={[Style.txt]}>Gender : </Text>
               <View
                 style={{
                   flexDirection: 'row',
-                  // alignItems: 'center',
-                  top: 2,
+
+                  top: 6,
                 }}>
                 <Checkbox
                   selected={selectedValue === 'male'}
@@ -439,7 +398,7 @@ const Register = ({navigation}) => {
                 style={{
                   flexDirection: 'row',
                   // alignItems: 'center',
-                  top: 4,
+                  top: 6,
                   marginLeft: 5,
                 }}>
                 <Checkbox
@@ -449,7 +408,39 @@ const Register = ({navigation}) => {
                 <Text style={Style.txt}>Female</Text>
               </View>
             </View>
-
+            <View
+              style={{
+                flexDirection: 'row',
+                marginHorizontal: 18,
+                justifyContent: 'space-between',
+              }}>
+              <Text
+                style={{
+                  fontSize: moderateScale(25),
+                  fontFamily: fonts.CTR,
+                  color: '#525252',
+                }}>
+                Date
+              </Text>
+              <Text
+                style={{
+                  fontSize: moderateScale(25),
+                  fontFamily: fonts.CTR,
+                  right: 18,
+                  color: '#525252',
+                }}>
+                Month
+              </Text>
+              <Text
+                style={{
+                  fontSize: moderateScale(25),
+                  fontFamily: fonts.CTR,
+                  right: 60,
+                  color: '#525252',
+                }}>
+                Year
+              </Text>
+            </View>
             <View
               style={{
                 flexDirection: 'row',
@@ -458,6 +449,8 @@ const Register = ({navigation}) => {
               }}>
               <SelectDropdown
                 data={datepicker}
+                defaultValueByIndex={0}
+                // defaultValue={'01'}
                 buttonStyle={{
                   backgroundColor: 'white',
                   padding: 8,
@@ -479,13 +472,13 @@ const Register = ({navigation}) => {
                 onSelect={(selectedItem, index) => {
                   console.log(selectedItem, index);
                   setSelectedDate(selectedItem.value);
-                  return selectedItem.label;
+                  return selectedItem.value;
                 }}
                 buttonTextAfterSelection={(selectedItem, index) => {
-                  return selectedItem.label;
+                  return selectedItem.value;
                 }}
                 rowTextForSelection={(item, index) => {
-                  return item.label;
+                  return item.value;
                 }}
                 renderDropdownIcon={isOpened => {
                   return (
@@ -502,6 +495,8 @@ const Register = ({navigation}) => {
                 dropdownIconPosition={'right'}
               />
               <SelectDropdown
+                defaultValueByIndex={0}
+                defaultValue={'01'}
                 data={monthpicker}
                 buttonStyle={{
                   backgroundColor: 'white',
@@ -613,6 +608,20 @@ const Register = ({navigation}) => {
                 Submit
               </Text>
             </TouchableOpacity>
+            <View
+              style={{
+                alignSelf: 'flex-end',
+                bottom: 30,
+              }}>
+              <Image
+                source={require('../../Images/Jinni.png')}
+                style={{
+                  height: moderateScale(255),
+                  width: moderateScale(100),
+                  marginHorizontal: 20,
+                }}
+              />
+            </View>
           </View>
         </ImageBackground>
       </ScrollView>

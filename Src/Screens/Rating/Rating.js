@@ -31,7 +31,6 @@ const Rating = ({navigation, route}) => {
   const [driver_no, setDriver_No] = useState();
   const [conductor_no, setConductor_No] = useState();
   console.log('v_total=======>' + v_total);
-  var combine_number;
 
   useEffect(() => {
     if (isFocused) {
@@ -54,8 +53,6 @@ const Rating = ({navigation, route}) => {
       const value4 = await AsyncStorage.getItem('conductor_no');
       console.log('ccccccc====>' + value4);
       const sum = JSON.parse(value2);
-      // combine_number = 62;
-      // console.log('combine_number', combine_number);
 
       if (value !== null) {
         setFirstName(value);
@@ -72,8 +69,7 @@ const Rating = ({navigation, route}) => {
       if (value4 !== null) {
         setConductor_No(value4);
       }
-      // console.log('set_v_value===>' + value2);
-      // console.log('parint===>' + parseInt(value2));
+
       console.log('SUm====>', value3);
     } catch (e) {
       console.log('notget', e);
@@ -81,7 +77,6 @@ const Rating = ({navigation, route}) => {
   };
 
   return (
-    // <SafeAreaView style={Style.maincontainer}>
     <View style={styles.container}>
       <View style={styles.subcontainer}>
         <TouchableOpacity onPress={() => navigation.openDrawer()}>
@@ -89,8 +84,10 @@ const Rating = ({navigation, route}) => {
         </TouchableOpacity>
 
         <View>
-          <Text style={styles.title}>Numerology Report of</Text>
-          <Text style={styles.name}>
+          <Text style={[Style.usertitle, {color: '#6B6B6B'}]}>
+            Numerology Report of
+          </Text>
+          <Text style={[Style.username, {color: '#0096A5'}]}>
             {FirstName}
             {LastName}
           </Text>
@@ -101,29 +98,28 @@ const Rating = ({navigation, route}) => {
           <ImageBackground
             source={Images.Bg_green}
             resizeMode="cover"
-            style={styles.image}>
-            <Text style={styles.Bg_txt}>{driver_no}</Text>
+            style={Style.image}>
+            <Text style={Style.Bg_txt}>{driver_no}</Text>
           </ImageBackground>
-          <View>
+          <View style={{}}>
             <Text style={styles.txt1}>Compatibility</Text>
             <Text style={styles.txt2}>Janmank & Bhagyank</Text>
           </View>
           <ImageBackground
             source={Images.Bg_green}
             resizeMode="cover"
-            style={styles.image}>
-            <Text style={styles.Bg_txt}>{conductor_no}</Text>
+            style={Style.image}>
+            <Text style={Style.Bg_txt}>{conductor_no}</Text>
           </ImageBackground>
         </View>
 
         <View
           style={{
             backgroundColor: '#FFFFFF',
-            // justifyContent: 'center',
             alignItems: 'center',
             marginHorizontal: 18,
             borderRadius: 40,
-            marginVertical: 10,
+            marginVertical: 14,
           }}>
           <View>
             {number_json.map(
@@ -134,6 +130,7 @@ const Rating = ({navigation, route}) => {
                       fontSize: 25,
                       color: '#454545',
                       fontFamily: fonts.ATR,
+                      top: 3,
                     }}>
                     {p.Ranking} Star
                   </Text>
@@ -144,7 +141,7 @@ const Rating = ({navigation, route}) => {
             {number_json.map(
               p =>
                 p.MB == v_total && (
-                  <Text style={{fontSize: 32, color: '#0096A5'}}>
+                  <Text style={{fontSize: 32, color: '#0096A5', bottom: 5}}>
                     {p.Stars}
                   </Text>
                 ),
@@ -160,8 +157,10 @@ const Rating = ({navigation, route}) => {
                   style={{
                     fontSize: 18,
                     color: '#454545',
-                    marginHorizontal: 18,
-                    lineHeight: 26,
+                    marginHorizontal: 20,
+                    lineHeight: 32,
+                    fontFamily: fonts.CTR,
+                    textAlign: 'center',
                   }}>
                   {p.Remarks}
                 </Text>
@@ -170,7 +169,7 @@ const Rating = ({navigation, route}) => {
         </View>
       </ScrollView>
 
-      <View style={styles.arrow}>
+      <View style={Style.button}>
         <TouchableOpacity onPress={() => navigation.navigate('ReportDriver1')}>
           <Leftbtn />
         </TouchableOpacity>
@@ -212,9 +211,9 @@ const styles = StyleSheet.create({
   },
   imageview: {
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
     alignItems: 'center',
-    // backgroundColor: 'green',
+    marginHorizontal: 6,
   },
   imgstyle: {
     resizeMode: 'contain',
@@ -222,12 +221,12 @@ const styles = StyleSheet.create({
     width: moderateScale(140),
   },
   txt1: {
-    fontSize: moderateScale(35),
+    fontSize: moderateScale(32),
     fontFamily: fonts.ATSBI,
     color: '#0096A5',
   },
   txt2: {
-    fontSize: moderateScale(22),
+    fontSize: moderateScale(20),
     fontFamily: fonts.ATSBI,
     color: '#454545',
   },
@@ -250,19 +249,5 @@ const styles = StyleSheet.create({
     // alignSelf: 'stretch',
 
     bottom: 20,
-  },
-  image: {
-    alignSelf: 'center',
-
-    height: 92,
-    width: 84,
-
-    justifyContent: 'center',
-  },
-  Bg_txt: {
-    fontSize: 32,
-    textAlign: 'center',
-    color: '#FFFFFF',
-    fontFamily: fonts.ATSBI,
   },
 });

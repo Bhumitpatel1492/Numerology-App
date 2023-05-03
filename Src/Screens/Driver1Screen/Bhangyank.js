@@ -17,6 +17,7 @@ import {moderateScale} from '../../Utils/scalling';
 import fonts from '../../Utils/Fonts';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Images from '../../Utils/Images';
+import Style from '../../Utils/Style';
 
 const number_json = require('../../../Jsonfile/number-details.json');
 
@@ -62,13 +63,14 @@ const Bhagyank = ({navigation, route}) => {
             <Drawer2 />
           </TouchableOpacity>
           <View>
-            <Text style={styles.title}>Numerology Report of</Text>
+            <Text style={[Style.usertitle, {color: '#6B6B6B'}]}>
+              Numerology Report of
+            </Text>
             <View
               style={{flexDirection: 'row', textDecorationLine: 'underline'}}>
-              <Text style={styles.name}>
+              <Text style={[Style.username, {color: '#0096A5'}]}>
                 {FirstName}
                 {LastName}
-                {/* {conductor_no} */}
               </Text>
             </View>
           </View>
@@ -106,7 +108,7 @@ const Bhagyank = ({navigation, route}) => {
           />
         </View>
       </View>
-      <View style={styles.footer}>
+      <View style={Style.B_Icon}>
         <TouchableOpacity onPress={() => navigation.navigate('Rating')}>
           <Leftbtn />
         </TouchableOpacity>
@@ -169,10 +171,10 @@ const styles = StyleSheet.create({
     lineHeight: 45,
   },
   Mobile: {
-    fontSize: moderateScale(22),
+    fontSize: moderateScale(26),
     color: '#454545',
     lineHeight: 30,
-    fontFamily: fonts.ATSBI,
+    fontFamily: fonts.CTR,
   },
   footer: {
     flexDirection: 'row',

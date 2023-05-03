@@ -8,6 +8,7 @@ import {
   ScrollView,
   Dimensions,
   FlatList,
+  ImageBackground,
 } from 'react-native';
 import Onbording2 from '../../../assets/Svg Image/Onbording2';
 import Style from '../../Utils/Style';
@@ -17,6 +18,7 @@ import fonts from '../../Utils/Fonts';
 import {moderateScale} from '../../Utils/scalling';
 import Drawer from '../../../assets/Svg Image/Drawer_red';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Images from '../../Utils/Images';
 
 const number_json = require('../../../Jsonfile/number-details.json'); // No,Plantes,
 const ReportDriverDetails = ({navigation, route}) => {
@@ -57,31 +59,36 @@ const ReportDriverDetails = ({navigation, route}) => {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#FFF2F7'}}>
       <View style={styles.container}>
-        <View style={styles.subcontainer}>
+        <View style={Style.subcontainer}>
           <TouchableOpacity onPress={() => navigation.openDrawer()}>
             <Drawer />
           </TouchableOpacity>
           <View>
-            <Text style={styles.title}>Numerology Report of</Text>
+            <Text style={[Style.usertitle, {color: '#6B6B6B'}]}>
+              Numerology Report of
+            </Text>
             <View
               style={{flexDirection: 'row', textDecorationLine: 'underline'}}>
-              <Text style={styles.name}>
+              <Text style={[Style.username, {color: '#A02056'}]}>
                 {FirstName} {LastName}
-                {/* {driver_no} */}
               </Text>
             </View>
           </View>
         </View>
 
-        <View style={styles.background}>
-          <Text
-            style={{
-              fontSize: moderateScale(40),
-              color: '#A02056',
-              fontFamily: fonts.ATSBI,
-            }}>
-            Driver (Mulyank)
-          </Text>
+        <View style={{marginHorizontal: 10}}>
+          <ImageBackground
+            source={require('../../Images/BG_white.png')}
+            style={{height: moderateScale(80), width: moderateScale(250)}}>
+            <Text
+              style={{
+                fontSize: moderateScale(40),
+                color: '#A02056',
+                fontFamily: fonts.ATSBI,
+              }}>
+              Driver (Mulyank)
+            </Text>
+          </ImageBackground>
         </View>
         <View
           style={{
@@ -89,8 +96,12 @@ const ReportDriverDetails = ({navigation, route}) => {
             alignItems: 'center',
             justifyContent: 'center',
           }}>
-          <Onbording2 />
-
+          <ImageBackground
+            source={Images.Bg_pink}
+            resizeMode="cover"
+            style={Style.image}>
+            <Text style={Style.Bg_txt}>{driver_no}</Text>
+          </ImageBackground>
           <FlatList
             style={{
               marginStart: moderateScale(18),
@@ -183,15 +194,14 @@ const ReportDriverDetails = ({navigation, route}) => {
             </View>
           )}
         />
-
-        <View style={styles.arrow}>
-          <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Backbtn />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate('Mulyank')}>
-            <Nextbtn />
-          </TouchableOpacity>
-        </View>
+      </View>
+      <View style={Style.B_Icon}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Backbtn />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Mulyank')}>
+          <Nextbtn />
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );

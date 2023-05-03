@@ -14,19 +14,20 @@ import Left_bluebtn from '../../../assets/Svg Image/Left_bluebtn';
 import Right_bluebtn from '../../../assets/Svg Image/Right_bluebtn';
 import Images from '../../Utils/Images';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Style from '../../Utils/Style';
 
 const yogs_json = require('../../../Jsonfile/yogs-details.json');
 const WellPowerYog = ({navigation}) => {
   const [FirstName, setFirstName] = useState();
   const [LastName, setLastName] = useState();
-  const [onenumber, setOneNumber] = useState([]);
-  const [twonumber, setTwoNumber] = useState([]);
+  const [onenumber, setOneNumber] = useState();
+  const [twonumber, setTwoNumber] = useState();
 
   var five = onenumber;
   var six = twonumber;
 
   console.log('update five==>' + five);
-  console.log('update six ===>' + six);
+  console.log('update six ===>' + twonumber);
 
   useEffect(() => {
     getData();
@@ -53,6 +54,7 @@ const WellPowerYog = ({navigation}) => {
       setOneNumber(five);
       six = getOccurrence(myarr, 6);
       setTwoNumber(six);
+
       console.log(' countfive===>' + five);
       console.log('countsix==>' + six);
 
@@ -74,10 +76,14 @@ const WellPowerYog = ({navigation}) => {
           <Drawer_Blue />
         </TouchableOpacity>
         <View>
-          <Text style={styles.title}>Numerology Report of</Text>
-          <Text style={styles.name}>
+          <Text style={[Style.usertitle, {color: '#8175AC'}]}>
+            Numerology Report of
+          </Text>
+          <Text style={[Style.username, {color: '#2C1E5C'}]}>
             {FirstName}
             {LastName}
+            {onenumber}
+            {twonumber}
           </Text>
         </View>
       </View>
@@ -115,17 +121,7 @@ const WellPowerYog = ({navigation}) => {
         {yogs_json.map(
           p =>
             p['No.'] == 5 &&
-            p.Times == five && (
-              <Text
-                style={{
-                  fontSize: 18,
-                  color: '#454545',
-                  fontFamily: fonts.ATR,
-                  marginHorizontal: 20,
-                }}>
-                {p.Details}
-              </Text>
-            ),
+            p.Times == five && <Text style={Style.yog_line}>{p.Details}</Text>,
         )}
         <View
           style={{
@@ -147,23 +143,13 @@ const WellPowerYog = ({navigation}) => {
             <Text style={styles.txt3}>Line of Action</Text>
           </View>
         </View>
-
         {yogs_json.map(
           p =>
             p['No.'] == 6 &&
-            p.Times == six && (
-              <Text
-                style={{
-                  fontSize: 18,
-                  color: '#454545',
-                  fontFamily: fonts.ATR,
-                  marginHorizontal: 20,
-                }}>
-                {p.Details}
-              </Text>
-            ),
+            p.Times == six && <Text style={Style.yog_line}>{p.Details}</Text>,
         )}
       </ScrollView>
+
       <View style={styles.arrow}>
         <TouchableOpacity onPress={() => navigation.navigate('Prectice')}>
           <Left_bluebtn />

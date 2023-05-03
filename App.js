@@ -6,6 +6,7 @@ import SplashNavigator from './Src/Navigation/Auth_stack/SplashNavigator';
 import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
 import Drawer_stack from './Src/Navigation/Drawer_navigation/Drawer_stack';
+import Root from './Src/Navigation/Auth_stack/Root';
 LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
 LogBox.ignoreAllLogs(); //Ignore all log notifications
 
@@ -32,6 +33,13 @@ const App = () => {
               }}
             />
 
+            <Stack.Screen
+              name="Root"
+              component={Root}
+              options={{
+                headerShown: false,
+              }}
+            />
             <Stack.Screen
               name="Drawer_stack"
               component={Drawer_stack}

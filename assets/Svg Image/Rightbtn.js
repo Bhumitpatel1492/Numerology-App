@@ -5,8 +5,8 @@ function Rightbtn() {
   return (
     <Svg
       xmlns="http://www.w3.org/2000/svg"
-      width="88.934"
-      height="72.292"
+      width="75"
+      height="65"
       viewBox="0 0 88.934 72.292">
       <G data-name="Group 169" transform="translate(-395 -922.02)">
         <G
