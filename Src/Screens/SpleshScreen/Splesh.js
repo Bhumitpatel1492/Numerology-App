@@ -6,12 +6,30 @@ import Logo from '../../../assets/Svg Image/Logo';
 import Logo1 from '../../../assets/Svg Image/Logo1';
 import fonts from '../../Utils/Fonts';
 import {moderateScale} from '../../Utils/scalling';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const Splesh = ({navigation}) => {
+const Splash = ({navigation}) => {
+  const readData = async () => {
+    try {
+      const isLogin = await AsyncStorage.getItem('isLoggedIn');
+      if (isLogin) {
+        console.log('Root');
+        navigation.replace('Drawer_stack');
+      } else {
+        console.log('AuthStack');
+        navigation.replace('AuthStack');
+      }
+    } catch (e) {
+      alert(e);
+    }
+  };
   useEffect(() => {
-    setTimeout(() => {
-      navigation.navigate('Register');
-    }, 3000);
+    setTimeout(
+      function () {
+        readData();
+      }.bind(this),
+      3000,
+    );
   }, []);
 
   return (
@@ -45,7 +63,7 @@ const Splesh = ({navigation}) => {
               textAlign: 'center',
             }}>
             {' '}
-            www.occultree.com
+            https://www.occultree.com
           </Text>
         </View>
       </View>
@@ -53,4 +71,4 @@ const Splesh = ({navigation}) => {
   );
 };
 
-export default Splesh;
+export default Splash;

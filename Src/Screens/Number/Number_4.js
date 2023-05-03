@@ -90,7 +90,7 @@ const Number_4 = ({navigation}) => {
   return (
     <View style={styles.container}>
       <View style={Style.subcontainer}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.openDrawer()}>
           {not_avalible ? <Drawer_green /> : <Drawer />}
         </TouchableOpacity>
         <View>

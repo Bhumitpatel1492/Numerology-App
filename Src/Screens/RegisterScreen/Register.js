@@ -331,7 +331,7 @@ const Register = ({navigation}) => {
       Alert.alert('success');
 
       storeData();
-      navigation.navigate('ReportDriver');
+      navigation.replace('Root');
     }
   };
 
@@ -349,6 +349,7 @@ const Register = ({navigation}) => {
       AsyncStorage.setItem('allnumbers', JSON.stringify(allNumber));
       AsyncStorage.setItem('final_month', JSON.stringify(Final1));
       AsyncStorage.setItem('final_year', JSON.stringify(Final2));
+      AsyncStorage.setItem('isLoggedIn', 'true');
     } catch (e) {
       console.log('error ===========>', e);
     }

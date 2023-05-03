@@ -21,7 +21,9 @@ import Right_greenbtn from '../../../assets/Svg Image/Right_greenbtn';
 import Drawer_green from '../../../assets/Svg Image/Drawer_green';
 
 const Loshu_GridNumber = ({navigation}) => {
-  // const [data, setData] = useState([]);
+  const [FirstName, setFirstName] = useState();
+  const [LastName, setLastName] = useState();
+
   const [data1, setData1] = useState('');
   const [data2, setData2] = useState('');
   const [data3, setData3] = useState('');
@@ -33,6 +35,7 @@ const Loshu_GridNumber = ({navigation}) => {
   const [data9, setData9] = useState('');
   useEffect(() => {
     getData();
+    getItem();
   }, []);
 
   const getData = async () => {
@@ -92,6 +95,23 @@ const Loshu_GridNumber = ({navigation}) => {
     }
   };
 
+  const getItem = async () => {
+    try {
+      const value = await AsyncStorage.getItem('firstname');
+      const value1 = await AsyncStorage.getItem('lastname');
+
+      // console.log('value==>' + value2);
+      if (value !== null) {
+        setFirstName(value);
+      }
+      if (value1 !== null) {
+        setLastName(value1);
+      }
+    } catch (e) {
+      console.log('notget', e);
+    }
+  };
+
   const data = [
     {id: 'a', value: data4},
     {id: 'b', value: data9},
@@ -115,14 +135,17 @@ const Loshu_GridNumber = ({navigation}) => {
 
         <View>
           <Text style={styles.title}>Numerology Report of</Text>
-          <Text style={styles.name}>TEJASH SHAH</Text>
+          <Text style={styles.name}>
+            {FirstName}
+            {LastName}
+          </Text>
         </View>
       </View>
       <ScrollView>
         <View style={styles.background}>
           <Text
             style={{
-              fontSize: moderateScale(34),
+              fontSize: moderateScale(30),
               color: '#F0F0A0',
               fontFamily: fonts.ATSBI,
             }}>
@@ -131,9 +154,14 @@ const Loshu_GridNumber = ({navigation}) => {
         </View>
         <View>
           <ImageBackground
-            style={{height: 300, width: 350, marginVertical: 20}}
+            resizeMode="contain"
+            style={{
+              marginTop: 20,
+              padding: 35,
+            }}
             source={Images.Gridle}>
             <FlatList
+              style={{alignSelf: 'center'}}
               data={data}
               renderItem={({item, index}) => (
                 <View style={styles.itemContainer}>
@@ -148,12 +176,13 @@ const Loshu_GridNumber = ({navigation}) => {
         <View>
           <Text
             style={{
-              fontSize: 35,
+              fontSize: moderateScale(40),
               textAlign: 'center',
               fontFamily: fonts.ATSBI,
               color: '#FFFFFF',
               marginTop: 20,
               marginBottom: 20,
+              marginHorizontal: 20,
             }}>
             What your Loshu Grid number says
           </Text>
@@ -176,22 +205,23 @@ export default Loshu_GridNumber;
 const styles = StyleSheet.create({
   container: {flex: 1, backgroundColor: '#656500'},
   itemContainer: {
-    width: 85,
-    height: 75,
+    width: moderateScale(115),
+    height: moderateScale(105),
     opacity: 1,
-
-    left: 50,
-    // top: 10,
+    //left: 50,
+    //top: 10,
+    //alignSelf:'center'
   },
   item: {
     flex: 1,
     borderColor: '#FFFFFF',
-    borderWidth: 1.2,
+    borderWidth: 1,
     color: '#FFFFFF',
     fontSize: moderateScale(35),
     fontFamily: fonts.ATR,
     textAlignVertical: 'center',
     textAlign: 'center',
+    //justifyContent:'center'
   },
   subcontainer: {
     marginHorizontal: 15,
@@ -221,7 +251,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     alignItems: 'center',
     justifyContent: 'center',
-    marginVertical: 15,
+    marginTop: 20,
   },
 
   txt2: {

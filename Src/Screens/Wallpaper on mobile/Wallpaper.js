@@ -50,7 +50,10 @@ const Wallpaper = ({navigation}) => {
     <SafeAreaView style={{flex: 1, backgroundColor: '#224079'}}>
       <View style={styles.container}>
         <View style={styles.subcontainer}>
-          <Blue_Drawer />
+          <TouchableOpacity onPress={() => navigation.openDrawer()}>
+            <Blue_Drawer />
+          </TouchableOpacity>
+
           <View>
             <Text style={styles.text1}>Numerology Report of</Text>
             <Text style={styles.text2}>

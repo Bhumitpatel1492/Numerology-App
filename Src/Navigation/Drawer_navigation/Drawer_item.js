@@ -9,11 +9,11 @@ import {
   StyleSheet,
 } from 'react-native';
 import {DrawerContentScrollView} from '@react-navigation/drawer';
-import fonts from '../Utils/Fonts';
-import Headerlogo from '../../../assets/Svg Image/headerlogo';
-import Close from '../../../assets/Svg Image/Close';
-import Logo1 from '../../../assets/Svg Image/Logo1';
 import {moderateScale} from '../../Utils/scalling';
+import fonts from '../../Utils/Fonts';
+import Close from '../../../assets/Svg Image/Close';
+import Headerlogo from '../../../assets/Svg Image/headerlogo';
+import Logo1 from '../../../assets/Svg Image/Logo1';
 
 const Drawer_item = ({name, onPress}) => {
   return (
@@ -63,7 +63,11 @@ const Drawerview = ({navigation}) => {
               <View style={styles.line}>
                 <Drawer_item
                   name={'ReportDriver'}
-                  onPress={() => navigation.navigate('ReportDriver')}
+                  onPress={() =>
+                    navigation.navigate('ConductorStackScreens', {
+                      screen: 'ReportDriver1',
+                    })
+                  }
                 />
               </View>
               <View style={styles.line1}>

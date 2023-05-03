@@ -17,8 +17,10 @@ import {ScrollView} from 'react-native-gesture-handler';
 import Left_bluebtn from '../../../assets/Svg Image/Left_bluebtn';
 import Right_bluebtn from '../../../assets/Svg Image/Right_bluebtn';
 
-const GridView = ({navigation}) => {
-  // const [data, setData] = useState([]);
+const Loshu_Grid = ({navigation}) => {
+  const [FirstName, setFirstName] = useState();
+  const [LastName, setLastName] = useState();
+
   const [data1, setData1] = useState('');
   const [data2, setData2] = useState('');
   const [data3, setData3] = useState('');
@@ -30,6 +32,7 @@ const GridView = ({navigation}) => {
   const [data9, setData9] = useState('');
   useEffect(() => {
     getData();
+    getItem();
   }, []);
 
   const getData = async () => {
@@ -89,6 +92,23 @@ const GridView = ({navigation}) => {
     }
   };
 
+  const getItem = async () => {
+    try {
+      const value = await AsyncStorage.getItem('firstname');
+      const value1 = await AsyncStorage.getItem('lastname');
+
+      // console.log('value==>' + value2);
+      if (value !== null) {
+        setFirstName(value);
+      }
+      if (value1 !== null) {
+        setLastName(value1);
+      }
+    } catch (e) {
+      console.log('notget', e);
+    }
+  };
+
   const data = [
     {id: 'a', value: data4},
     {id: 'b', value: data9},
@@ -112,7 +132,10 @@ const GridView = ({navigation}) => {
 
         <View>
           <Text style={styles.title}>Numerology Report of</Text>
-          <Text style={styles.name}>TEJASH SHAH</Text>
+          <Text style={styles.name}>
+            {FirstName}
+            {LastName}
+          </Text>
         </View>
       </View>
       <ScrollView>
@@ -129,9 +152,11 @@ const GridView = ({navigation}) => {
         </View>
         <View>
           <ImageBackground
-            style={{height: 300, width: 350, top: 40}}
+            resizeMode="contain"
+            style={{marginTop: 20, padding: 35}}
             source={Images.Bg_big}>
             <FlatList
+              style={{alignSelf: 'center'}}
               data={data}
               renderItem={({item, index}) => (
                 <View style={styles.itemContainer}>
@@ -167,24 +192,21 @@ const GridView = ({navigation}) => {
   );
 };
 
-export default GridView;
+export default Loshu_Grid;
 
 const styles = StyleSheet.create({
   container: {flex: 1, backgroundColor: '#2C1E5C'},
   itemContainer: {
-    width: 85,
-    height: 75,
+    width: moderateScale(115),
+    height: moderateScale(105),
     opacity: 1,
-
-    left: 50,
-    // top: 10,
   },
   item: {
     flex: 1,
     borderColor: '#FFFFFF',
-    borderWidth: 1.2,
+    borderWidth: 1,
     color: '#FFFFFF',
-    fontSize: moderateScale(35),
+    fontSize: moderateScale(32),
     fontFamily: fonts.ATR,
     textAlignVertical: 'center',
     textAlign: 'center',
@@ -202,7 +224,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.ATR,
   },
   name: {
-    fontSize: moderateScale(30),
+    fontSize: moderateScale(38),
     color: '#FFFFFF',
     opacity: 1,
     textDecorationLine: 'underline',

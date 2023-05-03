@@ -81,6 +81,23 @@ const Style = StyleSheet.create({
     fontFamily: fonts.ATR,
     marginHorizontal: 20,
   },
+  yog_title: {
+    fontSize: moderateScale(30),
+    color: '#2C1E5C',
+    fontFamily: fonts.ATR,
+  },
+  yog_subtitle: {
+    fontSize: moderateScale(22),
+    color: '#454545',
+    fontFamily: fonts.ATSBI,
+    opacity: 0.7,
+  },
+  yog_line: {
+    fontSize: moderateScale(22),
+    color: '#454545',
+    fontFamily: fonts.ATR,
+    marginHorizontal: 25,
+  },
 });
 
 export default Style;

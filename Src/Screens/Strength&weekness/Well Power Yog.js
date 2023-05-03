@@ -70,7 +70,7 @@ const WellPowerYog = ({navigation}) => {
   return (
     <View style={styles.container}>
       <View style={styles.subcontainer}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.openDrawer()}>
           <Drawer_Blue />
         </TouchableOpacity>
         <View>

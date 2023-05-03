@@ -14,6 +14,7 @@ import Left_bluebtn from '../../../assets/Svg Image/Left_bluebtn';
 import Right_bluebtn from '../../../assets/Svg Image/Right_bluebtn';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Images from '../../Utils/Images';
+import Style from '../../Utils/Style';
 
 const yogs_json = require('../../../Jsonfile/yogs-details.json');
 
@@ -113,25 +114,15 @@ const MentalYog = ({navigation}) => {
             </ImageBackground>
           </View>
           <View>
-            <Text style={styles.txt2}>Mental Yog</Text>
-            <Text style={styles.txt3}>Line of Mental Capability</Text>
+            <Text style={Style.yog_title}>Mental Yog</Text>
+            <Text style={Style.yog_subtitle}>Line of Mental Capability</Text>
           </View>
         </View>
         {/* {StrengthItem(yogs_json)} */}
         {yogs_json.map(
           p =>
             p['No.'] == 1 &&
-            p.Times == one && (
-              <Text
-                style={{
-                  fontSize: 20,
-                  color: '#454545',
-                  fontFamily: fonts.ATR,
-                  marginHorizontal: 25,
-                }}>
-                {p.Details}
-              </Text>
-            ),
+            p.Times == one && <Text style={Style.yog_line}>{p.Details}</Text>,
         )}
 
         <View
@@ -150,31 +141,15 @@ const MentalYog = ({navigation}) => {
             </ImageBackground>
           </View>
           <View>
-            <Text style={styles.txt2}>Emotional Yog</Text>
-            <Text style={styles.txt3}>Line of Emotions</Text>
+            <Text style={Style.yog_title}>Emotional Yog</Text>
+            <Text style={Style.yog_subtitle}>Line of Emotions</Text>
           </View>
         </View>
-        {/* <Text style={[styles.line, {bottom: 30}]}>
-          You are very much emotional. Line of emotion shows that you are a good
-          person. You can do your work peacefully without getting distracted.
-          Your heart rules over the heads. You have golden heart. you can trust
-          easily.
-        </Text> */}
 
         {yogs_json.map(
           p =>
             p['No.'] == 2 &&
-            p.Times == two && (
-              <Text
-                style={{
-                  fontSize: 20,
-                  color: '#454545',
-                  fontFamily: fonts.ATR,
-                  marginHorizontal: 25,
-                }}>
-                {p.Details}
-              </Text>
-            ),
+            p.Times == two && <Text style={Style.yog_line}>{p.Details}</Text>,
         )}
       </ScrollView>
       <View style={styles.arrow}>

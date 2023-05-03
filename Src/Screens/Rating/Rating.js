@@ -84,7 +84,10 @@ const Rating = ({navigation, route}) => {
     // <SafeAreaView style={Style.maincontainer}>
     <View style={styles.container}>
       <View style={styles.subcontainer}>
-        <Drawer2 />
+        <TouchableOpacity onPress={() => navigation.openDrawer()}>
+          <Drawer2 />
+        </TouchableOpacity>
+
         <View>
           <Text style={styles.title}>Numerology Report of</Text>
           <Text style={styles.name}>

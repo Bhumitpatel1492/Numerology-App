@@ -15,15 +15,12 @@ import Drawer2_Purple from '../../../assets/Svg Image/Drawer2_Purple';
 import Backbtn_Purple from '../../../assets/Svg Image/Backbtn_Purple';
 import Nextbtn_Purple from '../../../assets/Svg Image/Nextbtn_Purple';
 import Round from '../../../assets/Svg Image/Round';
-import {useIsFocused} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const ProfessionData = require('../../../Jsonfile/mulyank-bhaagyank-combination.json');
 
 const Profession = ({navigation}) => {
   const [data, setData] = useState([]);
-
-  const isFocused = useIsFocused();
 
   const [FirstName, setFirstName] = useState();
   const [LastName, setLastName] = useState();
@@ -32,19 +29,17 @@ const Profession = ({navigation}) => {
   console.log('v_total=======>' + v_total);
 
   useEffect(() => {
-    if (isFocused) {
-      getData();
-      setFirstName();
-      setLastName();
-      setV_Total();
-    }
+    getData();
+    setFirstName();
+    setLastName();
+    setV_Total();
 
     ProfessionData.forEach(item => {
       if (item.MB == v_total) {
         setData(item.Profession.split(','));
       }
     });
-  }, [isFocused]);
+  }, []);
 
   const getData = async () => {
     try {
@@ -81,7 +76,10 @@ const Profession = ({navigation}) => {
     <SafeAreaView style={{flex: 1, backgroundColor: '#69325E'}}>
       <View style={styles.container}>
         <View style={styles.subcontainer}>
-          <Drawer2_Purple />
+          <TouchableOpacity onPress={() => navigation.openDrawer()}>
+            <Drawer2_Purple />
+          </TouchableOpacity>
+
           <View>
             <Text style={styles.text1}>Numerology Report of</Text>
             <Text style={styles.text2}>
