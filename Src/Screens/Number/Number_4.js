@@ -25,6 +25,7 @@ import Backbtn from '../../../assets/Svg Image/Left_redbtn';
 import Leftbtn from '../../../assets/Svg Image/Leftbtn';
 import Nextbtn from '../../../assets/Svg Image/Right_redbtn';
 import Drawer from '../../../assets/Svg Image/Drawer_red';
+import {moderateScale} from '../../Utils/scalling';
 // import {Drawer} from 'react-native-paper';
 
 const loshu_grid_no = require('../../../Jsonfile/loshu-grid-no-says.json');
@@ -72,6 +73,7 @@ const Number_4 = ({navigation}) => {
           count++;
         }
       }
+
       setNot_avalible(count);
 
       console.log('not avalible three number===>' + count);
@@ -91,10 +93,10 @@ const Number_4 = ({navigation}) => {
     <View style={styles.container}>
       <View style={Style.subcontainer}>
         <TouchableOpacity onPress={() => navigation.openDrawer()}>
-          {not_avalible ? <Drawer_green /> : <Drawer />}
+          {not_avalible != 0 ? <Drawer_green /> : <Drawer />}
         </TouchableOpacity>
         <View>
-          {not_avalible ? (
+          {not_avalible != 0 ? (
             <Text style={[Style.usertitle, {color: '#A5A511'}]}>
               Numerology Report of
             </Text>
@@ -104,7 +106,7 @@ const Number_4 = ({navigation}) => {
             </Text>
           )}
 
-          {not_avalible ? (
+          {not_avalible != 0 ? (
             <Text style={[Style.username, {color: '#4B4B00'}]}>
               {FirstName}
               {LastName}
@@ -117,8 +119,9 @@ const Number_4 = ({navigation}) => {
           )}
         </View>
       </View>
+
       <View style={Style.middle}>
-        {not_avalible ? (
+        {not_avalible != 0 ? (
           <ImageBackground
             source={Images.Bg_number}
             resizeMode="cover"
@@ -149,7 +152,7 @@ const Number_4 = ({navigation}) => {
             </Text>
           </ImageBackground>
         )}
-
+        {not_avalible == 0 && <Text style={Style.check_number}>Missing</Text>}
         {avalible_number
           ? loshu_grid_no.map((item, i) => (
               <View style={Style.avalible_number}>
@@ -172,10 +175,10 @@ const Number_4 = ({navigation}) => {
       </View>
       <View style={Style.B_Icon}>
         <TouchableOpacity onPress={() => navigation.navigate('Number_3')}>
-          {not_avalible ? <Left_greenbtn /> : <Backbtn />}
+          {not_avalible != 0 ? <Left_greenbtn /> : <Backbtn />}
         </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate('Number_5')}>
-          {not_avalible ? <Right_greenbtn /> : <Nextbtn />}
+          {not_avalible != 0 ? <Right_greenbtn /> : <Nextbtn />}
         </TouchableOpacity>
       </View>
     </View>

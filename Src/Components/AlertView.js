@@ -1,9 +1,9 @@
-import React from "react";
-import AwesomeAlert from "react-native-awesome-alerts";
-import fonts from "../Utils/Fonts";
+import React from 'react';
+import AwesomeAlert from 'react-native-awesome-alerts';
+import fonts from '../Utils/Fonts';
 
 export function AlertView(props) {
-  const { showAlert, onDismiss, title = "", message, onConfirmPressed } = props;
+  const {showAlert, onDismiss, title = '', message, onConfirmPressed} = props;
 
   return (
     <AwesomeAlert
@@ -15,42 +15,40 @@ export function AlertView(props) {
       closeOnHardwareBackPress={true}
       showCancelButton={false}
       showConfirmButton={true}
-      confirmText={"OK"}
-      confirmButtonColor={"Blue"}
+      confirmText={'OK'}
+      confirmButtonColor={'#0096A5'}
       onConfirmPressed={onConfirmPressed}
       onDismiss={onDismiss}
       confirmButtonStyle={{
-        width: 160,
+        width: 140,
         height: 40,
-        justifyContent: "center",
+        justifyContent: 'center',
         borderRadius: 5,
       }}
       confirmButtonTextStyle={{
-        color: "red",
-        textAlign: "center",
-        fontWeight: "400",
+        color: '#FFFFFF',
+        textAlign: 'center',
+        // fontWeight: '400',
         fontSize: 14,
         fontFamily: fonts.ATEB,
       }}
       titleStyle={{
-        color: "Red",
-        fontWeight: "700",
-        textAlign: "center",
+        color: 'Red',
+        fontWeight: '700',
+        textAlign: 'center',
         fontSize: 19,
         fontFamily: fonts.ATEB,
-
       }}
       messageStyle={{
-        color: "black",
-        textAlign: "center",
-        fontWeight: "400",
-        fontSize: 13,
+        color: 'black',
+        textAlign: 'center',
+        // fontWeight: '400',
+        fontSize: 14,
         fontFamily: fonts.ATEB,
-
       }}
       contentContainerStyle={{
-        width: "75%",
-        justifyContent: "center",
+        width: '75%',
+        justifyContent: 'center',
       }}
     />
   );

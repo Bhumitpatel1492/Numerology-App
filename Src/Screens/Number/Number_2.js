@@ -20,6 +20,7 @@ import Backbtn from '../../../assets/Svg Image/Left_redbtn';
 import Leftbtn from '../../../assets/Svg Image/Leftbtn';
 import Nextbtn from '../../../assets/Svg Image/Right_redbtn';
 import Drawer from '../../../assets/Svg Image/Drawer_red';
+import {moderateScale} from '../../Utils/scalling';
 // import {Drawer} from 'react-native-paper';
 
 const loshu_grid_no = require('../../../Jsonfile/loshu-grid-no-says.json');
@@ -144,7 +145,7 @@ const Number_2 = ({navigation}) => {
             </Text>
           </ImageBackground>
         )}
-
+        {not_avalible == 0 && <Text style={Style.check_number}>Missing</Text>}
         {avalible_number
           ? loshu_grid_no.map((item, i) => (
               <View style={Style.avalible_number}>

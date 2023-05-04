@@ -142,7 +142,7 @@ const Number_1 = ({navigation}) => {
             </Text>
           </ImageBackground>
         )}
-
+        {not_avalible == 0 && <Text style={Style.check_number}>Missing</Text>}
         {avalible_number
           ? loshu_grid_no.map((item, i) => (
               <View style={Style.avalible_number}>

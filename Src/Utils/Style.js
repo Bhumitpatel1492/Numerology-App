@@ -148,6 +148,12 @@ const Style = StyleSheet.create({
   avalible_number: {
     top: 18,
   },
+  check_number: {
+    fontSize: moderateScale(60),
+    color: '#8B1A1A',
+    fontFamily: fonts.ATSBI,
+    textAlign: 'center',
+  },
 });
 
 export default Style;
