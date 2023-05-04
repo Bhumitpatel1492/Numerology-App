@@ -114,31 +114,22 @@ const Rating = ({navigation, route}) => {
           </ImageBackground>
         </View>
 
-        <View
-          style={{
-            // backgroundColor: '#FFFFFF',
-            alignItems: 'center',
-            // marginHorizontal: 18,
-            // borderRadius: 40,
-            marginVertical: 14,
-          }}>
+        <View style={{alignSelf: 'center', marginTop: 15}}>
           <ImageBackground
             source={require('../../Images/Rating.png')}
-            style={{
-              height: 100,
-              marginHorizontal: 15,
-              // width: useWindowDimensions(10),
-            }}>
+            style={{height: moderateScale(114), width: moderateScale(508)}}>
             <View>
               {number_json.map(
                 p =>
                   p.MB == v_total && (
                     <Text
                       style={{
-                        fontSize: 25,
+                        fontSize: moderateScale(35),
                         color: '#454545',
                         fontFamily: fonts.ATR,
                         top: 3,
+                        justifyContent: 'center',
+                        textAlign: 'center',
                       }}>
                       {p.Ranking} Star
                     </Text>
@@ -149,7 +140,13 @@ const Rating = ({navigation, route}) => {
               {number_json.map(
                 p =>
                   p.MB == v_total && (
-                    <Text style={{fontSize: 32, color: '#0096A5', bottom: 5}}>
+                    <Text
+                      style={{
+                        fontSize: 32,
+                        color: '#0096A5',
+                        bottom: 5,
+                        textAlign: 'center',
+                      }}>
                       {p.Stars}
                     </Text>
                   ),
@@ -164,12 +161,13 @@ const Rating = ({navigation, route}) => {
               p.MB == v_total && (
                 <Text
                   style={{
-                    fontSize: 18,
+                    fontSize: moderateScale(24),
                     color: '#454545',
                     marginHorizontal: 20,
-                    lineHeight: 34,
+                    lineHeight: 32,
                     fontFamily: fonts.CTR,
                     textAlign: 'center',
+                    marginVertical: 12,
                   }}>
                   {p.Remarks}
                 </Text>
@@ -230,7 +228,7 @@ const styles = StyleSheet.create({
     width: moderateScale(140),
   },
   txt1: {
-    fontSize: moderateScale(32),
+    fontSize: moderateScale(35),
     fontFamily: fonts.ATSBI,
     color: '#0096A5',
   },

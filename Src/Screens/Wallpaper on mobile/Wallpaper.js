@@ -6,6 +6,7 @@ import {
   SafeAreaView,
   ScrollView,
   TouchableOpacity,
+  ImageBackground,
 } from 'react-native';
 import {moderateScale} from '../../Utils/scalling';
 import fonts from '../../Utils/Fonts';
@@ -66,8 +67,20 @@ const Wallpaper = ({navigation}) => {
           </View>
         </View>
 
-        <View style={styles.back}>
-          <Text style={styles.text3}>Wallpaper on Mobile</Text>
+        {/* <View style={styles.back}>
+        
+        </View> */}
+
+        <View style={{alignSelf: 'center', marginTop: 5}}>
+          <ImageBackground
+            source={require('../../Images/BG_BLUE.png')}
+            style={{
+              height: moderateScale(73),
+              width: moderateScale(530),
+              justifyContent: 'center',
+            }}>
+            <Text style={styles.text3}>Wallpaper on Mobile</Text>
+          </ImageBackground>
         </View>
         <View>
           {number_json.map(
@@ -75,9 +88,9 @@ const Wallpaper = ({navigation}) => {
               p.No == conductor_no && (
                 <Text
                   style={{
-                    fontSize: 20,
+                    fontSize: moderateScale(25),
                     color: '#FFFFFF',
-                    fontFamily: fonts.ATR,
+                    fontFamily: fonts.ATSBI,
                     marginVertical: 20,
                     lineHeight: 40,
                     marginHorizontal: 20,

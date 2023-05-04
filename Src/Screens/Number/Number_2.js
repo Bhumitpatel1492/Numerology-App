@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import fonts from '../../Utils/Fonts';
 import Style from '../../Utils/Style';
-import Lucky1 from '../../../assets/Svg Image/Lucky1';
+// import Lucky1 from '../../../assets/Svg Image/Lucky1';
 import Drawer_green from '../../../assets/Svg Image/Drawer_green';
 import Left_greenbtn from '../../../assets/Svg Image/Left_greenbtn';
 import Right_greenbtn from '../../../assets/Svg Image/Right_greenbtn';

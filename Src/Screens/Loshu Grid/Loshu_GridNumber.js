@@ -145,15 +145,21 @@ const Loshu_GridNumber = ({navigation}) => {
         </View>
       </View>
       <ScrollView>
-        <View style={styles.background}>
-          <Text
-            style={{
-              fontSize: moderateScale(30),
-              color: '#F0F0A0',
-              fontFamily: fonts.ATSBI,
-            }}>
-            Loshu Grid
-          </Text>
+        <View style={{alignSelf: 'center', marginTop: 5}}>
+          <ImageBackground
+            source={require('../../Images/BG_DarkGreen.png')}
+            style={{height: moderateScale(73), width: moderateScale(530)}}>
+            <Text
+              style={{
+                fontSize: moderateScale(35),
+                color: '#F0F0A0',
+                fontFamily: fonts.ATSBI,
+                textAlign: 'center',
+                marginVertical: 10,
+              }}>
+              Loshu Grid
+            </Text>
+          </ImageBackground>
         </View>
         <View>
           <ImageBackground

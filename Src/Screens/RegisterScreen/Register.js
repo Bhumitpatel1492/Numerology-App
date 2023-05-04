@@ -11,17 +11,16 @@ import {
   Image,
 } from 'react-native';
 import Style from '../../Utils/Style';
-import Headerlogo from '../../../assets/Svg Image/headerlogo';
 import Checkbox from '../../Components/Chechbox';
 import {moderateScale} from '../../Utils/scalling';
 import CustomTextInput from '../../Components/Textinput';
-// import DateCollect from '../../Components/Datecollect';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import SelectDropdown from 'react-native-select-dropdown';
 
 import moment from 'moment';
 import fonts from '../../Utils/Fonts';
 import {AlertView} from '../../Components/AlertView';
+import Headerlogo1 from '../../../assets/Svg Image/headerlogo1';
 
 const Register = ({navigation}) => {
   const [showAlert, setShowAlert] = useState(false);
@@ -33,22 +32,13 @@ const Register = ({navigation}) => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedMonth, setSelectedMonth] = useState(null);
   const [selectedYear, setSelectedYear] = useState(null);
-  // console.log('syear', selectedYear);
+
   const [datepicker, setDatePicker] = useState([]);
   const [monthpicker, setMonthPicker] = useState([]);
-  // console.log('pmonth', monthpicker);
-  const [yearpicker, setYearPicker] = useState([]);
-  // console.log('pyear', yearpicker);
-  const [selectedValue, setSelectedValue] = useState();
-  const [Driver_no, setDriver_no] = useState(); // driver no
-  console.log('driver_no', Driver_no);
 
-  const [conductor_no, setConductor_no] = useState(); // Conductor value
-  console.log('conductor_no=====>' + conductor_no);
-  const [valueoftotal, setvalueoftotal] = useState(); // driver + Conductor value
-  console.log('combine value=====>' + valueoftotal);
-  const [allNumber, setAllNumber] = useState();
-  console.log('allNumber=====>' + allNumber);
+  const [yearpicker, setYearPicker] = useState([]);
+
+  const [selectedValue, setSelectedValue] = useState();
 
   useEffect(() => {
     setFirstName('ABC');
@@ -78,7 +68,7 @@ const Register = ({navigation}) => {
         value: element,
       });
     }
-    // console.log('Months===>', months);
+
     setMonthPicker(months);
 
     const d = new Date();
@@ -99,13 +89,11 @@ const Register = ({navigation}) => {
     var format = `${selectedDate}/${selectedMonth}/${selectedYear}`;
     var dateFormat = 'DD/MM/YYYY';
     const checkDate = format.trim();
-    // console.log('checkDate====>', checkDate);
-    // console.log('meon====>', moment(checkDate, dateFormat, true).isValid());
+
     return moment(checkDate.toString(), dateFormat, true).isValid();
   };
 
   const handleSelection = value => {
-    // console.log('Value======>', value);
     setSelectedValue(value);
   };
 
@@ -120,23 +108,32 @@ const Register = ({navigation}) => {
       showAlertMessage('Please Enter LastName');
       setShowAlert(true);
     } else if (Email === '') {
-      Alert.alert('Please Enter Email');
+      showAlertMessage('Please Enter Email');
+      setShowAlert(true);
     } else if (!email.test(Email)) {
-      Alert.alert('enter Valid Email');
+      showAlertMessage('Please Enter Email');
+      setShowAlert(true);
     } else if (MobileNo === '') {
-      Alert.alert('Please Enter Mobile Number');
+      showAlertMessage('Please Enter Mobile Number');
+      setShowAlert(true);
     } else if (!number.test(MobileNo)) {
-      Alert.alert('Invalid Number');
+      showAlertMessage('Invalid Number');
+      setShowAlert(true);
     } else if (selectedValue === null) {
-      Alert.alert('select Your Gender');
+      showAlertMessage('selectValue');
+      setShowAlert(true);
     } else if (selectedDate === null) {
-      Alert.alert('Please Enter Birth Date');
+      showAlertMessage('Please Select Date');
+      setShowAlert(true);
     } else if (selectedMonth === null) {
-      Alert.alert('Please Enter month');
+      showAlertMessage('Please Select Month');
+      setShowAlert(true);
     } else if (selectedYear === null) {
-      Alert.alert('Please Enter year');
+      showAlertMessage('Please Select Year');
+      setShowAlert(true);
     } else if (checkDateIsValid() == false) {
-      Alert.alert('Please Select Valid Date');
+      showAlertMessage('Please Select Valid Date');
+      setShowAlert(true);
     } else {
       var datesum;
       const abc = selectedDate.toString();
@@ -155,7 +152,7 @@ const Register = ({navigation}) => {
       }
       console.log('datesum', datesum);
       // console.log('datetetetet', datesum);
-      setDriver_no(datesum);
+      // setDriver_no(datesum);
 
       var monthsum;
       const month = selectedMonth.toString();
@@ -205,7 +202,7 @@ const Register = ({navigation}) => {
         }
       }
 
-      // console.log('yearsum', yearsum);
+      console.log('yearsum', yearsum);
 
       // var conductorsum;
       let conductor = datesum + monthsum + yearsum;
@@ -217,61 +214,54 @@ const Register = ({navigation}) => {
         let Y = ans2[1] == undefined ? 0 : ans2[1];
 
         conductor = parseInt(X) + parseInt(Y);
+        console.log('ccccccc===>', parseInt(X) + parseInt(Y));
       }
-      setConductor_no(conductor);
-      // console.log(' conductor======>' + conductor);
-      //   if (conductorsum > 9) {
-      //     let B = conductorsum.toString();
-      //     let C = B.split('');
-      //     let ans3 = C;
-      //     let X = ans3[0] == undefined ? 0 : ans3[0];
-      //     let Y = ans3[1] == undefined ? 0 : ans3[1];
-      //     conductorsum = parseInt(X) + parseInt(Y);
-      //   }
-      // }
+      if (conductor > 9) {
+        let B = conductor.toString();
+        let C = B.split('');
+        let ans2 = C;
+        let X = ans2[0] == undefined ? 0 : ans2[0];
+        let Y = ans2[1] == undefined ? 0 : ans2[1];
 
-      // setConductor_no(conductorsum);
-      // console.log('conductorsum', conductorsum);
+        conductor = parseInt(X) + parseInt(Y);
+        console.log('DDDDDDDDD===>', parseInt(X) + parseInt(Y));
+      }
+
+      console.log(' conductor======>' + conductor);
 
       var combine;
       const intValue1 = parseInt(datesum);
       const intValue2 = parseInt(conductor);
       combine = '' + intValue1 + intValue2;
 
-      // console.log('combine number=======>' + combine);
-      setvalueoftotal(combine);
+      console.log('combine number=======>' + combine);
 
-      var allvalue;
+      var allnumbers;
       const item3 = selectedDate;
       const item4 = selectedMonth;
       const item5 = selectedYear;
       const item6 = datesum;
       const item7 = conductor;
-      allvalue =
+      allnumbers =
         item3 + '' + item4 + '' + '' + item5 + '' + item6 + '' + '' + item7;
 
-      allvalue = allvalue.toString();
-      // console.log('allvalue=====>' + allvalue);
-      setAllNumber(allvalue);
+      allnumbers = allnumbers.toString();
+      console.log('allvalue=====>' + allnumbers);
 
-      // setAllNumber(allvalue);
-
-      Alert.alert('success');
-
-      storeData();
+      storeData(datesum, conductor, combine, allnumbers);
       navigation.replace('Root');
     }
   };
 
-  const storeData = (datesum, conductor, combine, allvalue) => {
+  const storeData = (datesum, conductor, combine, allnumbers) => {
     try {
       AsyncStorage.setItem('firstname', FirstName);
       AsyncStorage.setItem('lastname', LastName);
       AsyncStorage.setItem('gender', selectedValue);
-      AsyncStorage.setItem('driver_no', JSON.stringify(Driver_no));
-      AsyncStorage.setItem('conductor_no', JSON.stringify(conductor_no));
-      AsyncStorage.setItem('v_total', JSON.stringify(valueoftotal));
-      AsyncStorage.setItem('allnumbers', JSON.stringify(allNumber));
+      AsyncStorage.setItem('driver_no', JSON.stringify(datesum));
+      AsyncStorage.setItem('conductor_no', JSON.stringify(conductor));
+      AsyncStorage.setItem('v_total', JSON.stringify(combine));
+      AsyncStorage.setItem('allnumbers', JSON.stringify(allnumbers));
 
       AsyncStorage.setItem('isLoggedIn', 'true');
     } catch (e) {
@@ -297,8 +287,13 @@ const Register = ({navigation}) => {
           resizeMode="stretch">
           <View style={Style.container}>
             <View style={styles.header}>
-              <View style={{alignSelf: 'flex-end', marginHorizontal: 12}}>
-                <Headerlogo />
+              <View
+                style={{
+                  alignSelf: 'flex-end',
+                  marginHorizontal: 25,
+                  marginTop: 48,
+                }}>
+                <Headerlogo1 />
               </View>
             </View>
             <Text style={styles.title}>Numerology Calculator</Text>
@@ -482,16 +477,10 @@ const Register = ({navigation}) => {
                 }}
                 buttonTextAfterSelection={(selectedItem, index) => {
                   return selectedItem.label;
-                  // text represented after item is selected
-                  // if data array is an array of objects then return selectedItem.property to render after item is selected
-                  // return selectedItem;
                 }}
                 rowTextForSelection={(item, index) => {
                   // console.log('item', item);
                   return item.label;
-                  // text represented for each item in dropdown
-                  // if data array is an array of objects then return item.property to represent item in dropdown
-                  // return item;
                 }}
                 renderDropdownIcon={isOpened => {
                   return (

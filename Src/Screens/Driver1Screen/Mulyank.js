@@ -74,21 +74,21 @@ const Mulyank = ({navigation, route}) => {
             style={Style.image}>
             <Text style={Style.Bg_txt}>{driver_no}</Text>
           </ImageBackground>
-          <View style={{alignSelf: 'center'}}>
-            <ImageBackground
-              source={require('../../Images/BG_white.png')}
-              style={{height: 60, width: 300, right: 20, marginHorizontal: 20}}>
-              <Text
-                style={{
-                  fontSize: moderateScale(35),
-                  color: '#A02056',
-                  fontFamily: fonts.ATSBI,
-                  textAlign: 'center',
-                }}>
-                Driver (Mulyank)
-              </Text>
-            </ImageBackground>
-          </View>
+          <ImageBackground
+            source={require('../../Images/Subtraction.png')}
+            resizeMode="contain"
+            style={{flex: 1}}>
+            <Text
+              style={{
+                fontSize: moderateScale(35),
+                color: '#A02056',
+                fontFamily: fonts.ATSBI,
+                textAlign: 'center',
+                top: 28,
+              }}>
+              Driver (Mulyank)
+            </Text>
+          </ImageBackground>
         </View>
         <FlatList
           data={number_json}

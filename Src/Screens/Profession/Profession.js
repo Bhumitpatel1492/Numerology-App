@@ -7,6 +7,7 @@ import {
   ScrollView,
   TouchableOpacity,
   FlatList,
+  ImageBackground,
 } from 'react-native';
 import Style from '../../Utils/Style';
 import {moderateScale} from '../../Utils/scalling';
@@ -87,8 +88,16 @@ const Profession = ({navigation}) => {
           </View>
         </View>
 
-        <View style={styles.back}>
-          <Text style={styles.text3}>Profession</Text>
+        {/* <View style={styles.back}>
+          
+        </View> */}
+
+        <View style={{alignSelf: 'center', marginTop: 5}}>
+          <ImageBackground
+            source={require('../../Images/BG_Purple.png')}
+            style={{height: moderateScale(73), width: moderateScale(530)}}>
+            <Text style={styles.text3}>Profession</Text>
+          </ImageBackground>
         </View>
 
         <FlatList data={data} renderItem={renderItem} />

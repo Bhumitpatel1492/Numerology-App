@@ -76,19 +76,26 @@ const Bhagyank = ({navigation, route}) => {
           <ImageBackground
             source={Images.Bg_green}
             resizeMode="cover"
-            style={styles.image}>
-            <Text style={styles.Bg_txt}>{conductor_no}</Text>
+            style={Style.image}>
+            <Text style={[Style.Bg_txt, {color: '#FFFFFF'}]}>
+              {conductor_no}
+            </Text>
           </ImageBackground>
-          <View style={styles.view2}>
+          <ImageBackground
+            source={require('../../Images/Subtraction.png')}
+            resizeMode="contain"
+            style={{flex: 1}}>
             <Text
               style={{
-                fontSize: moderateScale(28),
+                fontSize: moderateScale(30),
                 color: '#0096A5',
                 fontFamily: fonts.ATSBI,
+                textAlign: 'center',
+                top: 32,
               }}>
               Conductor (Bhagyank)
             </Text>
-          </View>
+          </ImageBackground>
         </View>
         <View style={{marginHorizontal: 12, marginTop: 20}}>
           <Text style={styles.low}>Enhance Bhagyank</Text>
