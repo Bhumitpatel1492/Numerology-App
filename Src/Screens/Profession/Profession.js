@@ -43,7 +43,7 @@ const Profession = ({navigation}) => {
 
       const sum = JSON.parse(value2);
       ProfessionData.forEach(item => {
-        if (item.MB == v_total) {
+        if (item.MB == sum) {
           setData(item.Profession.split(','));
         }
       });
@@ -73,7 +73,7 @@ const Profession = ({navigation}) => {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#69325E'}}>
       <View style={styles.container}>
-        <View style={Style.subcontainer}>
+        <View style={styles.subcontainer}>
           <TouchableOpacity onPress={() => navigation.openDrawer()}>
             <Drawer2_Purple />
           </TouchableOpacity>
@@ -93,7 +93,7 @@ const Profession = ({navigation}) => {
 
         <FlatList data={data} renderItem={renderItem} />
 
-        <View style={Style.B_Icon}>
+        <View style={styles.footer}>
           <TouchableOpacity onPress={() => navigation.navigate('Number_9')}>
             <Backbtn_Purple />
           </TouchableOpacity>
@@ -112,21 +112,21 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#69325E',
-    // marginHorizontal: 10,
+    marginHorizontal: 10,
   },
   subcontainer: {
     marginTop: 20,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    // marginHorizontal: 10,
+    marginHorizontal: 10,
   },
   text1: {
-    fontSize: moderateScale(20),
+    fontSize: moderateScale(26),
     color: '#E6C6E0',
     fontFamily: fonts.ATSBI,
   },
   text2: {
-    fontSize: moderateScale(38),
+    fontSize: moderateScale(39),
     color: '#FFFFFF',
     lineHeight: 42,
     textDecorationLine: 'underline',
@@ -137,10 +137,10 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     height: moderateScale(80),
     justifyContent: 'center',
-    marginTop: 10,
+    marginTop: 25,
   },
   text3: {
-    fontSize: moderateScale(35),
+    fontSize: moderateScale(45),
     color: '#E6C6E0',
     fontFamily: fonts.ATSBI,
     //margin: 14,
@@ -148,10 +148,9 @@ const styles = StyleSheet.create({
   },
   round: {
     flexDirection: 'row',
-    marginHorizontal: 10,
-    // alignItems: 'center',
+    marginHorizontal: 20,
+    alignItems: 'center',
     marginTop: 20,
-    paddingHorizontal: 10,
   },
   footer: {
     flexDirection: 'row',

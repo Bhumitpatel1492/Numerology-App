@@ -59,7 +59,7 @@ const Drawerview = ({navigation}) => {
             <View
               style={{
                 justifyContent: 'center',
-                alignItems: 'flex-start',
+                // alignItems: 'flex-start',
                 marginTop: moderateScale(35),
               }}>
               <View style={styles.line}>
@@ -113,16 +113,15 @@ const Drawerview = ({navigation}) => {
             </View>
           </ScrollView>
         </View>
-        <View
-          style={{
-            alignItems: 'center',
-            marginTop: 20,
-          }}>
-          <Logo1 />
-          <Text style={styles.link}> Visit us</Text>
-          <Text style={styles.link1}> www.occultree.com</Text>
-        </View>
       </DrawerContentScrollView>
+      <View
+        style={{
+          alignItems: 'center',
+        }}>
+        <Logo1 />
+        <Text style={styles.link}> Visit us</Text>
+        <Text style={styles.link1}> www.occultree.com</Text>
+      </View>
     </>
   );
 };
