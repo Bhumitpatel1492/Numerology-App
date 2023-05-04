@@ -58,7 +58,7 @@ const Bhagyank = ({navigation, route}) => {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#E8FDFF'}}>
       <View style={styles.container}>
-        <View style={styles.subcontainer}>
+        <View style={Style.subcontainer}>
           <TouchableOpacity onPress={() => navigation.openDrawer()}>
             <Drawer2 />
           </TouchableOpacity>
@@ -66,13 +66,10 @@ const Bhagyank = ({navigation, route}) => {
             <Text style={[Style.usertitle, {color: '#6B6B6B'}]}>
               Numerology Report of
             </Text>
-            <View
-              style={{flexDirection: 'row', textDecorationLine: 'underline'}}>
-              <Text style={[Style.username, {color: '#0096A5'}]}>
-                {FirstName}
-                {LastName}
-              </Text>
-            </View>
+            <Text style={[Style.username, {color: '#0096A5'}]}>
+              {FirstName}
+              {LastName}
+            </Text>
           </View>
         </View>
         <View style={styles.view1}>
@@ -167,7 +164,7 @@ const styles = StyleSheet.create({
   low: {
     fontSize: moderateScale(35),
     color: '#0096A5',
-    fontFamily: fonts.ATSBI,
+    fontFamily: fonts.ATR,
     lineHeight: 45,
   },
   Mobile: {

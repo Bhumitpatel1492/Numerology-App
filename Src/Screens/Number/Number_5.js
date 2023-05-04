@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 import fonts from '../../Utils/Fonts';
 import Style from '../../Utils/Style';
-import Lucky1 from '../../../assets/Svg Image/Lucky1';
 import Drawer_green from '../../../assets/Svg Image/Drawer_green';
 import Left_greenbtn from '../../../assets/Svg Image/Left_greenbtn';
 import Right_greenbtn from '../../../assets/Svg Image/Right_greenbtn';
@@ -153,7 +152,7 @@ const Number_5 = ({navigation}) => {
 
         {avalible_number
           ? loshu_grid_no.map((item, i) => (
-              <View style={{top: 18}}>
+              <View style={Style.avalible_number}>
                 <View style={{alignItems: 'center', justifyContent: 'center'}}>
                   {getNumber_5(two) == item.No && (
                     <Text style={Style.Number_txt}>{item.WhatitsSays}</Text>
@@ -162,7 +161,7 @@ const Number_5 = ({navigation}) => {
               </View>
             ))
           : missing_no.map((item, i) => (
-              <View style={{top: 18}}>
+              <View style={Style.avalible_number}>
                 <View>
                   {getNumber_5(not_avalible) == item.MissingNo && (
                     <Text style={Style.Number_txt}>{item.WhatitsSays}</Text>
@@ -171,7 +170,7 @@ const Number_5 = ({navigation}) => {
               </View>
             ))}
       </View>
-      <View style={Style.arrow}>
+      <View style={Style.B_Icon}>
         <TouchableOpacity onPress={() => navigation.navigate('Number_4')}>
           {not_avalible ? <Left_greenbtn /> : <Backbtn />}
         </TouchableOpacity>

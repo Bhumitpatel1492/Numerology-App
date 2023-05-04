@@ -145,7 +145,7 @@ const Number_1 = ({navigation}) => {
 
         {avalible_number
           ? loshu_grid_no.map((item, i) => (
-              <View style={{top: 18}}>
+              <View style={Style.avalible_number}>
                 <View style={{alignItems: 'center', justifyContent: 'center'}}>
                   {getNumber(one) == item.No && (
                     <Text style={Style.Number_txt}>{item.WhatitsSays}</Text>
@@ -154,7 +154,7 @@ const Number_1 = ({navigation}) => {
               </View>
             ))
           : missing_no.map((item, i) => (
-              <View style={{marginVertical: 10}}>
+              <View style={Style.avalible_number}>
                 <View>
                   {getNumber(not_avalible) == item.MissingNo && (
                     <Text style={Style.Number_txt}>{item.WhatitsSays}</Text>
@@ -163,7 +163,7 @@ const Number_1 = ({navigation}) => {
               </View>
             ))}
       </View>
-      <View style={Style.arrow}>
+      <View style={Style.B_Icon}>
         <TouchableOpacity
           onPress={() => navigation.navigate('Loshu_GridNumber')}>
           {not_avalible ? <Left_greenbtn /> : <Backbtn />}

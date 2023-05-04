@@ -76,15 +76,17 @@ const ReportDriverDetails = ({navigation, route}) => {
           </View>
         </View>
 
-        <View style={{marginHorizontal: 10}}>
+        <View style={{alignSelf: 'center'}}>
           <ImageBackground
             source={require('../../Images/BG_white.png')}
-            style={{height: moderateScale(80), width: moderateScale(250)}}>
+            style={{height: moderateScale(73), width: moderateScale(530)}}>
             <Text
               style={{
-                fontSize: moderateScale(40),
+                fontSize: moderateScale(35),
                 color: '#A02056',
                 fontFamily: fonts.ATSBI,
+                textAlign: 'center',
+                marginVertical: 10,
               }}>
               Driver (Mulyank)
             </Text>
@@ -150,7 +152,7 @@ const ReportDriverDetails = ({navigation, route}) => {
           data={list}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({item}) => (
-            <View style={{marginTop: moderateScale(10)}}>
+            <View style={{marginTop: moderateScale(5)}}>
               <View style={{flexDirection: 'row'}}>
                 {driver_no == item.No ? (
                   <Text style={Style.lines}>•</Text>

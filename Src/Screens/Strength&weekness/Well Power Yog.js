@@ -71,7 +71,7 @@ const WellPowerYog = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.subcontainer}>
+      <View style={Style.subcontainer}>
         <TouchableOpacity onPress={() => navigation.openDrawer()}>
           <Drawer_Blue />
         </TouchableOpacity>
@@ -82,21 +82,25 @@ const WellPowerYog = ({navigation}) => {
           <Text style={[Style.username, {color: '#2C1E5C'}]}>
             {FirstName}
             {LastName}
-            {onenumber}
-            {twonumber}
           </Text>
         </View>
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.background}>
-          <Text
-            style={{
-              fontSize: moderateScale(32),
-              color: '#2C1E5C',
-              fontFamily: fonts.ATSBI,
-            }}>
-            Strengths & Weaknesses
-          </Text>
+        <View style={{alignSelf: 'center'}}>
+          <ImageBackground
+            source={require('../../Images/BG_white.png')}
+            style={{height: moderateScale(73), width: moderateScale(530)}}>
+            <Text
+              style={{
+                fontSize: moderateScale(35),
+                color: '#2C1E5C',
+                fontFamily: fonts.ATSBI,
+                textAlign: 'center',
+                marginVertical: 10,
+              }}>
+              Strengths & Weaknesses
+            </Text>
+          </ImageBackground>
         </View>
         <View
           style={{
@@ -113,7 +117,7 @@ const WellPowerYog = ({navigation}) => {
               <Text style={styles.Bg_txt}>33%</Text>
             </ImageBackground>
           </View>
-          <View>
+          <View style={{marginHorizontal: 8}}>
             <Text style={styles.txt2}>Well Power Yog</Text>
             <Text style={styles.txt3}>Line of Will</Text>
           </View>
@@ -138,7 +142,7 @@ const WellPowerYog = ({navigation}) => {
               <Text style={styles.Bg_txt}>100%</Text>
             </ImageBackground>
           </View>
-          <View>
+          <View style={{marginHorizontal: 8}}>
             <Text style={styles.txt2}>Action Yog</Text>
             <Text style={styles.txt3}>Line of Action</Text>
           </View>
@@ -146,11 +150,13 @@ const WellPowerYog = ({navigation}) => {
         {yogs_json.map(
           p =>
             p['No.'] == 6 &&
-            p.Times == six && <Text style={Style.yog_line}>{p.Details}</Text>,
+            p.Times == six && (
+              <Text style={[Style.yog_line, {bottom: 24}]}>{p.Details}</Text>
+            ),
         )}
       </ScrollView>
 
-      <View style={styles.arrow}>
+      <View style={Style.B_Icon}>
         <TouchableOpacity onPress={() => navigation.navigate('Prectice')}>
           <Left_bluebtn />
         </TouchableOpacity>

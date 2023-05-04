@@ -43,7 +43,7 @@ const Profession = ({navigation}) => {
 
       const sum = JSON.parse(value2);
       ProfessionData.forEach(item => {
-        if (item.MB == 11) {
+        if (item.MB == v_total) {
           setData(item.Profession.split(','));
         }
       });
@@ -73,7 +73,7 @@ const Profession = ({navigation}) => {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#69325E'}}>
       <View style={styles.container}>
-        <View style={styles.subcontainer}>
+        <View style={Style.subcontainer}>
           <TouchableOpacity onPress={() => navigation.openDrawer()}>
             <Drawer2_Purple />
           </TouchableOpacity>
@@ -93,7 +93,7 @@ const Profession = ({navigation}) => {
 
         <FlatList data={data} renderItem={renderItem} />
 
-        <View style={styles.footer}>
+        <View style={Style.B_Icon}>
           <TouchableOpacity onPress={() => navigation.navigate('Number_9')}>
             <Backbtn_Purple />
           </TouchableOpacity>
@@ -112,13 +112,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#69325E',
-    marginHorizontal: 10,
+    // marginHorizontal: 10,
   },
   subcontainer: {
     marginTop: 20,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginHorizontal: 10,
+    // marginHorizontal: 10,
   },
   text1: {
     fontSize: moderateScale(20),
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     height: moderateScale(80),
     justifyContent: 'center',
-    marginTop: 25,
+    marginTop: 10,
   },
   text3: {
     fontSize: moderateScale(35),

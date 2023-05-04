@@ -71,10 +71,11 @@ const Style = StyleSheet.create({
     bottom: 20,
   },
   subcontainer: {
-    marginVertical: 15,
+    padding: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginHorizontal: 12,
+    // marginHorizontal: 12,
+    // backgroundColor: 'red'
   },
   text4: {
     fontSize: moderateScale(28),
@@ -98,7 +99,7 @@ const Style = StyleSheet.create({
     opacity: 0.7,
   },
   yog_line: {
-    fontSize: moderateScale(24),
+    fontSize: moderateScale(22),
     color: '#454545',
     fontFamily: fonts.CTR,
     marginHorizontal: 25,
@@ -143,6 +144,9 @@ const Style = StyleSheet.create({
     marginHorizontal: 8,
     alignSelf: 'stretch',
     bottom: 8,
+  },
+  avalible_number: {
+    top: 18,
   },
 });
 

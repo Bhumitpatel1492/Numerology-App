@@ -127,7 +127,7 @@ const Loshu_Grid = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.subcontainer}>
+      <View style={Style.subcontainer}>
         <TouchableOpacity onPress={() => navigation.openDrawer()}>
           <Drawer_Blue />
         </TouchableOpacity>
@@ -188,7 +188,7 @@ const Loshu_Grid = ({navigation}) => {
           </View>
         </View>
       </ScrollView>
-      <View style={styles.arrow}>
+      <View style={Style.B_Icon}>
         <TouchableOpacity onPress={() => navigation.navigate('Bhagyank')}>
           <Left_bluebtn />
         </TouchableOpacity>

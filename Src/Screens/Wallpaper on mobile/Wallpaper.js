@@ -50,7 +50,7 @@ const Wallpaper = ({navigation}) => {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#224079'}}>
       <View style={styles.container}>
-        <View style={styles.subcontainer}>
+        <View style={Style.subcontainer}>
           <TouchableOpacity onPress={() => navigation.openDrawer()}>
             <Blue_Drawer />
           </TouchableOpacity>
@@ -88,7 +88,7 @@ const Wallpaper = ({navigation}) => {
           )}
         </View>
       </View>
-      <View style={styles.footer}>
+      <View style={Style.B_Icon}>
         <TouchableOpacity onPress={() => navigation.navigate('Profession')}>
           <Backbtn_Blue />
         </TouchableOpacity>
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginHorizontal: 10,
+    // marginHorizontal: 10,
   },
   text1: {
     fontSize: moderateScale(26),

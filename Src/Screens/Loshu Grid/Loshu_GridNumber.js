@@ -129,7 +129,7 @@ const Loshu_GridNumber = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.subcontainer}>
+      <View style={Style.subcontainer}>
         <TouchableOpacity onPress={() => navigation.openDrawer()}>
           <Drawer_green />
         </TouchableOpacity>
@@ -192,7 +192,7 @@ const Loshu_GridNumber = ({navigation}) => {
           </Text>
         </View>
       </ScrollView>
-      <View style={styles.arrow}>
+      <View style={Style.B_Icon}>
         <TouchableOpacity onPress={() => navigation.navigate('RajYog')}>
           <Left_greenbtn />
         </TouchableOpacity>

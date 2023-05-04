@@ -74,11 +74,22 @@ const Mulyank = ({navigation, route}) => {
             style={Style.image}>
             <Text style={Style.Bg_txt}>{driver_no}</Text>
           </ImageBackground>
-          <View style={styles.view2}>
-            <Text style={styles.text3}>Driver (Mulyank)</Text>
+          <View style={{alignSelf: 'center'}}>
+            <ImageBackground
+              source={require('../../Images/BG_white.png')}
+              style={{height: 60, width: 300, right: 20, marginHorizontal: 20}}>
+              <Text
+                style={{
+                  fontSize: moderateScale(35),
+                  color: '#A02056',
+                  fontFamily: fonts.ATSBI,
+                  textAlign: 'center',
+                }}>
+                Driver (Mulyank)
+              </Text>
+            </ImageBackground>
           </View>
         </View>
-
         <FlatList
           data={number_json}
           keyExtractor={(item, index) => index.toString()}
@@ -179,15 +190,15 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(32),
   },
   low: {
-    fontSize: moderateScale(35),
+    fontSize: moderateScale(26),
     color: '#A02056',
     fontFamily: fonts.ATSBI,
     lineHeight: 48,
   },
   Mobile: {
-    fontSize: moderateScale(24),
+    fontSize: moderateScale(22),
     color: '#454545',
-    lineHeight: 30,
+    lineHeight: moderateScale(36),
     fontFamily: fonts.CTR,
   },
   footer: {

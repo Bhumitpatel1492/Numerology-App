@@ -75,28 +75,36 @@ const MentalYog = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.subcontainer}>
+      <View style={Style.subcontainer}>
         <TouchableOpacity onPress={() => navigation.openDrawer()}>
           <Drawer_Blue />
         </TouchableOpacity>
         <View>
-          <Text style={styles.title}>Numerology Report of</Text>
-          <Text style={styles.name}>
+          <Text style={[Style.usertitle, {color: '#8175AC'}]}>
+            Numerology Report of
+          </Text>
+          <Text style={[Style.username, {color: '#2C1E5C'}]}>
             {FirstName}
             {LastName}
           </Text>
         </View>
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.background}>
-          <Text
-            style={{
-              fontSize: moderateScale(32),
-              color: '#2C1E5C',
-              fontFamily: fonts.ATSBI,
-            }}>
-            Strengths & Weaknesses
-          </Text>
+        <View style={{alignSelf: 'center'}}>
+          <ImageBackground
+            source={require('../../Images/BG_white.png')}
+            style={{height: moderateScale(73), width: moderateScale(530)}}>
+            <Text
+              style={{
+                fontSize: moderateScale(35),
+                color: '#2C1E5C',
+                fontFamily: fonts.ATSBI,
+                textAlign: 'center',
+                marginVertical: 10,
+              }}>
+              Strengths & Weaknesses
+            </Text>
+          </ImageBackground>
         </View>
         <View
           style={{
@@ -113,12 +121,12 @@ const MentalYog = ({navigation}) => {
               <Text style={styles.Bg_txt}>33%</Text>
             </ImageBackground>
           </View>
-          <View>
+          <View style={{marginHorizontal: 8}}>
             <Text style={Style.yog_title}>Mental Yog</Text>
             <Text style={Style.yog_subtitle}>Line of Mental Capability</Text>
           </View>
         </View>
-        {/* {StrengthItem(yogs_json)} */}
+
         {yogs_json.map(
           p =>
             p['No.'] == 1 &&
@@ -130,7 +138,7 @@ const MentalYog = ({navigation}) => {
             flexDirection: 'row',
             marginHorizontal: 10,
             alignItems: 'center',
-            marginVertical: 30,
+            marginVertical: 20,
           }}>
           <View>
             <ImageBackground
@@ -140,7 +148,7 @@ const MentalYog = ({navigation}) => {
               <Text style={styles.Bg_txt}>100%</Text>
             </ImageBackground>
           </View>
-          <View>
+          <View style={{marginHorizontal: 8}}>
             <Text style={Style.yog_title}>Emotional Yog</Text>
             <Text style={Style.yog_subtitle}>Line of Emotions</Text>
           </View>
@@ -149,10 +157,12 @@ const MentalYog = ({navigation}) => {
         {yogs_json.map(
           p =>
             p['No.'] == 2 &&
-            p.Times == two && <Text style={Style.yog_line}>{p.Details}</Text>,
+            p.Times == two && (
+              <Text style={[Style.yog_line, {bottom: 16}]}>{p.Details}</Text>
+            ),
         )}
       </ScrollView>
-      <View style={styles.arrow}>
+      <View style={Style.B_Icon}>
         <TouchableOpacity onPress={() => navigation.navigate('Loshu_Grid')}>
           <Left_bluebtn />
         </TouchableOpacity>

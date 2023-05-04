@@ -8,6 +8,7 @@ import {
   SafeAreaView,
   TouchableOpacity,
   ImageBackground,
+  useWindowDimensions,
 } from 'react-native';
 import Drawer2 from '../../../assets/Svg Image/Drawer2';
 import fonts from '../../Utils/Fonts';
@@ -78,7 +79,7 @@ const Rating = ({navigation, route}) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.subcontainer}>
+      <View style={Style.subcontainer}>
         <TouchableOpacity onPress={() => navigation.openDrawer()}>
           <Drawer2 />
         </TouchableOpacity>
@@ -115,38 +116,46 @@ const Rating = ({navigation, route}) => {
 
         <View
           style={{
-            backgroundColor: '#FFFFFF',
+            // backgroundColor: '#FFFFFF',
             alignItems: 'center',
-            marginHorizontal: 18,
-            borderRadius: 40,
+            // marginHorizontal: 18,
+            // borderRadius: 40,
             marginVertical: 14,
           }}>
-          <View>
-            {number_json.map(
-              p =>
-                p.MB == v_total && (
-                  <Text
-                    style={{
-                      fontSize: 25,
-                      color: '#454545',
-                      fontFamily: fonts.ATR,
-                      top: 3,
-                    }}>
-                    {p.Ranking} Star
-                  </Text>
-                ),
-            )}
-          </View>
-          <View>
-            {number_json.map(
-              p =>
-                p.MB == v_total && (
-                  <Text style={{fontSize: 32, color: '#0096A5', bottom: 5}}>
-                    {p.Stars}
-                  </Text>
-                ),
-            )}
-          </View>
+          <ImageBackground
+            source={require('../../Images/Rating.png')}
+            style={{
+              height: 100,
+              marginHorizontal: 15,
+              // width: useWindowDimensions(10),
+            }}>
+            <View>
+              {number_json.map(
+                p =>
+                  p.MB == v_total && (
+                    <Text
+                      style={{
+                        fontSize: 25,
+                        color: '#454545',
+                        fontFamily: fonts.ATR,
+                        top: 3,
+                      }}>
+                      {p.Ranking} Star
+                    </Text>
+                  ),
+              )}
+            </View>
+            <View>
+              {number_json.map(
+                p =>
+                  p.MB == v_total && (
+                    <Text style={{fontSize: 32, color: '#0096A5', bottom: 5}}>
+                      {p.Stars}
+                    </Text>
+                  ),
+              )}
+            </View>
+          </ImageBackground>
         </View>
 
         <View>
@@ -158,7 +167,7 @@ const Rating = ({navigation, route}) => {
                     fontSize: 18,
                     color: '#454545',
                     marginHorizontal: 20,
-                    lineHeight: 32,
+                    lineHeight: 34,
                     fontFamily: fonts.CTR,
                     textAlign: 'center',
                   }}>
@@ -169,7 +178,7 @@ const Rating = ({navigation, route}) => {
         </View>
       </ScrollView>
 
-      <View style={Style.button}>
+      <View style={Style.B_Icon}>
         <TouchableOpacity onPress={() => navigation.navigate('ReportDriver1')}>
           <Leftbtn />
         </TouchableOpacity>
@@ -229,6 +238,7 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(20),
     fontFamily: fonts.ATSBI,
     color: '#454545',
+    lineHeight: 40,
   },
 
   txt3: {
