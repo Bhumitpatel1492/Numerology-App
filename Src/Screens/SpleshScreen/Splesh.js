@@ -14,7 +14,7 @@ const Splash = ({navigation}) => {
       const isLogin = await AsyncStorage.getItem('isLoggedIn');
       if (isLogin) {
         console.log('Root');
-        navigation.replace('AuthStack');
+        navigation.replace('Drawer_stack');
       } else {
         console.log('AuthStack');
         navigation.replace('AuthStack');

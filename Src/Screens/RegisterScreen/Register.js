@@ -41,10 +41,10 @@ const Register = ({navigation}) => {
   const [selectedValue, setSelectedValue] = useState();
 
   useEffect(() => {
-    setFirstName('ABC');
-    setLastName('DEF');
-    setEmail('abc123@gmail.com');
-    setMobileNo('9988662211');
+    setFirstName('');
+    setLastName('');
+    setEmail('');
+    setMobileNo('');
   }, [selectedDate, selectedMonth, selectedYear]);
 
   useEffect(() => {
